@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technopreneurship: Turning Technology into Business Opportunities</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2f57e8;
+      --primary-light: #5e7df1;
+      --text-dark: #1b1f24;
+      --text-muted: #606b79;
+      --bg: #f7f9fc;
+      --bg-light: #eef3f8;
+      --radius: 14px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    /* === GLOBAL STYLES === */
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary);
+      letter-spacing: 0.02em;
+      margin-top: 0;
+    }
+
+    p, li {
+      color: var(--text-dark);
+      font-size: 1.02rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary);
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--primary-light);
+    }
+
+    /* === NAVIGATION (Shared Component) === */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid #e2e6ec;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 28px;
+    }
+
+    .nav-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* === PAGE CONTAINER === */
+    .container {
+      max-width: 780px;
+      margin: 64px auto;
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 48px 40px 36px;
+    }
+
+    /* === HEADER === */
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    header .subtitle {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      margin-top: 6px;
+    }
+
+    .hero-img {
+      width: 100%;
+      border-radius: var(--radius);
+      margin: 26px 0 30px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    /* === SECTIONS === */
+    .section {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 22px 22px 16px;
+      margin-bottom: 22px;
+      border-left: 4px solid var(--primary-light);
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 6px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .quote {
+      background: #eaf1fc;
+      border-left: 5px solid var(--primary);
+      padding: 14px 20px;
+      margin: 20px 0;
+      font-style: italic;
+      color: #2a5fbe;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .img-inline {
+      width: 100%;
+      border-radius: var(--radius);
+      margin: 28px 0 12px;
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.06);
+    }
+
+    /* === FOOTER === */
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #8a94a3;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 720px) {
+      .container {
+        margin: 28px auto;
+        padding: 28px 22px;
+      }
+      .nav-links {
+        display: none;
+      }
+      header h1 {
+        font-size: 1.6rem;
+      }
+      p, li {
+        font-size: 0.98rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== NAVIGATION BAR (Shared Component) ===== -->
+  <nav>
+    <div class="nav-container">
+      <div class="nav-logo">EE Technopreneurship</div>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#roles">Roles</a>
+        <a href="#collaboration">Collaboration</a>
+        <a href="#reflection">Reflection</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="container" id="overview">
+    <header>
+      <h1>Technopreneurship</h1>
+      <div class="subtitle">Turning Technology into Business Opportunities</div>
+    </header>
+
+    <img src="images/docu_profdev_pubmat.jpg" alt="Technopreneurship Webinar Pubmat" class="hero-img" />
+
+    <section class="section" id="roles">
+      <h2 class="section-title">Roles and Assignments</h2>
+      <p>
+        I was originally designated to handle the technical side of the <strong>“Technopreneurship”</strong> webinar, ensuring the virtual event ran smoothly and troubleshooting any real-time issues. However, due to my simultaneous appointment for facilitating <strong>DRRM training</strong> for first-year students, I was unable to be present onsite.
+      </p>
+    </section>
+
+    <section class="section" id="collaboration">
+      <h2 class="section-title">Collaboration on Narrative Report</h2>
+      <p>
+        Recognizing my limited availability for technical duty, I volunteered to support the documentation team by helping compose the official <strong>narrative report</strong> for the webinar. Working closely with <strong>Ma. Louicel Quong</strong>, I clarified key points, added context, and helped distill the core takeaways from our activity.
+      </p>
+    </section>
+
+    <section class="section" id="adjustments">
+      <h2 class="section-title">Event Day Adjustments</h2>
+      <p>
+        On the day of the event, I was set to deliver the closing remarks. However, our group made a last-minute change, and I was reassigned to read out the <strong>certificate citations</strong> instead. This unexpected shift required me to quickly adapt and fulfill the task professionally, despite the sudden modification of plans.
+      </p>
+      <div class="quote">
+        “Flexibility and collaboration were essential—not only in planning but also in executing responsibilities as circumstances changed.”
+      </div>
+      <img src="images/docu_profdev_certaward.png" alt="Awarding Ceremony Documentation" class="img-inline" />
+    </section>
+
+    <section class="section" id="reflection">
+      <h2 class="section-title">Reflection and Takeaways</h2>
+      <ul>
+        <li>Demonstrated adaptability, moving from a technical role to a documentation and support role.</li>
+        <li>Enhanced the narrative report for clarity and depth through collaboration.</li>
+        <li>Navigated last-minute program changes with professionalism and composure.</li>
+        <li>Strengthened teamwork skills through communication and flexibility.</li>
+      </ul>
+    </section>
+
+    <footer id="contact">
+      © 2025 Technopreneurship Webinar — A report by Jureen Dominique Sese
+    </footer>
+  </main>
+</body>
+</html>
