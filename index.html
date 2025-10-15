@@ -15,15 +15,15 @@
 
     <style>
         :root {
-            --primary-color: #3f51b5; /* Indigo */
-            --accent-color: #ff4081;  /* Pink */
+            --primary-color: #2c3e50; /* Midnight Blue */
+            --accent-color: #1abc9c;  /* Turquoise */
             --text-dark: #212121;
             --text-light: #757575;
-            --bg-color: #f5f5f5;
+            --bg-color: #ecf0f1; /* Lighter grey */
             --surface-color: #ffffff;
             --radius: 8px;
             --shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            --shadow-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            --shadow-2: 0 4px 8px rgba(0,0,0,0.16), 0 4px 8px rgba(0,0,0,0.23);
         }
 
         * {
@@ -46,12 +46,48 @@
             padding: 0 24px;
         }
 
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes backgroundAnimate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(20px);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
         /* --- Header --- */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: var(--surface-color);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
             box-shadow: var(--shadow-1);
             z-index: 1000;
             transition: background-color 0.3s ease;
@@ -111,66 +147,78 @@
 
         /* --- Hero Section --- */
         #home {
-            padding-top: 120px;
-            padding-bottom: 80px;
+            padding-top: 64px; /* Account for nav */
             text-align: center;
-            min-height: 80vh;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            background: linear-gradient(45deg, #2c3e50, #34495e, #16a085, #1abc9c);
+            background-size: 400% 400%;
+            animation: backgroundAnimate 15s ease infinite;
         }
 
         .hero-content h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 16px;
+            animation: fadeInUp 0.8s ease-out forwards;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .hero-content .subtitle {
             font-size: 1.2rem;
-            color: var(--text-light);
             max-width: 600px;
             margin: 0 auto 32px;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            opacity: 0; /* Start hidden for animation */
         }
 
         .cta-button {
             display: inline-block;
-            background: var(--primary-color);
+            background: var(--accent-color);
             color: white;
-            padding: 14px 28px;
+            padding: 14px 32px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 500;
-            box-shadow: var(--shadow-1);
+            box-shadow: var(--shadow-2);
             transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+            opacity: 0; /* Start hidden for animation */
+            border: 2px solid transparent;
         }
 
         .cta-button:hover {
-            background: var(--accent-color);
+            background: transparent;
+            border-color: var(--accent-color);
             box-shadow: var(--shadow-2);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
         /* --- Section Styling --- */
         .section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
         .section-title {
             text-align: center;
             font-family: 'Poppins', sans-serif;
             font-size: 2.5rem;
-            margin-bottom: 48px;
+            margin-bottom: 64px;
             position: relative;
         }
         
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 70px;
             height: 4px;
             background: var(--accent-color);
             border-radius: 2px;
@@ -180,7 +228,7 @@
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            gap: 32px;
         }
 
         .portfolio-card {
@@ -188,38 +236,80 @@
             border-radius: var(--radius);
             box-shadow: var(--shadow-1);
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
+            position: relative;
         }
 
         .portfolio-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px);
             box-shadow: var(--shadow-2);
         }
 
         .portfolio-image {
             width: 100%;
-            height: 200px;
-            background-color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-light);
+            height: 220px;
+            overflow: hidden;
         }
         
         .portfolio-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.4s ease;
         }
+        
+        .portfolio-card:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-card .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 62, 80, 0.85);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .portfolio-card:hover .overlay {
+            opacity: 1;
+        }
+        
+        .overlay h3 {
+             font-family: 'Poppins', sans-serif;
+             margin: 0 0 16px;
+             text-align: center;
+             padding: 0 16px;
+        }
+        
+        .overlay span {
+            border: 1px solid var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
 
         .portfolio-content {
             padding: 24px;
+            background: var(--surface-color);
+            position: relative;
+            z-index: 2;
         }
 
         .portfolio-content h3 {
             margin: 0 0 8px;
             font-family: 'Poppins', sans-serif;
+            color: var(--primary-color);
         }
 
         .portfolio-content p {
@@ -229,10 +319,15 @@
         }
 
         /* --- Contact Section --- */
+        #contact {
+            background: var(--surface-color);
+        }
+
         .contact-content {
             display: flex;
             gap: 48px;
             flex-wrap: wrap;
+            align-items: center;
         }
         
         .contact-info, .contact-form-container {
@@ -254,21 +349,23 @@
 
         .contact-item i {
             color: var(--primary-color);
+            stroke-width: 2;
         }
         
         .contact-item a {
             color: var(--text-dark);
             text-decoration: none;
             transition: color 0.3s ease;
+            font-weight: 500;
         }
         
         .contact-item a:hover {
-            color: var(--primary-color);
+            color: var(--accent-color);
         }
 
         .social-links a {
             color: var(--text-light);
-            margin-right: 16px;
+            margin-right: 20px;
             transition: color 0.3s ease;
         }
         
@@ -280,9 +377,9 @@
         footer {
             text-align: center;
             padding: 32px 0;
-            margin-top: 40px;
-            border-top: 1px solid #e0e0e0;
-            color: var(--text-light);
+            background: var(--primary-color);
+            color: white;
+            font-size: 0.9rem;
         }
 
         /* --- Modal --- */
@@ -292,7 +389,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -311,17 +408,17 @@
             background: var(--surface-color);
             padding: 32px;
             border-radius: var(--radius);
-            max-width: 700px;
+            max-width: 750px;
             width: 90%;
             max-height: 85vh;
             overflow-y: auto;
             position: relative;
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
+            transform: scale(0.95) translateY(10px);
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
         .modal.open .modal-content {
-            transform: scale(1);
+            transform: scale(1) translateY(0);
         }
         
         .modal-close {
@@ -330,16 +427,18 @@
             right: 16px;
             cursor: pointer;
             color: var(--text-light);
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .modal-close:hover {
             color: var(--text-dark);
+            transform: rotate(90deg);
         }
         
         .modal-content h2 {
             font-family: 'Poppins', sans-serif;
             margin-top: 0;
+            margin-bottom: 24px;
             color: var(--primary-color);
         }
 
@@ -352,11 +451,13 @@
 
         .modal-body h3 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            margin-top: 24px;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 8px;
-            display: inline-block;
+            font-size: 1.2rem;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         /* --- Responsive Design --- */
@@ -376,28 +477,16 @@
             }
 
             .nav-links.open {
-                max-height: 300px; /* Adjust as needed */
+                max-height: 300px;
                 padding: 16px 0;
                 box-shadow: var(--shadow-1);
             }
             
-            .nav-links a {
-                padding: 16px 0;
-                width: 100%;
-                text-align: center;
-            }
-            
-            .nav-links a::after {
-                display: none;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
+            .nav-links a { padding: 16px 0; width: 100%; text-align: center; }
+            .nav-links a::after { display: none; }
+            .menu-toggle { display: block; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .section { padding: 80px 0; }
         }
 
     </style>
@@ -432,35 +521,47 @@
         <!-- PORTFOLIO SECTION -->
         <section id="portfolio" class="section">
             <div class="container">
-                <h2 class="section-title">Portfolio</h2>
+                <h2 class="section-title fade-in">Portfolio</h2>
                 <div class="portfolio-grid">
                     
                     <!-- Card 1 -->
-                    <div class="portfolio-card" data-modal="modal1">
+                    <div class="portfolio-card fade-in" data-modal="modal1">
                         <div class="portfolio-image">
-                            <img src="https://placehold.co/600x400/3f51b5/ffffff?text=Thermal+Imaging" alt="Thermal Camera Placeholder">
+                            <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Thermal+Imaging" alt="Thermal Camera Placeholder">
+                        </div>
+                        <div class="overlay">
+                            <h3>Thermal Camera for Inspection</h3>
+                            <span>View Details</span>
                         </div>
                         <div class="portfolio-content">
                             <h3>Thermal Camera for Inspection</h3>
-                            <p>Session 1: A virtual technical lecture on using thermal cameras for electromechanical troubleshooting.</p>
+                            <p>Session 1: A virtual lecture on using thermal cameras for electromechanical troubleshooting.</p>
                         </div>
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="portfolio-card" data-modal="modal2">
+                    <div class="portfolio-card fade-in" data-modal="modal2">
                          <div class="portfolio-image">
-                            <img src="https://placehold.co/600x400/ff4081/ffffff?text=Solar+Design" alt="Solar Design Placeholder">
+                            <img src="https://placehold.co/600x400/1abc9c/ffffff?text=Solar+Design" alt="Solar Design Placeholder">
+                        </div>
+                         <div class="overlay">
+                            <h3>Basic Solar Design & Installation</h3>
+                            <span>View Details</span>
                         </div>
                         <div class="portfolio-content">
                             <h3>Basic Solar Design & Installation</h3>
-                            <p>Session 2: An engaging webinar covering the fundamentals of solar power system design.</p>
+                            <p>Session 2: An engaging webinar on the fundamentals of solar power system design.</p>
                         </div>
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="portfolio-card" data-modal="modal3">
+                    <div class="portfolio-card fade-in" data-modal="modal3">
                         <div class="portfolio-image">
-                             <img src="https://placehold.co/600x400/3f51b5/ffffff?text=Technopreneurship" alt="Technopreneurship Placeholder">
+                             <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Technopreneurship" alt="Technopreneurship Placeholder">
+                        </div>
+                        <div class="overlay">
+                            <h3>Technopreneurship</h3>
+                            <span>View Details</span>
                         </div>
                         <div class="portfolio-content">
                             <h3>Technopreneurship</h3>
@@ -469,13 +570,17 @@
                     </div>
 
                     <!-- Card 4 -->
-                    <div class="portfolio-card" data-modal="modal4">
+                    <div class="portfolio-card fade-in" data-modal="modal4">
                          <div class="portfolio-image">
-                           <img src="https://placehold.co/600x400/ff4081/ffffff?text=GMM+Workshops" alt="GMM Workshops Placeholder">
+                           <img src="https://placehold.co/600x400/1abc9c/ffffff?text=GMM+Workshops" alt="GMM Workshops Placeholder">
+                        </div>
+                        <div class="overlay">
+                             <h3>GMM & Technical Workshops</h3>
+                             <span>View Details</span>
                         </div>
                         <div class="portfolio-content">
                             <h3>GMM & Technical Workshops</h3>
-                            <p>Session 4: Hosting a General Membership Meeting featuring four professional workshops.</p>
+                            <p>Session 4: Hosting a GMM featuring four professional workshops.</p>
                         </div>
                     </div>
 
@@ -486,8 +591,8 @@
         <!-- CONTACT SECTION -->
         <section id="contact" class="section">
              <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="contact-content">
+                <h2 class="section-title fade-in">Get In Touch</h2>
+                <div class="contact-content fade-in">
                     <div class="contact-info">
                         <h3>Contact Information</h3>
                         <p>Feel free to reach out via email or connect with me on social media. I'm always open to discussing new projects, creative ideas, or opportunities.</p>
@@ -498,13 +603,12 @@
                         </div>
                         <div class="contact-item">
                             <i data-feather="globe"></i>
-                            <a href="https://overwatchsalespitch.my.canva.site/sese-bosh" target="_blank">Canva Website</a>
+                            <a href="https://overwatchsalespitch.my.canva.site/sese-bosh" target="_blank">Personal Portfolio</a>
                         </div>
                         
                         <h3 style="margin-top: 32px;">Follow Me</h3>
                         <div class="social-links">
                             <a href="https://www.facebook.com/jureen.s" target="_blank"><i data-feather="facebook"></i></a>
-                            <!-- Add other social links here if needed -->
                         </div>
                     </div>
                 </div>
@@ -527,12 +631,12 @@
             <i class="modal-close" data-feather="x"></i>
             <div class="modal-body">
                 <h2>Use of Thermal Camera for Electromechanical Inspection</h2>
-                <img src="https://placehold.co/600x300/3f51b5/ffffff?text=Documentation+1" alt="Placeholder documentation image">
-                <h3>Introduction</h3>
+                <img src="https://placehold.co/600x300/2c3e50/ffffff?text=Documentation+1" alt="Placeholder documentation image">
+                <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
                 <p>This seminar was made possible by the Bicol University Electrical Engineering Department, in partnership with the IIEE - UAE Chapter. The event was part of the ProfDev Series focused on emerging technologies. The first session was a virtual lecture by Engr. Ferdinand B. Borlongan on using thermal cameras for inspection.</p>
-                <h3>Summary</h3>
+                <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
                 <p>Engr. Borlongan provided an accessible overview of how thermal cameras are used for electromechanical troubleshooting. He highlighted their ability to detect anomalies like overheating components, faulty connections, and insulation defects, thereby preventing costly breakdowns.</p>
-                <h3>Learnings</h3>
+                <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
                 <p>I learned that thermal cameras are essential for preventative maintenance in electromechanical systems. The practical demonstrations and case studies clearly illustrated their effectiveness in real-world applications, ensuring operational efficiency and safety.</p>
             </div>
         </div>
@@ -544,12 +648,12 @@
             <i class="modal-close" data-feather="x"></i>
             <div class="modal-body">
                 <h2>Basic Solar Design and Installation</h2>
-                <img src="https://placehold.co/600x300/ff4081/ffffff?text=Documentation+2" alt="Placeholder documentation image">
-                <h3>Introduction</h3>
+                <img src="https://placehold.co/600x300/1abc9c/ffffff?text=Documentation+2" alt="Placeholder documentation image">
+                <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
                 <p>I attended this seminar on Basic Solar Design, featuring speaker Engr. Constantine Reymundo. Despite joining a bit late due to an internet outage, I found the content highly engaging and participated in an interactive quiz at the end.</p>
-                <h3>Summary</h3>
+                <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
                 <p>The webinar covered the intricacies of solar design, including types of solar panels, efficiency ratings, and the fundamental components of photovoltaic systems like inverters and batteries. It also touched on system sizing, site assessment, and regulatory requirements in the Philippines.</p>
-                <h3>Learnings</h3>
+                <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
                 <p>I learned that solar design is a multi-faceted business requiring significant investment. The session was informative about current trends and the future of solar energy in the Philippines, emphasizing its economic and environmental benefits.</p>
             </div>
         </div>
@@ -561,12 +665,12 @@
             <i class="modal-close" data-feather="x"></i>
             <div class="modal-body">
                 <h2>Technopreneurship: Turning Technology into Business</h2>
-                 <img src="https://placehold.co/600x300/3f51b5/ffffff?text=Documentation+3" alt="Placeholder documentation image">
-                <h3>Introduction & Role</h3>
+                 <img src="https://placehold.co/600x300/2c3e50/ffffff?text=Documentation+3" alt="Placeholder documentation image">
+                <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
                 <p>Our group hosted this webinar. I was initially assigned to the technical team but had a schedule conflict with DRRM training. I pivoted to support the documentation team, co-authoring the narrative report with Ma. Louicel Quong to ensure the event's key takeaways were captured.</p>
-                <h3>Summary of Experience</h3>
+                <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Experience</h3>
                 <p>On the event day, my role shifted again from delivering closing remarks to reading certificate citations. This last-minute change required quick adaptation and professionalism.</p>
-                <h3>Learnings</h3>
+                <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
                 <p>The seminar taught me how to identify market gaps and leverage innovation for business. As an organizer, I also learned the importance of clear communication and flexible role assignments to ensure a successful event despite unforeseen challenges.</p>
             </div>
         </div>
@@ -578,12 +682,12 @@
             <i class="modal-close" data-feather="x"></i>
             <div class="modal-body">
                 <h2>GMM Meeting & Technical Workshops</h2>
-                <img src="https://placehold.co/600x300/ff4081/ffffff?text=Documentation+4" alt="Placeholder documentation image">
-                <h3>Introduction & Role</h3>
+                <img src="https://placehold.co/600x300/1abc9c/ffffff?text=Documentation+4" alt="Placeholder documentation image">
+                <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
                 <p>I was unable to attend the four technical workshops as I was the host for the General Membership Meeting held simultaneously. However, I gathered insights from attendees and the organizing committee.</p>
-                <h3>Summary of Gained Knowledge</h3>
+                <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Gained Knowledge</h3>
                 <p>Through discussions, I learned about advancements in solar technology, photovoltaic systems, and best practices in electrical engineering. The event, headed by Engr. Pee Jay Gealone, showcased the IIEE's commitment to professional development.</p>
-                <h3>Learnings & Hosting Experience</h3>
+                <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings & Hosting Experience</h3>
                 <p>I gained a deeper understanding of industry standards and the importance of knowledge sharing. Hosting alongside Ma. Fatima Faye Balilo was a fun and engaging experience, highlighting the value of teamwork and collaboration in a large-scale event.</p>
             </div>
         </div>
@@ -598,6 +702,10 @@
         const navLinks = document.querySelector('.nav-links');
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('open');
+            // Close menu when a link is clicked
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => navLinks.classList.remove('open'));
+            });
         });
 
         // --- Active Nav Link on Scroll ---
@@ -629,7 +737,10 @@
         portfolioCards.forEach(card => {
             card.addEventListener('click', () => {
                 const modalId = card.getAttribute('data-modal');
-                document.getElementById(modalId).classList.add('open');
+                const modal = document.getElementById(modalId)
+                modal.classList.add('open');
+                // Re-initialize feather icons inside the modal
+                feather.replace();
             });
         });
 
@@ -639,7 +750,6 @@
             });
         });
         
-        // Close modal on outside click
         modals.forEach(modal => {
             modal.addEventListener('click', (e) => {
                 if(e.target === modal) {
@@ -648,6 +758,21 @@
             });
         });
 
+        // --- Scroll Animations ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        });
+
+        const elementsToAnimate = document.querySelectorAll('.fade-in');
+        elementsToAnimate.forEach((el) => observer.observe(el));
+
     </script>
 </body>
 </html>
+
