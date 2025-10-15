@@ -8,22 +8,23 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
     <style>
         :root {
-            --primary-color: #2c3e50; /* Midnight Blue */
-            --accent-color: #1abc9c;  /* Turquoise */
-            --text-dark: #212121;
-            --text-light: #757575;
-            --bg-color: #ecf0f1; /* Lighter grey */
+            --primary-color: #0D1B2A; /* Rich Black */
+            --accent-color: #778DA9;  /* Light Steel Blue */
+            --secondary-color: #415A77; /* Paynes Gray */
+            --text-dark: #0D1B2A;
+            --text-light: #415A77;
+            --bg-color: #EDF2F4; 
             --surface-color: #ffffff;
-            --radius: 8px;
-            --shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            --shadow-2: 0 4px 8px rgba(0,0,0,0.16), 0 4px 8px rgba(0,0,0,0.23);
+            --radius: 12px;
+            --shadow-1: 0 2px 4px rgba(0,0,0,0.08);
+            --shadow-2: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         * {
@@ -37,7 +38,7 @@
             background: var(--bg-color);
             font-family: 'Roboto', sans-serif;
             color: var(--text-dark);
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .container {
@@ -47,32 +48,15 @@
         }
 
         /* --- Animations --- */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes backgroundAnimate {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .fade-in {
             opacity: 0;
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            transform: translateY(20px);
+            transform: translateY(30px);
         }
 
         .fade-in.visible {
@@ -80,13 +64,12 @@
             transform: translateY(0);
         }
 
-
         /* --- Header --- */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
             box-shadow: var(--shadow-1);
             z-index: 1000;
@@ -97,19 +80,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 64px;
+            height: 70px;
         }
 
         .logo {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary-color);
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 36px;
         }
 
         .nav-links a {
@@ -124,11 +107,13 @@
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
-            height: 2px;
+            height: 3px;
             background: var(--accent-color);
+            border-radius: 2px;
             transition: width 0.3s ease;
         }
 
@@ -140,64 +125,88 @@
             width: 100%;
         }
         
-        .menu-toggle {
-            display: none;
-            cursor: pointer;
-        }
+        .menu-toggle { display: none; cursor: pointer; }
 
         /* --- Hero Section --- */
         #home {
-            padding-top: 64px; /* Account for nav */
-            text-align: center;
-            height: 100vh;
+            padding-top: 70px; /* Account for nav */
+            text-align: left;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
             position: relative;
             overflow: hidden;
-            color: white;
-            background: linear-gradient(45deg, #2c3e50, #34495e, #16a085, #1abc9c);
-            background-size: 400% 400%;
-            animation: backgroundAnimate 15s ease infinite;
+            background-color: #E0E1DD; /* Light Gray from palette */
         }
 
-        .hero-content h1 {
+        .hero-content {
+            z-index: 2;
+        }
+        
+        .hero-content .name-header {
             font-family: 'Poppins', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 16px;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 8px;
+            color: var(--primary-color);
             animation: fadeInUp 0.8s ease-out forwards;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-content .name-subheader {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--secondary-color);
+            margin-bottom: 24px;
+             animation: fadeInUp 0.8s ease-out 0.2s forwards;
+             opacity: 0;
         }
 
         .hero-content .subtitle {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 32px;
-            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
             opacity: 0; /* Start hidden for animation */
         }
 
         .cta-button {
             display: inline-block;
-            background: var(--accent-color);
+            background: var(--secondary-color);
             color: white;
             padding: 14px 32px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
             box-shadow: var(--shadow-2);
             transition: all 0.3s ease;
-            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
             opacity: 0; /* Start hidden for animation */
-            border: 2px solid transparent;
         }
 
         .cta-button:hover {
-            background: transparent;
-            border-color: var(--accent-color);
+            background: var(--primary-color);
             box-shadow: var(--shadow-2);
-            transform: translateY(-3px);
+            transform: translateY(-4px) scale(1.02);
         }
+        
+        .hero-shape {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 500px;
+            height: 500px;
+            background: var(--primary-color);
+            border-radius: 45% 55% 70% 30% / 30% 50% 50% 70%;
+            animation: morph 8s ease-in-out infinite both alternate;
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        @keyframes morph {
+            0% { border-radius: 45% 55% 70% 30% / 30% 50% 50% 70%; }
+            100% { border-radius: 30% 70% 30% 70% / 70% 30% 70% 30%; transform: rotate(10deg); }
+        }
+
 
         /* --- Section Styling --- */
         .section {
@@ -207,7 +216,7 @@
         .section-title {
             text-align: center;
             font-family: 'Poppins', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 64px;
             position: relative;
         }
@@ -218,8 +227,8 @@
             bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 70px;
-            height: 4px;
+            width: 80px;
+            height: 5px;
             background: var(--accent-color);
             border-radius: 2px;
         }
@@ -238,72 +247,19 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-            position: relative;
+            border: 1px solid #eee;
         }
 
         .portfolio-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-2);
         }
-
-        .portfolio-image {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
-        }
         
-        .portfolio-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
+        .portfolio-image img { width: 100%; height: 220px; object-fit: cover; }
         
-        .portfolio-card:hover .portfolio-image img {
-            transform: scale(1.1);
-        }
-
-        .portfolio-card .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(44, 62, 80, 0.85);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        
-        .portfolio-card:hover .overlay {
-            opacity: 1;
-        }
-        
-        .overlay h3 {
-             font-family: 'Poppins', sans-serif;
-             margin: 0 0 16px;
-             text-align: center;
-             padding: 0 16px;
-        }
-        
-        .overlay span {
-            border: 1px solid var(--accent-color);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-
         .portfolio-content {
             padding: 24px;
             background: var(--surface-color);
-            position: relative;
-            z-index: 2;
         }
 
         .portfolio-content h3 {
@@ -315,177 +271,124 @@
         .portfolio-content p {
             margin: 0;
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+        }
+
+        /* --- Accomplishments Section --- */
+        #accomplishments {
+            background: var(--surface-color);
+        }
+        .accomplishments-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+        .accomplishments-col h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 8px;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+        .accomplishments-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .accomplishments-col li {
+            margin-bottom: 12px;
+            padding-left: 28px;
+            position: relative;
+        }
+        .accomplishments-col li::before {
+            content: '✓';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
         }
 
         /* --- Contact Section --- */
-        #contact {
-            background: var(--surface-color);
-        }
-
         .contact-content {
+            text-align: center;
+        }
+
+        .contact-info p {
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        
+        .contact-links {
             display: flex;
-            gap: 48px;
+            justify-content: center;
+            gap: 24px;
             flex-wrap: wrap;
+        }
+        
+        .contact-link-item {
+            display: inline-flex;
             align-items: center;
-        }
-        
-        .contact-info, .contact-form-container {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .contact-info h3 {
-             font-family: 'Poppins', sans-serif;
-             margin-bottom: 24px;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .contact-item i {
-            color: var(--primary-color);
-            stroke-width: 2;
-        }
-        
-        .contact-item a {
-            color: var(--text-dark);
+            gap: 12px;
+            background: var(--surface-color);
+            padding: 12px 24px;
+            border-radius: 50px;
+            box-shadow: var(--shadow-1);
             text-decoration: none;
-            transition: color 0.3s ease;
+            color: var(--text-dark);
             font-weight: 500;
+            transition: all 0.3s ease;
         }
         
-        .contact-item a:hover {
-            color: var(--accent-color);
-        }
-
-        .social-links a {
-            color: var(--text-light);
-            margin-right: 20px;
-            transition: color 0.3s ease;
+        .contact-link-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-2);
+            color: var(--primary-color);
         }
         
-        .social-links a:hover {
+        .contact-link-item i {
             color: var(--primary-color);
         }
 
         /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 32px 0;
-            background: var(--primary-color);
-            color: white;
-            font-size: 0.9rem;
-        }
+        footer { text-align: center; padding: 32px 0; background: var(--primary-color); color: white; font-size: 0.9rem; }
 
         /* --- Modal --- */
         .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); display: flex; align-items: center; justify-content: center;
+            z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        
-        .modal.open {
-            opacity: 1;
-            visibility: visible;
-        }
+        .modal.open { opacity: 1; visibility: visible; }
 
         .modal-content {
-            background: var(--surface-color);
-            padding: 32px;
-            border-radius: var(--radius);
-            max-width: 750px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            position: relative;
-            transform: scale(0.95) translateY(10px);
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            background: var(--surface-color); padding: 32px; border-radius: var(--radius);
+            max-width: 750px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative;
+            transform: scale(0.95) translateY(10px); transition: transform 0.3s ease, opacity 0.3s ease;
         }
-
-        .modal.open .modal-content {
-            transform: scale(1) translateY(0);
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            cursor: pointer;
-            color: var(--text-light);
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .modal-close:hover {
-            color: var(--text-dark);
-            transform: rotate(90deg);
-        }
-        
-        .modal-content h2 {
-            font-family: 'Poppins', sans-serif;
-            margin-top: 0;
-            margin-bottom: 24px;
-            color: var(--primary-color);
-        }
-
-        .modal-body img {
-            max-width: 100%;
-            border-radius: var(--radius);
-            margin: 16px 0;
-            box-shadow: var(--shadow-1);
-        }
-
+        .modal.open .modal-content { transform: scale(1) translateY(0); }
+        .modal-close { position: absolute; top: 16px; right: 16px; cursor: pointer; color: var(--text-light); transition: all 0.3s ease; }
+        .modal-close:hover { color: var(--text-dark); transform: rotate(90deg); }
+        .modal-content h2 { font-family: 'Poppins', sans-serif; margin: 0 0 24px; color: var(--primary-color); }
+        .modal-body img { max-width: 100%; border-radius: var(--radius); margin: 16px 0; box-shadow: var(--shadow-1); }
         .modal-body h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem;
-            margin-top: 32px;
-            margin-bottom: 12px;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-family: 'Poppins', sans-serif; font-size: 1.2rem; margin: 32px 0 12px;
+            color: var(--primary-color); display: flex; align-items: center; gap: 10px;
         }
         
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
             .nav-links {
-                position: absolute;
-                top: 64px;
-                left: 0;
-                width: 100%;
-                background: var(--surface-color);
-                flex-direction: column;
-                align-items: center;
-                gap: 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.4s ease-in-out;
+                position: absolute; top: 70px; left: 0; width: 100%;
+                background: var(--surface-color); flex-direction: column; align-items: center;
+                gap: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out;
             }
-
-            .nav-links.open {
-                max-height: 300px;
-                padding: 16px 0;
-                box-shadow: var(--shadow-1);
-            }
-            
+            .nav-links.open { max-height: 300px; padding: 16px 0; box-shadow: var(--shadow-1); }
             .nav-links a { padding: 16px 0; width: 100%; text-align: center; }
             .nav-links a::after { display: none; }
             .menu-toggle { display: block; }
-            .hero-content h1 { font-size: 2.5rem; }
+            .hero-shape { width: 300px; height: 300px; }
+            .accomplishments-grid { grid-template-columns: 1fr; }
             .section { padding: 80px 0; }
         }
 
@@ -500,6 +403,7 @@
             <nav class="nav-links">
                 <a href="#home" class="active">Home</a>
                 <a href="#portfolio">Portfolio</a>
+                <a href="#accomplishments">Accomplishments</a>
                 <a href="#contact">Contact</a>
             </nav>
             <div class="menu-toggle">
@@ -511,11 +415,17 @@
     <main>
         <!-- HERO SECTION -->
         <section id="home">
-            <div class="hero-content">
-                <h1>Jureen Dominique E. Sese</h1>
-                <p class="subtitle">An aspiring Electrical Engineer passionate about electromechanical systems, solar design, and turning technology into business opportunities.</p>
-                <a href="#portfolio" class="cta-button">View My Work</a>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="name-header">Jureen Dominique E. Sese</h1>
+                    <p class="name-subheader">BSEE-4A, Batch 2026</p>
+                    <p class="subtitle"><strong>Hello! I'm juju!</strong><br>
+                        Versatile Electrical Engineering student with strong academics and experience in technical, creative, and leadership roles. Skilled in CAD, PLC Simulation, and microcontroller projects. Recognized graphic designer active in major college and departmental organizations.
+                    </p>
+                    <a href="#portfolio" class="cta-button">View My Work</a>
+                </div>
             </div>
+            <div class="hero-shape"></div>
         </section>
 
         <!-- PORTFOLIO SECTION -->
@@ -524,203 +434,169 @@
                 <h2 class="section-title fade-in">Portfolio</h2>
                 <div class="portfolio-grid">
                     
-                    <!-- Card 1 -->
                     <div class="portfolio-card fade-in" data-modal="modal1">
-                        <div class="portfolio-image">
-                            <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Thermal+Imaging" alt="Thermal Camera Placeholder">
-                        </div>
-                        <div class="overlay">
-                            <h3>Thermal Camera for Inspection</h3>
-                            <span>View Details</span>
-                        </div>
-                        <div class="portfolio-content">
-                            <h3>Thermal Camera for Inspection</h3>
-                            <p>Session 1: A virtual lecture on using thermal cameras for electromechanical troubleshooting.</p>
-                        </div>
+                        <div class="portfolio-image"> <img src="https://placehold.co/600x400/0D1B2A/FFFFFF?text=Thermal+Imaging" alt="Thermal Camera Placeholder"> </div>
+                        <div class="portfolio-content"> <h3>Thermal Camera for Inspection</h3> <p>Session 1: A virtual lecture on using thermal cameras for electromechanical troubleshooting.</p> </div>
                     </div>
-
-                    <!-- Card 2 -->
                     <div class="portfolio-card fade-in" data-modal="modal2">
-                         <div class="portfolio-image">
-                            <img src="https://placehold.co/600x400/1abc9c/ffffff?text=Solar+Design" alt="Solar Design Placeholder">
-                        </div>
-                         <div class="overlay">
-                            <h3>Basic Solar Design & Installation</h3>
-                            <span>View Details</span>
-                        </div>
-                        <div class="portfolio-content">
-                            <h3>Basic Solar Design & Installation</h3>
-                            <p>Session 2: An engaging webinar on the fundamentals of solar power system design.</p>
-                        </div>
+                         <div class="portfolio-image"> <img src="https://placehold.co/600x400/415A77/FFFFFF?text=Solar+Design" alt="Solar Design Placeholder"> </div>
+                        <div class="portfolio-content"> <h3>Basic Solar Design & Installation</h3> <p>Session 2: An engaging webinar on the fundamentals of solar power system design.</p> </div>
                     </div>
-
-                    <!-- Card 3 -->
                     <div class="portfolio-card fade-in" data-modal="modal3">
-                        <div class="portfolio-image">
-                             <img src="https://placehold.co/600x400/2c3e50/ffffff?text=Technopreneurship" alt="Technopreneurship Placeholder">
-                        </div>
-                        <div class="overlay">
-                            <h3>Technopreneurship</h3>
-                            <span>View Details</span>
-                        </div>
-                        <div class="portfolio-content">
-                            <h3>Technopreneurship</h3>
-                            <p>Session 3: A hosted webinar on turning technology into viable business opportunities.</p>
-                        </div>
+                        <div class="portfolio-image"> <img src="https://placehold.co/600x400/0D1B2A/FFFFFF?text=Technopreneurship" alt="Technopreneurship Placeholder"> </div>
+                        <div class="portfolio-content"> <h3>Technopreneurship</h3> <p>Session 3: A hosted webinar on turning technology into viable business opportunities.</p> </div>
                     </div>
-
-                    <!-- Card 4 -->
                     <div class="portfolio-card fade-in" data-modal="modal4">
-                         <div class="portfolio-image">
-                           <img src="https://placehold.co/600x400/1abc9c/ffffff?text=GMM+Workshops" alt="GMM Workshops Placeholder">
-                        </div>
-                        <div class="overlay">
-                             <h3>GMM & Technical Workshops</h3>
-                             <span>View Details</span>
-                        </div>
-                        <div class="portfolio-content">
-                            <h3>GMM & Technical Workshops</h3>
-                            <p>Session 4: Hosting a GMM featuring four professional workshops.</p>
-                        </div>
+                         <div class="portfolio-image"> <img src="https://placehold.co/600x400/415A77/FFFFFF?text=GMM+Workshops" alt="GMM Workshops Placeholder"> </div>
+                        <div class="portfolio-content"> <h3>GMM & Technical Workshops</h3> <p>Session 4: Hosting a GMM featuring four professional workshops.</p> </div>
                     </div>
 
                 </div>
             </div>
         </section>
         
+        <!-- ACCOMPLISHMENTS SECTION -->
+        <section id="accomplishments" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Accomplishments</h2>
+                <div class="accomplishments-grid fade-in">
+                    <div class="accomplishments-col">
+                        <h3>Organizations Handled</h3>
+                        <ul>
+                            <li>Technical Vice President, IIEE-BUSC</li>
+                            <li>Vice President, BUCENG-CSC 2024-2025</li>
+                            <li>Majority Floor Leader, BU Legislative Council 2023-2024</li>
+                            <li>President, Masbate City Division Federated Supreme Student Government (2021-2022)</li>
+                            <li>Chairperson, Student Coordinating Council - Masbate National Comprehensive High School (2021-2022)</li>
+                            <li>Member, Local Youth Development Council (LYDC) Masbate City (2022)</li>
+                        </ul>
+                    </div>
+                    <div class="accomplishments-col">
+                        <h3>Notable Involvements</h3>
+                        <ul>
+                            <li>Gerry Roxas Leadership Awardee, 2022</li>
+                            <li>Philippine Startup Challenge Regional Champion, Bicol Region (2022)</li>
+                            <li>2nd Runner Up, Regional Science and Technology Fair (RSTF)</li>
+                            <li>Event Head, Lead Initiatives 2023</li>
+                            <li>Host, Nexus Futura: Engineering Week 2024</li>
+                            <li>Creative Director, EE JAM 2023 Event Head, EE Art Jam</li>
+                            <li>Host, TechHarbor 2024</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- CONTACT SECTION -->
         <section id="contact" class="section">
              <div class="container">
                 <h2 class="section-title fade-in">Get In Touch</h2>
                 <div class="contact-content fade-in">
                     <div class="contact-info">
-                        <h3>Contact Information</h3>
-                        <p>Feel free to reach out via email or connect with me on social media. I'm always open to discussing new projects, creative ideas, or opportunities.</p>
-                        
-                        <div class="contact-item">
-                            <i data-feather="mail"></i>
-                            <a href="mailto:jdes2022-6474-33556@bicol-u.edu.ph">jdes2022-6474-33556@bicol-u.edu.ph</a>
-                        </div>
-                        <div class="contact-item">
-                            <i data-feather="globe"></i>
-                            <a href="https://overwatchsalespitch.my.canva.site/sese-bosh" target="_blank">Personal Portfolio</a>
-                        </div>
-                        
-                        <h3 style="margin-top: 32px;">Follow Me</h3>
-                        <div class="social-links">
-                            <a href="https://www.facebook.com/jureen.s" target="_blank"><i data-feather="facebook"></i></a>
+                        <p>Feel free to reach out! I'm always open to discussing new projects, creative ideas, or opportunities to collaborate.</p>
+                        <div class="contact-links">
+                             <a href="mailto:jdes2022-6474-33556@bicol-u.edu.ph" class="contact-link-item">
+                                <i data-feather="mail"></i>
+                                <span>jdes2022-6474-33556@bicol-u.edu.ph</span>
+                            </a>
+                            <a href="https://www.facebook.com/jureen.s" target="_blank" class="contact-link-item">
+                                <i data-feather="facebook"></i>
+                                <span>Facebook Profile</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
     
     <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            © 2025 Jureen Dominique E. Sese. All Rights Reserved.
-        </div>
-    </footer>
+    <footer> <div class="container"> © 2025 Jureen Dominique E. Sese. All Rights Reserved. </div> </footer>
     
     <!-- MODALS -->
-    <!-- Modal 1 -->
     <div id="modal1" class="modal">
         <div class="modal-content">
             <i class="modal-close" data-feather="x"></i>
             <div class="modal-body">
                 <h2>Use of Thermal Camera for Electromechanical Inspection</h2>
-                <img src="https://placehold.co/600x300/2c3e50/ffffff?text=Documentation+1" alt="Placeholder documentation image">
+                <img src="https://placehold.co/600x300/0D1B2A/FFFFFF?text=Documentation+1" alt="Placeholder">
                 <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
-                <p>This seminar was made possible by the Bicol University Electrical Engineering Department, in partnership with the IIEE - UAE Chapter. The event was part of the ProfDev Series focused on emerging technologies. The first session was a virtual lecture by Engr. Ferdinand B. Borlongan on using thermal cameras for inspection.</p>
+                <p>I learned that this seminar was made possible by the Bicol University Electrical Engineering Department, in partnership with the Institute of Integrated Electrical Engineers - United Arab Emirates Chapter. The event was part of the ProfDev Series titled: Charting the Frontiers of Emerging Technologies in Electrical Engineering. This series aims to engage learners and researchers with ideas, innovations, and impacts in the field of engineering. The first session, "Use of Thermal Camera for Electromechanical Inspection and Troubleshooting," was a virtual technical lecture delivered by Engr. Ferdinand B. Borlongan via Zoom.</p>
                 <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
-                <p>Engr. Borlongan provided an accessible overview of how thermal cameras are used for electromechanical troubleshooting. He highlighted their ability to detect anomalies like overheating components, faulty connections, and insulation defects, thereby preventing costly breakdowns.</p>
+                <p>Engr. Ferdinand B. Borlongan truly illuminated the world of thermal cameras! He provided a fantastic overview of how these handy devices are used for electromechanical inspection and troubleshooting, making complex topics surprisingly accessible and engaging. He highlighted how thermal cameras can detect anomalies like overheating components, faulty connections, and insulation defects, preventing costly breakdowns and ensuring operational efficiency. The session also included practical demonstrations and case studies, illustrating the effectiveness of thermal cameras in real-world scenarios.</p>
                 <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                <p>I learned that thermal cameras are essential for preventative maintenance in electromechanical systems. The practical demonstrations and case studies clearly illustrated their effectiveness in real-world applications, ensuring operational efficiency and safety.</p>
+                <p>I learned how thermal cameras are essential for detecting anomalies like overheating, faulty connections, and insulation defects in electromechanical systems. Their ability to provide non-contact temperature measurements makes them a powerful tool for preventative maintenance, ensuring safety and operational efficiency. The practical demonstrations and case studies clearly illustrated their effectiveness in real-world applications.</p>
             </div>
         </div>
     </div>
-    
-    <!-- Modal 2 -->
     <div id="modal2" class="modal">
         <div class="modal-content">
             <i class="modal-close" data-feather="x"></i>
             <div class="modal-body">
                 <h2>Basic Solar Design and Installation</h2>
-                <img src="https://placehold.co/600x300/1abc9c/ffffff?text=Documentation+2" alt="Placeholder documentation image">
+                <img src="https://placehold.co/600x300/415A77/FFFFFF?text=Documentation+2" alt="Placeholder">
                 <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
-                <p>I attended this seminar on Basic Solar Design, featuring speaker Engr. Constantine Reymundo. Despite joining a bit late due to an internet outage, I found the content highly engaging and participated in an interactive quiz at the end.</p>
+                <p>I was able to attend this seminar, Basic Solar Design, with the speaker being Engr. Constantine Reymundo. Although I was a bit late because of the internet outage, I was still able to participate in the interactive quiz at the end.</p>
                 <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
-                <p>The webinar covered the intricacies of solar design, including types of solar panels, efficiency ratings, and the fundamental components of photovoltaic systems like inverters and batteries. It also touched on system sizing, site assessment, and regulatory requirements in the Philippines.</p>
+                <p>The webinar delved into the intricacies of solar design, covering topics such as different types of solar panels, their efficiency ratings, and the key components of a photovoltaic system, including inverters, batteries, and charge controllers. It also touched upon system sizing, site assessment, and the regulatory requirements for solar installations in the Philippines.</p>
                 <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                <p>I learned that solar design is a multi-faceted business requiring significant investment. The session was informative about current trends and the future of solar energy in the Philippines, emphasizing its economic and environmental benefits.</p>
+                <p>I learned that solar design is a multi-faceted business that requires significant capital investment, which is why it is not widely adopted yet despite its benefits. The session was very informative on the current trends and the future of solar energy in the Philippines, highlighting both its economic and environmental advantages.</p>
             </div>
         </div>
     </div>
-
-    <!-- Modal 3 -->
     <div id="modal3" class="modal">
         <div class="modal-content">
             <i class="modal-close" data-feather="x"></i>
             <div class="modal-body">
                 <h2>Technopreneurship: Turning Technology into Business</h2>
-                 <img src="https://placehold.co/600x300/2c3e50/ffffff?text=Documentation+3" alt="Placeholder documentation image">
+                <img src="https://placehold.co/600x300/0D1B2A/FFFFFF?text=Documentation+3" alt="Placeholder">
                 <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
-                <p>Our group hosted this webinar. I was initially assigned to the technical team but had a schedule conflict with DRRM training. I pivoted to support the documentation team, co-authoring the narrative report with Ma. Louicel Quong to ensure the event's key takeaways were captured.</p>
+                <p>Our group hosted the webinar titled “Technopreneurship: Turning Technology into Business Opportunities.” In this event, I was assigned to be a part of the technical team, but unfortunately, my schedule conflicted with the DRRM training for first-year students. Understanding the situation, I volunteered to assist the documentation team instead. I worked closely with Ma. Louicel Quong to compose the narrative report, ensuring that we captured the key points and takeaways from the activity.</p>
                 <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Experience</h3>
-                <p>On the event day, my role shifted again from delivering closing remarks to reading certificate citations. This last-minute change required quick adaptation and professionalism.</p>
+                <p>On the day of the event, there was a last-minute change in the program flow. I was originally scheduled to deliver the closing remarks, but I was asked to read the certificate citations instead. This required me to be adaptable and ready to take on a different role on the spot. I made sure to handle the task with professionalism despite the sudden shift in responsibilities.</p>
                 <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                <p>The seminar taught me how to identify market gaps and leverage innovation for business. As an organizer, I also learned the importance of clear communication and flexible role assignments to ensure a successful event despite unforeseen challenges.</p>
+                <p>This seminar provided valuable insights into the world of technopreneurship, teaching us how to identify market gaps and leverage technological innovations to create viable business ventures. The experience of organizing the event also reinforced the importance of clear communication, teamwork, and the ability to adapt to unexpected changes. It was a practical lesson in event management and collaboration, demonstrating how a team can work together to ensure the successful execution of an event, even when faced with unforeseen circumstances.</p>
             </div>
         </div>
     </div>
-    
-    <!-- Modal 4 -->
     <div id="modal4" class="modal">
         <div class="modal-content">
             <i class="modal-close" data-feather="x"></i>
             <div class="modal-body">
                 <h2>GMM Meeting & Technical Workshops</h2>
-                <img src="https://placehold.co/600x300/1abc9c/ffffff?text=Documentation+4" alt="Placeholder documentation image">
+                <img src="https://placehold.co/600x300/415A77/FFFFFF?text=Documentation+4" alt="Placeholder">
                 <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
-                <p>I was unable to attend the four technical workshops as I was the host for the General Membership Meeting held simultaneously. However, I gathered insights from attendees and the organizing committee.</p>
+                <p>I was not able to attend as I was the host during the GMM Meeting held in the Gymnasium with Four(4) separate professional technical workshops. However, through discussions with attendees and the organizing committee, I gained valuable insights into the topics covered in the workshops.</p>
                 <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Gained Knowledge</h3>
-                <p>Through discussions, I learned about advancements in solar technology, photovoltaic systems, and best practices in electrical engineering. The event, headed by Engr. Pee Jay Gealone, showcased the IIEE's commitment to professional development.</p>
+                <p>I learned about the latest advancements in solar technology, including various types of solar panels, their efficiency ratings, and the factors influencing their performance. I also gained a deeper understanding of the fundamental principles of photovoltaic systems, encompassing components like inverters, batteries, and charge controllers. The importance of system sizing, site assessment, and regulatory requirements for solar installations in the Philippines were also highlighted.</p>
                 <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings & Hosting Experience</h3>
-                <p>I gained a deeper understanding of industry standards and the importance of knowledge sharing. Hosting alongside Ma. Fatima Faye Balilo was a fun and engaging experience, highlighting the value of teamwork and collaboration in a large-scale event.</p>
+                <p>Furthermore, I learned about the standards and best practices in the electrical engineering field, particularly how the Institute of Integrated Electrical Engineers (IIEE) actively promotes professional development and knowledge sharing among its members. The event showcased the dedication of the IIEE in organizing high-quality technical workshops and fostering a collaborative environment for engineers. It was a fun and engaging day of hosting, working alongside my partner, Ma. Fatima Faye Balilo, and the diligent working committee, all expertly headed by Engr. Pee Jay Gealone.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // --- Feather Icons ---
         feather.replace();
 
-        // --- Mobile Menu ---
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('open');
-            // Close menu when a link is clicked
             navLinks.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => navLinks.classList.remove('open'));
             });
         });
 
-        // --- Active Nav Link on Scroll ---
         const sections = document.querySelectorAll('section');
         const navA = document.querySelectorAll('.nav-links a');
-
         window.addEventListener('scroll', () => {
-            let current = '';
+            let current = 'home';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 70) {
+                if (pageYOffset >= sectionTop - 75) {
                     current = section.getAttribute('id');
                 }
             });
-            
             navA.forEach(a => {
                 a.classList.remove('active');
                 if (a.getAttribute('href') == '#' + current) {
@@ -729,49 +605,27 @@
             });
         });
 
-        // --- Modal Logic ---
         const portfolioCards = document.querySelectorAll('.portfolio-card');
         const modals = document.querySelectorAll('.modal');
         const closeButtons = document.querySelectorAll('.modal-close');
-
         portfolioCards.forEach(card => {
             card.addEventListener('click', () => {
                 const modalId = card.getAttribute('data-modal');
-                const modal = document.getElementById(modalId)
-                modal.classList.add('open');
-                // Re-initialize feather icons inside the modal
+                document.getElementById(modalId).classList.add('open');
                 feather.replace();
             });
         });
+        closeButtons.forEach(button => button.addEventListener('click', () => button.closest('.modal').classList.remove('open')));
+        modals.forEach(modal => modal.addEventListener('click', (e) => { if(e.target === modal) { modal.classList.remove('open'); } }));
 
-        closeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                button.closest('.modal').classList.remove('open');
-            });
-        });
-        
-        modals.forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if(e.target === modal) {
-                    modal.classList.remove('open');
-                }
-            });
-        });
-
-        // --- Scroll Animations ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, {
-            threshold: 0.1 // Trigger when 10% of the element is visible
-        });
-
-        const elementsToAnimate = document.querySelectorAll('.fade-in');
-        elementsToAnimate.forEach((el) => observer.observe(el));
-
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
     </script>
 </body>
 </html>
