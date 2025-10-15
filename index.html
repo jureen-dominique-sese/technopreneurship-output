@@ -1,294 +1,653 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Technopreneurship: Turning Technology into Business Opportunities</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jureen Dominique E. Sese | BSEE Portfolio</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
 
-  <style>
-    :root {
-      --primary: #2f57e8;
-      --accent: #ff7a00;
-      --text-dark: #1b1f24;
-      --text-muted: #606b79;
-      --bg: #f9fafb;
-      --radius: 16px;
-      --shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-      --shadow-hover: 0 10px 24px rgba(0, 0, 0, 0.1);
-    }
+    <style>
+        :root {
+            --primary-color: #3f51b5; /* Indigo */
+            --accent-color: #ff4081;  /* Pink */
+            --text-dark: #212121;
+            --text-light: #757575;
+            --bg-color: #f5f5f5;
+            --surface-color: #ffffff;
+            --radius: 8px;
+            --shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --shadow-2: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-    body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      font-family: 'Inter', sans-serif;
-      color: var(--text-dark);
-      line-height: 1.7;
-      scroll-behavior: smooth;
-    }
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg-color);
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-    h1, h2 {
-      font-family: 'Poppins', sans-serif;
-      margin-top: 0;
-      letter-spacing: 0.01em;
-    }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-    a {
-      text-decoration: none;
-      color: var(--primary);
-      transition: all 0.2s ease;
-    }
-    a:hover {
-      color: var(--accent);
-    }
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--surface-color);
+            box-shadow: var(--shadow-1);
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
 
-    /* === NAVIGATION === */
-    nav {
-      position: sticky;
-      top: 0;
-      background: #fff;
-      border-bottom: 1px solid #e2e6ec;
-      z-index: 10;
-    }
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 28px;
-    }
-    .nav-logo {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: var(--accent);
-    }
-    .nav-links {
-      display: flex;
-      gap: 26px;
-    }
-    .nav-links a {
-      font-weight: 500;
-      color: var(--text-dark);
-      position: relative;
-    }
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: var(--accent);
-      transition: width 0.3s ease;
-    }
-    .nav-links a:hover::after {
-      width: 100%;
-    }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
 
-    /* === CONTAINER === */
-    .container {
-      max-width: 820px;
-      margin: 64px auto;
-      padding: 0 24px;
-    }
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
 
-    /* === HERO / BANNER === */
-    .hero {
-      background: var(--accent);
-      color: #fff;
-      border-radius: var(--radius);
-      padding: 48px 36px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      margin-bottom: 48px;
-    }
-    .hero h1 {
-      font-size: 2.3rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-    }
-    .hero .subtitle {
-      font-size: 1.1rem;
-      font-weight: 500;
-      opacity: 0.9;
-    }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
 
-    .author-line {
-      margin-top: 16px;
-      font-size: 0.95rem;
-      opacity: 0.9;
-      letter-spacing: 0.02em;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
 
-    .contact-links {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
 
-    .contact-links a {
-      background: #fff;
-      color: var(--accent);
-      padding: 10px 20px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.25s ease;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    }
-    .contact-links a:hover {
-      background: var(--primary);
-      color: #fff;
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
+        /* --- Hero Section --- */
+        #home {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    /* === SECTION CARDS === */
-    .section {
-      background: #fff;
-      border-radius: var(--radius);
-      padding: 28px 32px 24px;
-      margin-bottom: 26px;
-      box-shadow: var(--shadow);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .section:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-    }
+        .hero-content h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
 
-    .section-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+        .hero-content .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
 
-    .hero-img, .img-inline {
-      width: 100%;
-      border-radius: var(--radius);
-      margin: 26px 0;
-      box-shadow: var(--shadow);
-    }
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: var(--shadow-1);
+            transition: all 0.3s ease;
+        }
 
-    .quote {
-      background: #f1f5ff;
-      border-left: 4px solid var(--primary);
-      padding: 14px 20px;
-      margin: 20px 0;
-      font-style: italic;
-      border-radius: 10px;
-      color: var(--primary);
-    }
+        .cta-button:hover {
+            background: var(--accent-color);
+            box-shadow: var(--shadow-2);
+            transform: translateY(-2px);
+        }
 
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-top: 50px;
-    }
+        /* --- Section Styling --- */
+        .section {
+            padding: 80px 0;
+        }
 
-    @media (max-width: 720px) {
-      .hero {
-        padding: 32px 22px;
-      }
-      .hero h1 {
-        font-size: 1.8rem;
-      }
-      .section {
-        padding: 22px;
-      }
-      .nav-links {
-        display: none;
-      }
-    }
-  </style>
+        .section-title {
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 48px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* --- Portfolio Section --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .portfolio-card {
+            background: var(--surface-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 200px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+        }
+        
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .portfolio-content {
+            padding: 24px;
+        }
+
+        .portfolio-content h3 {
+            margin: 0 0 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .portfolio-content p {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* --- Contact Section --- */
+        .contact-content {
+            display: flex;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-info, .contact-form-container {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info h3 {
+             font-family: 'Poppins', sans-serif;
+             margin-bottom: 24px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+        }
+        
+        .contact-item a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-item a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            margin-right: 16px;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 32px 0;
+            margin-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            color: var(--text-light);
+        }
+
+        /* --- Modal --- */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--surface-color);
+            padding: 32px;
+            border-radius: var(--radius);
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.open .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--text-dark);
+        }
+        
+        .modal-content h2 {
+            font-family: 'Poppins', sans-serif;
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            border-radius: var(--radius);
+            margin: 16px 0;
+            box-shadow: var(--shadow-1);
+        }
+
+        .modal-body h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            margin-top: 24px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+        
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 64px;
+                left: 0;
+                width: 100%;
+                background: var(--surface-color);
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease-in-out;
+            }
+
+            .nav-links.open {
+                max-height: 300px; /* Adjust as needed */
+                padding: 16px 0;
+                box-shadow: var(--shadow-1);
+            }
+            
+            .nav-links a {
+                padding: 16px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-links a::after {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+    </style>
 </head>
-
 <body>
 
-  <!-- NAVIGATION -->
-  <nav>
-    <div class="nav-container">
-      <div class="nav-logo">EE Technopreneurship</div>
-      <div class="nav-links">
-        <a href="#overview">Overview</a>
-        <a href="#roles">Roles</a>
-        <a href="#collaboration">Collaboration</a>
-        <a href="#reflection">Reflection</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </div>
-  </nav>
+    <!-- HEADER & NAVIGATION -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">Jureen Sese</div>
+            <nav class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="menu-toggle">
+                <i data-feather="menu"></i>
+            </div>
+        </div>
+    </header>
 
-  <!-- MAIN CONTENT -->
-  <main class="container" id="overview">
+    <main>
+        <!-- HERO SECTION -->
+        <section id="home">
+            <div class="hero-content">
+                <h1>Jureen Dominique E. Sese</h1>
+                <p class="subtitle">An aspiring Electrical Engineer passionate about electromechanical systems, solar design, and turning technology into business opportunities.</p>
+                <a href="#portfolio" class="cta-button">View My Work</a>
+            </div>
+        </section>
 
-    <!-- HERO / CONTAINED BANNER -->
-    <section class="hero">
-      <h1>Technopreneurship</h1>
-      <div class="subtitle">Turning Technology into Business Opportunities</div>
-      <div class="author-line">Written by: <strong>Jureen Dominique E. Sese</strong> | BSEE - 4th Year</div>
+        <!-- PORTFOLIO SECTION -->
+        <section id="portfolio" class="section">
+            <div class="container">
+                <h2 class="section-title">Portfolio</h2>
+                <div class="portfolio-grid">
+                    
+                    <!-- Card 1 -->
+                    <div class="portfolio-card" data-modal="modal1">
+                        <div class="portfolio-image">
+                            <img src="https://placehold.co/600x400/3f51b5/ffffff?text=Thermal+Imaging" alt="Thermal Camera Placeholder">
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Thermal Camera for Inspection</h3>
+                            <p>Session 1: A virtual technical lecture on using thermal cameras for electromechanical troubleshooting.</p>
+                        </div>
+                    </div>
 
-      <div class="contact-links">
-        <a href="https://www.facebook.com/jureen.s" target="_blank">🔵 Facebook</a>
-        <a href="mailto:jdes2022-6474-33556@bicol-u.edu.ph">✉️ Email</a>
-        <a href="https://overwatchsalespitch.my.canva.site/sese-bosh" target="_blank">🌐 Website</a>
-      </div>
-    </section>
+                    <!-- Card 2 -->
+                    <div class="portfolio-card" data-modal="modal2">
+                         <div class="portfolio-image">
+                            <img src="https://placehold.co/600x400/ff4081/ffffff?text=Solar+Design" alt="Solar Design Placeholder">
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Basic Solar Design & Installation</h3>
+                            <p>Session 2: An engaging webinar covering the fundamentals of solar power system design.</p>
+                        </div>
+                    </div>
 
-    <!-- EXISTING CONTENT -->
-    <img src="images/docu_profdev_pubmat.jpg" alt="Technopreneurship Webinar Pubmat" class="hero-img" />
+                    <!-- Card 3 -->
+                    <div class="portfolio-card" data-modal="modal3">
+                        <div class="portfolio-image">
+                             <img src="https://placehold.co/600x400/3f51b5/ffffff?text=Technopreneurship" alt="Technopreneurship Placeholder">
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>Technopreneurship</h3>
+                            <p>Session 3: A hosted webinar on turning technology into viable business opportunities.</p>
+                        </div>
+                    </div>
 
-    <section class="section" id="roles">
-      <h2 class="section-title">💼 Roles and Assignments</h2>
-      <p>I was originally designated to handle the technical side of the <strong>“Technopreneurship”</strong> webinar, ensuring the virtual event ran smoothly and troubleshooting any real-time issues. However, due to my simultaneous appointment for facilitating <strong>DRRM training</strong> for first-year students, I was unable to be present onsite.</p>
-    </section>
+                    <!-- Card 4 -->
+                    <div class="portfolio-card" data-modal="modal4">
+                         <div class="portfolio-image">
+                           <img src="https://placehold.co/600x400/ff4081/ffffff?text=GMM+Workshops" alt="GMM Workshops Placeholder">
+                        </div>
+                        <div class="portfolio-content">
+                            <h3>GMM & Technical Workshops</h3>
+                            <p>Session 4: Hosting a General Membership Meeting featuring four professional workshops.</p>
+                        </div>
+                    </div>
 
-    <section class="section" id="collaboration">
-      <h2 class="section-title">🤝 Collaboration on Narrative Report</h2>
-      <p>Recognizing my limited availability for technical duty, I volunteered to support the documentation team by helping compose the official <strong>narrative report</strong> for the webinar. Working closely with <strong>Ma. Louicel Quong</strong>, I clarified key points, added context, and helped distill the core takeaways from our activity.</p>
-    </section>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="section">
+             <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <p>Feel free to reach out via email or connect with me on social media. I'm always open to discussing new projects, creative ideas, or opportunities.</p>
+                        
+                        <div class="contact-item">
+                            <i data-feather="mail"></i>
+                            <a href="mailto:jdes2022-6474-33556@bicol-u.edu.ph">jdes2022-6474-33556@bicol-u.edu.ph</a>
+                        </div>
+                        <div class="contact-item">
+                            <i data-feather="globe"></i>
+                            <a href="https://overwatchsalespitch.my.canva.site/sese-bosh" target="_blank">Canva Website</a>
+                        </div>
+                        
+                        <h3 style="margin-top: 32px;">Follow Me</h3>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/jureen.s" target="_blank"><i data-feather="facebook"></i></a>
+                            <!-- Add other social links here if needed -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="section" id="adjustments">
-      <h2 class="section-title">🧩 Event Day Adjustments</h2>
-      <p>On the day of the event, I was set to deliver the closing remarks. However, our group made a last-minute change, and I was reassigned to read out the <strong>certificate citations</strong> instead. This unexpected shift required me to quickly adapt and fulfill the task professionally, despite the sudden modification of plans.</p>
-
-      <div class="quote">
-        “Flexibility and collaboration were essential—not only in planning but also in executing responsibilities as circumstances changed.”
-      </div>
-
-      <img src="images/docu_profdev_certaward.png" alt="Awarding Ceremony Documentation" class="img-inline" />
-    </section>
-
-    <section class="section" id="reflection">
-      <h2 class="section-title">🧠 Reflection and Takeaways</h2>
-      <ul>
-        <li>Demonstrated adaptability, moving from a technical role to a documentation and support role.</li>
-        <li>Enhanced the narrative report for clarity and depth through collaboration.</li>
-        <li>Navigated last-minute program changes with professionalism and composure.</li>
-        <li>Strengthened teamwork skills through communication and flexibility.</li>
-      </ul>
-    </section>
-
-    <footer id="contact">
-      © 2025 Technopreneurship Webinar — A report by Jureen Dominique Sese
+    </main>
+    
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            © 2025 Jureen Dominique E. Sese. All Rights Reserved.
+        </div>
     </footer>
+    
+    <!-- MODALS -->
+    <!-- Modal 1 -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <i class="modal-close" data-feather="x"></i>
+            <div class="modal-body">
+                <h2>Use of Thermal Camera for Electromechanical Inspection</h2>
+                <img src="https://placehold.co/600x300/3f51b5/ffffff?text=Documentation+1" alt="Placeholder documentation image">
+                <h3>Introduction</h3>
+                <p>This seminar was made possible by the Bicol University Electrical Engineering Department, in partnership with the IIEE - UAE Chapter. The event was part of the ProfDev Series focused on emerging technologies. The first session was a virtual lecture by Engr. Ferdinand B. Borlongan on using thermal cameras for inspection.</p>
+                <h3>Summary</h3>
+                <p>Engr. Borlongan provided an accessible overview of how thermal cameras are used for electromechanical troubleshooting. He highlighted their ability to detect anomalies like overheating components, faulty connections, and insulation defects, thereby preventing costly breakdowns.</p>
+                <h3>Learnings</h3>
+                <p>I learned that thermal cameras are essential for preventative maintenance in electromechanical systems. The practical demonstrations and case studies clearly illustrated their effectiveness in real-world applications, ensuring operational efficiency and safety.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal 2 -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <i class="modal-close" data-feather="x"></i>
+            <div class="modal-body">
+                <h2>Basic Solar Design and Installation</h2>
+                <img src="https://placehold.co/600x300/ff4081/ffffff?text=Documentation+2" alt="Placeholder documentation image">
+                <h3>Introduction</h3>
+                <p>I attended this seminar on Basic Solar Design, featuring speaker Engr. Constantine Reymundo. Despite joining a bit late due to an internet outage, I found the content highly engaging and participated in an interactive quiz at the end.</p>
+                <h3>Summary</h3>
+                <p>The webinar covered the intricacies of solar design, including types of solar panels, efficiency ratings, and the fundamental components of photovoltaic systems like inverters and batteries. It also touched on system sizing, site assessment, and regulatory requirements in the Philippines.</p>
+                <h3>Learnings</h3>
+                <p>I learned that solar design is a multi-faceted business requiring significant investment. The session was informative about current trends and the future of solar energy in the Philippines, emphasizing its economic and environmental benefits.</p>
+            </div>
+        </div>
+    </div>
 
-  </main>
+    <!-- Modal 3 -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <i class="modal-close" data-feather="x"></i>
+            <div class="modal-body">
+                <h2>Technopreneurship: Turning Technology into Business</h2>
+                 <img src="https://placehold.co/600x300/3f51b5/ffffff?text=Documentation+3" alt="Placeholder documentation image">
+                <h3>Introduction & Role</h3>
+                <p>Our group hosted this webinar. I was initially assigned to the technical team but had a schedule conflict with DRRM training. I pivoted to support the documentation team, co-authoring the narrative report with Ma. Louicel Quong to ensure the event's key takeaways were captured.</p>
+                <h3>Summary of Experience</h3>
+                <p>On the event day, my role shifted again from delivering closing remarks to reading certificate citations. This last-minute change required quick adaptation and professionalism.</p>
+                <h3>Learnings</h3>
+                <p>The seminar taught me how to identify market gaps and leverage innovation for business. As an organizer, I also learned the importance of clear communication and flexible role assignments to ensure a successful event despite unforeseen challenges.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal 4 -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <i class="modal-close" data-feather="x"></i>
+            <div class="modal-body">
+                <h2>GMM Meeting & Technical Workshops</h2>
+                <img src="https://placehold.co/600x300/ff4081/ffffff?text=Documentation+4" alt="Placeholder documentation image">
+                <h3>Introduction & Role</h3>
+                <p>I was unable to attend the four technical workshops as I was the host for the General Membership Meeting held simultaneously. However, I gathered insights from attendees and the organizing committee.</p>
+                <h3>Summary of Gained Knowledge</h3>
+                <p>Through discussions, I learned about advancements in solar technology, photovoltaic systems, and best practices in electrical engineering. The event, headed by Engr. Pee Jay Gealone, showcased the IIEE's commitment to professional development.</p>
+                <h3>Learnings & Hosting Experience</h3>
+                <p>I gained a deeper understanding of industry standards and the importance of knowledge sharing. Hosting alongside Ma. Fatima Faye Balilo was a fun and engaging experience, highlighting the value of teamwork and collaboration in a large-scale event.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Feather Icons ---
+        feather.replace();
+
+        // --- Mobile Menu ---
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // --- Active Nav Link on Scroll ---
+        const sections = document.querySelectorAll('section');
+        const navA = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 70) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navA.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href') == '#' + current) {
+                    a.classList.add('active');
+                }
+            });
+        });
+
+        // --- Modal Logic ---
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+        const modals = document.querySelectorAll('.modal');
+        const closeButtons = document.querySelectorAll('.modal-close');
+
+        portfolioCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const modalId = card.getAttribute('data-modal');
+                document.getElementById(modalId).classList.add('open');
+            });
+        });
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.closest('.modal').classList.remove('open');
+            });
+        });
+        
+        // Close modal on outside click
+        modals.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if(e.target === modal) {
+                    modal.classList.remove('open');
+                }
+            });
+        });
+
+    </script>
 </body>
 </html>
