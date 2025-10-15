@@ -62,6 +62,12 @@
         @keyframes fadeOut {
             to { opacity: 0; transform: translateY(20px); }
         }
+        
+        @keyframes subtle-pan {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
         .fade-in {
             opacity: 0;
@@ -251,7 +257,7 @@
             border-radius: 2px;
         }
 
-        /* --- NEW PORTFOLIO CARD DECK STYLES --- */
+        /* --- PORTFOLIO CAROUSEL --- */
         #portfolio {
             min-height: 100vh;
             display: flex;
@@ -261,110 +267,55 @@
             overflow: hidden;
         }
 
-        .card-deck-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1500px;
-            padding: 40px 0;
-            position: relative;
+        .carousel-container {
             width: 100%;
-            min-height: 600px;
+            height: 500px;
+            position: relative;
+            perspective: 1200px;
+            margin-top: 40px;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.2s linear;
         }
 
         .portfolio-card {
+            position: absolute;
             width: 320px;
             height: 450px;
-            position: absolute;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s ease;
+            left: 50%;
+            top: 50%;
+            margin-left: -160px;
+            margin-top: -225px;
             cursor: pointer;
-            transform-style: preserve-3d;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .portfolio-card:hover {
+            transform: var(--card-transform) scale(1.05) !important;
         }
 
         .card-inner {
-            position: relative;
             width: 100%;
             height: 100%;
-            transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
-            transform-style: preserve-3d;
-            box-shadow: var(--shadow-2);
-            border-radius: var(--radius);
-        }
-
-        .portfolio-card.is-flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-
-        .card-front {
             background: var(--surface-color);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-back {
-            background-color: var(--surface-color);
-            transform: rotateY(180deg);
-            padding: 24px;
-            overflow-y: auto;
-        }
-        
-        .card-back h2 { font-family: 'Poppins', sans-serif; margin: 0 0 12px; font-size: 1.4rem; color: var(--primary-color); }
-        .card-back h3 { font-family: 'Poppins', sans-serif; font-size: 1.1rem; margin: 24px 0 8px; color: var(--primary-color); display: flex; align-items: center; gap: 8px; }
-        .card-back p { color: var(--text-light); margin-bottom: 12px; font-size: 0.95rem; }
-
-
-        .portfolio-image {
-            width: 100%;
-            height: 220px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-2);
             overflow: hidden;
-        }
-        .portfolio-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .portfolio-content {
-            padding: 24px;
-            text-align: center;
-            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
         }
+
+        .portfolio-image { width: 100%; height: 220px; overflow: hidden; }
+        .portfolio-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .portfolio-card:hover .portfolio-image img { transform: scale(1.1); }
+        .portfolio-content { padding: 24px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
         .portfolio-content h3 { margin: 0 0 8px; font-family: 'Poppins', sans-serif; color: var(--primary-color); }
         .portfolio-content p { margin: 0; color: var(--text-light); font-size: 0.95rem; }
-
-
-        /* Card Deck Arrangement & Hover Effects */
-        .portfolio-card:nth-child(1) { transform: translateX(-150%) rotate(-15deg); }
-        .portfolio-card:nth-child(2) { transform: translateX(-50%) rotate(-5deg); }
-        .portfolio-card:nth-child(3) { transform: translateX(50%) rotate(5deg); }
-        .portfolio-card:nth-child(4) { transform: translateX(150%) rotate(15deg); }
-        
-        .card-deck-container:hover .portfolio-card {
-             transform: translateX(0) rotate(0);
-        }
-        
-        .portfolio-card:hover {
-            transform: translateY(-20px) scale(1.05) !important;
-            z-index: 10;
-        }
-        
-        .portfolio-card:hover .portfolio-image img {
-            transform: scale(1.1);
-        }
 
 
         /* --- Accomplishments Section --- */
@@ -429,6 +380,38 @@
 
         /* --- Footer --- */
         footer { text-align: center; padding: 32px 0; background: var(--primary-color); color: white; font-size: 0.9rem; }
+        
+        /* --- Project Modal --- */
+        .project-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .project-modal.open { opacity: 1; visibility: visible; }
+        
+        .modal-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(13, 27, 42, 0.8), rgba(65, 90, 119, 0.8));
+            background-size: 400% 400%;
+            animation: subtle-pan 15s ease infinite;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--surface-color); padding: 32px; border-radius: var(--radius);
+            max-width: 750px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative;
+            transform: scale(0.95) translateY(10px); transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        .project-modal.open .modal-content { transform: scale(1) translateY(0); }
+        .modal-close { position: absolute; top: 16px; right: 16px; cursor: pointer; color: var(--text-light); transition: all 0.3s ease; }
+        .modal-close:hover { color: var(--text-dark); transform: rotate(90deg); }
+        .modal-body h2 { font-family: 'Poppins', sans-serif; margin: 0 0 24px; color: var(--primary-color); }
+        .modal-body img { max-width: 100%; border-radius: var(--radius); margin: 16px 0; box-shadow: var(--shadow-1); }
+        .modal-body h3 {
+            font-family: 'Poppins', sans-serif; font-size: 1.2rem; margin: 32px 0 12px;
+            color: var(--primary-color); display: flex; align-items: center; gap: 10px;
+        }
 
         /* --- Gemini Chat Modal --- */
         .gemini-modal {
@@ -503,29 +486,21 @@
         body.retro-mode * { border-radius: 0 !important; }
 
         /* --- Responsive Design --- */
-        @media (max-width: 1200px) {
-            .portfolio-card:nth-child(1) { transform: translateX(-120%) rotate(-12deg); }
-            .portfolio-card:nth-child(2) { transform: translateX(-40%) rotate(-4deg); }
-            .portfolio-card:nth-child(3) { transform: translateX(40%) rotate(4deg); }
-            .portfolio-card:nth-child(4) { transform: translateX(120%) rotate(12deg); }
-        }
-
         @media (max-width: 992px) {
-            .card-deck-container {
-                flex-direction: column;
-                min-height: auto;
+            .carousel-container {
                 perspective: none;
+                height: auto;
+            }
+            .carousel {
+                position: relative;
+                transform-style: flat;
             }
             .portfolio-card {
                 position: relative;
                 transform: none !important;
-                margin-bottom: 32px;
-            }
-            .card-deck-container:hover .portfolio-card {
-                transform: none !important;
-            }
-            .portfolio-card:hover {
-                 transform: translateY(-10px) scale(1.03) !important;
+                margin: 16px auto;
+                left: auto;
+                top: auto;
             }
         }
 
@@ -586,86 +561,35 @@
         <section id="portfolio" class="section" data-achievement="Curator">
             <div class="container">
                 <h2 class="section-title fade-in">Portfolio</h2>
-                <p class="section-subtitle fade-in">A collection of my recent work and experiences. Click a card to flip it over and learn more.</p>
+                <p class="section-subtitle fade-in">A collection of my recent work. Move your mouse to spin the carousel!</p>
             </div>
-            <div class="card-deck-container">
-                
-                <!-- CARD 1 -->
-                <div class="portfolio-card fade-in">
-                    <div class="card-inner">
-                        <div class="card-front">
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="portfolio-card fade-in" data-modal-id="modal1">
+                         <div class="card-inner">
                             <div class="portfolio-image"> <img src="https://placehold.co/600x400/0D1B2A/FFFFFF?text=Thermal+Imaging" alt="Thermal Camera Placeholder"> </div>
-                            <div class="portfolio-content"> <h3>Thermal Camera for Inspection</h3> <p>Session 1: A virtual lecture on using thermal cameras for electromechanical troubleshooting.</p> </div>
-                        </div>
-                        <div class="card-back">
-                            <h2>Use of Thermal Camera for Electromechanical Inspection</h2>
-                            <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
-                            <p>I learned that this seminar was made possible by the Bicol University Electrical Engineering Department, in partnership with the Institute of Integrated Electrical Engineers - United Arab Emirates Chapter. The event was part of the ProfDev Series titled: Charting the Frontiers of Emerging Technologies in Electrical Engineering.</p>
-                            <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
-                            <p>Engr. Ferdinand B. Borlongan truly illuminated the world of thermal cameras! He provided a fantastic overview of how these handy devices are used for electromechanical inspection and troubleshooting, making complex topics surprisingly accessible and engaging.</p>
-                            <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                            <p>I learned how thermal cameras are essential for detecting anomalies like overheating, faulty connections, and insulation defects in electromechanical systems. Their ability to provide non-contact temperature measurements makes them a powerful tool for preventative maintenance.</p>
+                            <div class="portfolio-content"> <h3>Thermal Camera for Inspection</h3> <p>Session 1: A virtual lecture on using thermal cameras.</p> </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- CARD 2 -->
-                <div class="portfolio-card fade-in">
-                    <div class="card-inner">
-                        <div class="card-front">
+                    <div class="portfolio-card fade-in" data-modal-id="modal2">
+                         <div class="card-inner">
                             <div class="portfolio-image"> <img src="https://placehold.co/600x400/415A77/FFFFFF?text=Solar+Design" alt="Solar Design Placeholder"> </div>
-                            <div class="portfolio-content"> <h3>Basic Solar Design & Installation</h3> <p>Session 2: An engaging webinar on the fundamentals of solar power system design.</p> </div>
-                        </div>
-                        <div class="card-back">
-                            <h2>Basic Solar Design and Installation</h2>
-                            <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
-                            <p>I was able to attend this seminar, Basic Solar Design, with the speaker being Engr. Constantine Reymundo. Although I was a bit late because of the internet outage, I was still able to participate in the interactive quiz at the end.</p>
-                            <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
-                            <p>The webinar delved into the intricacies of solar design, covering topics such as different types of solar panels, their efficiency ratings, and the key components of a photovoltaic system, including inverters, batteries, and charge controllers.</p>
-                            <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                            <p>I learned that solar design is a multi-faceted business that requires significant capital investment, which is why it is not widely adopted yet despite its benefits. The session was very informative on the current trends and the future of solar energy in the Philippines.</p>
+                            <div class="portfolio-content"> <h3>Basic Solar Design & Installation</h3> <p>Session 2: A webinar on solar power system design.</p> </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- CARD 3 -->
-                <div class="portfolio-card fade-in">
-                    <div class="card-inner">
-                        <div class="card-front">
+                    <div class="portfolio-card fade-in" data-modal-id="modal3">
+                         <div class="card-inner">
                             <div class="portfolio-image"> <img src="https://placehold.co/600x400/0D1B2A/FFFFFF?text=Technopreneurship" alt="Technopreneurship Placeholder"> </div>
-                            <div class="portfolio-content"> <h3>Technopreneurship</h3> <p>Session 3: A hosted webinar on turning technology into viable business opportunities.</p> </div>
-                        </div>
-                        <div class="card-back">
-                             <h2>Technopreneurship: Turning Technology into Business</h2>
-                            <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
-                            <p>Our group hosted the webinar titled “Technopreneurship.” In this event, I was assigned to be a part of the technical team, but unfortunately, my schedule conflicted with DRRM training. Understanding the situation, I volunteered to assist the documentation team instead.</p>
-                            <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Experience</h3>
-                            <p>On the day of the event, there was a last-minute change. I was originally scheduled to deliver the closing remarks, but I was asked to read the certificate citations instead. This required me to be adaptable and ready to take on a different role on the spot.</p>
-                            <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                            <p>This seminar provided valuable insights into the world of technopreneurship, teaching us how to leverage technological innovations to create viable business ventures. The experience also reinforced the importance of teamwork and adaptability.</p>
+                            <div class="portfolio-content"> <h3>Technopreneurship</h3> <p>Session 3: Turning technology into business opportunities.</p> </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- CARD 4 -->
-                <div class="portfolio-card fade-in">
-                    <div class="card-inner">
-                        <div class="card-front">
+                    <div class="portfolio-card fade-in" data-modal-id="modal4">
+                         <div class="card-inner">
                             <div class="portfolio-image"> <img src="https://placehold.co/600x400/415A77/FFFFFF?text=GMM+Workshops" alt="GMM Workshops Placeholder"> </div>
-                            <div class="portfolio-content"> <h3>GMM & Technical Workshops</h3> <p>Session 4: Hosting a GMM featuring four professional workshops.</p> </div>
-                        </div>
-                        <div class="card-back">
-                            <h2>GMM Meeting & Technical Workshops</h2>
-                            <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
-                            <p>I was not able to attend as I was the host during the GMM Meeting held in the Gymnasium with Four(4) separate professional technical workshops. However, I gained valuable insights into the topics covered.</p>
-                            <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Gained Knowledge</h3>
-                            <p>I learned about the latest advancements in solar technology, including various types of solar panels and their efficiency ratings. I also gained a deeper understanding of the fundamental principles of photovoltaic systems and their components.</p>
-                            <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings & Hosting Experience</h3>
-                            <p>I learned about the standards and best practices in the electrical engineering field. The event showcased the dedication of the IIEE in organizing high-quality technical workshops. It was a fun and engaging day of hosting, working alongside my partner and the diligent working committee.</p>
+                            <div class="portfolio-content"> <h3>GMM & Technical Workshops</h3> <p>Session 4: Hosting a GMM with four professional workshops.</p> </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
         
@@ -731,6 +655,74 @@
     <!-- FOOTER -->
     <footer> <div class="container"> © 2025 Jureen Dominique E. Sese. All Rights Reserved. </div> </footer>
 
+    <!-- MODALS CONTAINER -->
+    <div id="modals-container">
+         <div id="modal1" class="project-modal">
+            <div class="modal-bg"></div>
+            <div class="modal-content">
+                <i class="modal-close" data-feather="x"></i>
+                <div class="modal-body">
+                    <h2>Use of Thermal Camera for Electromechanical Inspection</h2>
+                    <img src="https://placehold.co/600x300/0D1B2A/FFFFFF?text=Documentation+1" alt="Placeholder">
+                    <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
+                    <p>I learned that this seminar was made possible by the Bicol University Electrical Engineering Department, in partnership with the Institute of Integrated Electrical Engineers - United Arab Emirates Chapter. The event was part of the ProfDev Series titled: Charting the Frontiers of Emerging Technologies in Electrical Engineering.</p>
+                    <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
+                    <p>Engr. Ferdinand B. Borlongan truly illuminated the world of thermal cameras! He provided a fantastic overview of how these handy devices are used for electromechanical inspection and troubleshooting, making complex topics surprisingly accessible and engaging.</p>
+                    <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
+                    <p>I learned how thermal cameras are essential for detecting anomalies like overheating, faulty connections, and insulation defects in electromechanical systems. Their ability to provide non-contact temperature measurements makes them a powerful tool for preventative maintenance.</p>
+                </div>
+            </div>
+        </div>
+        <div id="modal2" class="project-modal">
+            <div class="modal-bg"></div>
+            <div class="modal-content">
+                <i class="modal-close" data-feather="x"></i>
+                <div class="modal-body">
+                    <h2>Basic Solar Design and Installation</h2>
+                    <img src="https://placehold.co/600x300/415A77/FFFFFF?text=Documentation+2" alt="Placeholder">
+                    <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
+                    <p>I was able to attend this seminar, Basic Solar Design, with the speaker being Engr. Constantine Reymundo. Although I was a bit late because of the internet outage, I was still able to participate in the interactive quiz at the end.</p>
+                    <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
+                    <p>The webinar delved into the intricacies of solar design, covering topics such as different types of solar panels, their efficiency ratings, and the key components of a photovoltaic system, including inverters, batteries, and charge controllers.</p>
+                    <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
+                    <p>I learned that solar design is a multi-faceted business that requires significant capital investment, which is why it is not widely adopted yet despite its benefits. The session was very informative on the current trends and the future of solar energy in the Philippines.</p>
+                </div>
+            </div>
+        </div>
+        <div id="modal3" class="project-modal">
+            <div class="modal-bg"></div>
+            <div class="modal-content">
+                <i class="modal-close" data-feather="x"></i>
+                <div class="modal-body">
+                    <h2>Technopreneurship: Turning Technology into Business</h2>
+                    <img src="https://placehold.co/600x300/0D1B2A/FFFFFF?text=Documentation+3" alt="Placeholder">
+                    <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
+                    <p>Our group hosted the webinar titled “Technopreneurship.” In this event, I was assigned to be a part of the technical team, but unfortunately, my schedule conflicted with DRRM training. Understanding the situation, I volunteered to assist the documentation team instead.</p>
+                    <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Experience</h3>
+                    <p>On the day of the event, there was a last-minute change. I was originally scheduled to deliver the closing remarks, but I was asked to read the certificate citations instead. This required me to be adaptable and ready to take on a different role on the spot.</p>
+                    <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
+                    <p>This seminar provided valuable insights into the world of technopreneurship, teaching us how to leverage technological innovations to create viable business ventures. The experience also reinforced the importance of teamwork and adaptability.</p>
+                </div>
+            </div>
+        </div>
+        <div id="modal4" class="project-modal">
+            <div class="modal-bg"></div>
+            <div class="modal-content">
+                <i class="modal-close" data-feather="x"></i>
+                <div class="modal-body">
+                    <h2>GMM Meeting & Technical Workshops</h2>
+                    <img src="https://placehold.co/600x300/415A77/FFFFFF?text=Documentation+4" alt="Placeholder">
+                    <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
+                    <p>I was not able to attend as I was the host during the GMM Meeting held in the Gymnasium with Four(4) separate professional technical workshops. However, I gained valuable insights into the topics covered.</p>
+                    <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Gained Knowledge</h3>
+                    <p>I learned about the latest advancements in solar technology, including various types of solar panels and their efficiency ratings. I also gained a deeper understanding of the fundamental principles of photovoltaic systems and their components.</p>
+                    <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings & Hosting Experience</h3>
+                    <p>I learned about the standards and best practices in the electrical engineering field. The event showcased the dedication of the IIEE in organizing high-quality technical workshops. It was a fun and engaging day of hosting, working alongside my partner and the diligent working committee.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- GEMINI CHAT MODAL -->
     <div id="geminiChatModal" class="gemini-modal">
         <div class="gemini-modal-content">
@@ -795,22 +787,61 @@
                 }
             });
         });
-
-        // --- Card Flip Logic ---
+        
+        // --- Carousel Logic ---
+        const carousel = document.querySelector('.carousel');
+        const carouselContainer = document.querySelector('.carousel-container');
         const cards = document.querySelectorAll('.portfolio-card');
-        cards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                // Prevent flipping if a link inside the card back is clicked
-                if (e.target.tagName === 'A') return;
+        const cardCount = cards.length;
+        const angle = 360 / cardCount;
+        let rotation = 0;
+        let targetRotation = 0;
+        let currentSpeed = 0;
 
-                const isFlipped = card.classList.contains('is-flipped');
-                cards.forEach(otherCard => {
-                    otherCard.classList.remove('is-flipped');
-                });
-                if (!isFlipped) {
-                    card.classList.add('is-flipped');
+        function setupCarousel() {
+            const radius = (cards[0].offsetWidth / 2) / Math.tan(Math.PI / cardCount) + 100;
+            cards.forEach((card, index) => {
+                const cardAngle = angle * index;
+                card.style.setProperty('--card-transform', `rotateY(${cardAngle}deg) translateZ(${radius}px)`);
+                card.style.transform = `rotateY(${cardAngle}deg) translateZ(${radius}px)`;
+            });
+        }
+        
+        carouselContainer.addEventListener('mousemove', e => {
+            const containerRect = carouselContainer.getBoundingClientRect();
+            const mouseX = e.clientX - containerRect.left;
+            const percentage = mouseX / containerRect.width;
+            const maxSpeed = 1.5; 
+            targetRotation = (percentage - 0.5) * maxSpeed * -1;
+        });
+        
+        carouselContainer.addEventListener('mouseleave', () => {
+            targetRotation = 0;
+        });
+
+        function animateCarousel() {
+            const easing = 0.05;
+            currentSpeed += (targetRotation - currentSpeed) * easing;
+            rotation += currentSpeed;
+            carousel.style.transform = `rotateY(${rotation}deg)`;
+            requestAnimationFrame(animateCarousel);
+        }
+        
+        // --- Modal Logic ---
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const modalId = card.dataset.modalId;
+                const modal = document.getElementById(modalId);
+                if(modal) {
+                    modal.classList.add('open');
+                    feather.replace();
                 }
-                feather.replace(); 
+            });
+        });
+
+        document.querySelectorAll('.modal-close, .modal-bg').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.currentTarget.closest('.project-modal').classList.remove('open');
             });
         });
 
@@ -931,9 +962,9 @@
             const involvements = document.querySelector('#accomplishments .accomplishments-col:nth-child(2)');
             if(involvements) context += `\n\nNotable Involvements:\n${involvements.innerText}`;
             
-            document.querySelectorAll('.portfolio-card .card-back').forEach((card, index) => {
-                const title = card.querySelector('h2').innerText;
-                const content = Array.from(card.querySelectorAll('p')).map(p => p.innerText).join(' ');
+            document.querySelectorAll('.modal-body').forEach((modal, index) => {
+                const title = modal.querySelector('h2').innerText;
+                const content = Array.from(modal.querySelectorAll('p')).map(p => p.innerText).join(' ');
                 context += `\n\nProject ${index + 1}: ${title}\nDetails: ${content}`;
             });
             
@@ -1052,6 +1083,12 @@
         konamiClose.addEventListener('click', () => {
              konamiModal.classList.remove('open');
         });
+        
+        // Initialize scripts on load
+        window.onload = () => {
+            setupCarousel();
+            animateCarousel();
+        };
 
     </script>
 </body>
