@@ -143,18 +143,19 @@
 
         /* --- Hero Section --- */
         #home {
-            padding-top: 70px; /* Account for nav */
+            padding-top: 70px;
             text-align: left;
             min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
-            background-color: #E0E1DD; /* Light Gray from palette */
+            background-color: #E0E1DD;
         }
 
         .hero-content {
             z-index: 2;
+            position: relative;
         }
         
         .hero-content .name-header {
@@ -165,13 +166,29 @@
             animation: fadeInUp 0.8s ease-out forwards;
         }
         
+        /* NEW: Styles for individual letter spans */
+        .name-header .letter {
+            display: inline-block;
+            transition: transform 0.3s ease, color 0.3s ease, font-family 0.2s ease-out;
+        }
+        
+        /* NEW: Wavy hover effect for the name */
+        .name-header:hover .letter {
+            transform: translateY(-10px) rotate(-5deg);
+            color: var(--secondary-color);
+        }
+        .name-header .letter:hover {
+            transform: translateY(-15px) rotate(5deg) scale(1.1);
+            color: var(--accent-color) !important;
+        }
+
         .hero-content .name-subheader {
             font-family: 'Poppins', sans-serif;
             font-size: clamp(1rem, 2vw, 1.2rem);
             color: var(--secondary-color);
             margin-bottom: 24px;
-              animation: fadeInUp 0.8s ease-out 0.2s forwards;
-              opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
         }
 
         .hero-content .subtitle {
@@ -179,7 +196,7 @@
             max-width: 650px;
             margin-bottom: 32px;
             animation: fadeInUp 0.8s ease-out 0.4s forwards;
-            opacity: 0; /* Start hidden for animation */
+            opacity: 0;
         }
 
         .cta-button {
@@ -194,7 +211,7 @@
             box-shadow: var(--shadow-2);
             transition: all 0.3s ease;
             animation: fadeInUp 0.8s ease-out 0.6s forwards;
-            opacity: 0; /* Start hidden for animation */
+            opacity: 0;
         }
 
         .cta-button:hover {
@@ -215,12 +232,28 @@
             opacity: 0.8;
             z-index: 1;
         }
+        
+        /* NEW: Spotlight follower effect */
+        .spotlight {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(120, 142, 169, 0.2), transparent 60%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            transition: opacity 0.4s ease, transform 0.05s linear;
+            opacity: 0;
+        }
+        #home:hover .spotlight {
+            opacity: 1;
+        }
 
         @keyframes morph {
             0% { border-radius: 45% 55% 70% 30% / 30% 50% 50% 70%; }
             100% { border-radius: 30% 70% 30% 70% / 70% 30% 70% 30%; transform: rotate(10deg); }
         }
-
 
         /* --- Section Styling --- */
         .section {
@@ -540,10 +573,9 @@
 
     <main>
         <section id="home" data-achievement="Explorer">
-            <div class="container">
+            <div class="spotlight"></div> <div class="container">
                 <div class="hero-content">
-                    <h1 class="name-header">Jureen Dominique E. Sese</h1>
-                    <p class="name-subheader">BSEE-4A, Batch 2026</p>
+                    <h1 class="name-header">Jureen Dominique E. Sese</h1> <p class="name-subheader">BSEE-4A, Batch 2026</p>
                     <p class="subtitle"><strong>Hello! I'm juju!</strong><br>
                         Versatile Electrical Engineering student with strong academics and experience in technical, creative, and leadership roles. Skilled in CAD, PLC Simulation, and microcontroller projects. Recognized student leader and graphic designer active in major college and departmental organizations.
                     </p>
@@ -800,6 +832,7 @@
         let currentSpeed = 0;
 
         function setupCarousel() {
+            if (cards.length === 0) return;
             const radius = (cards[0].offsetWidth / 2) / Math.tan(Math.PI / cardCount) + 100;
             cards.forEach((card, index) => {
                 const cardAngle = angle * index;
@@ -808,19 +841,22 @@
             });
         }
         
-        carouselContainer.addEventListener('mousemove', e => {
-            const containerRect = carouselContainer.getBoundingClientRect();
-            const mouseX = e.clientX - containerRect.left;
-            const percentage = mouseX / containerRect.width;
-            const maxSpeed = 1.5; 
-            targetRotation = (percentage - 0.5) * maxSpeed * -1;
-        });
-        
-        carouselContainer.addEventListener('mouseleave', () => {
-            targetRotation = 0;
-        });
+        if (carouselContainer) {
+            carouselContainer.addEventListener('mousemove', e => {
+                const containerRect = carouselContainer.getBoundingClientRect();
+                const mouseX = e.clientX - containerRect.left;
+                const percentage = mouseX / containerRect.width;
+                const maxSpeed = 1.5; 
+                targetRotation = (percentage - 0.5) * maxSpeed * -1;
+            });
+            
+            carouselContainer.addEventListener('mouseleave', () => {
+                targetRotation = 0;
+            });
+        }
 
         function animateCarousel() {
+            if (!carousel) return;
             const easing = 0.05;
             currentSpeed += (targetRotation - currentSpeed) * easing;
             rotation += currentSpeed;
@@ -840,16 +876,13 @@
             });
         });
 
-        // Event listener for all modal buttons (including the new PDF one)
         document.addEventListener('click', function(e) {
-            // Open certificate modal
             if (e.target.closest('[data-modal-button]')) {
                 e.preventDefault();
                 const modalId = e.target.closest('[data-modal-button]').dataset.modalButton;
                 document.getElementById(modalId).classList.add('open');
             }
             
-            // Close any open project modal
             if (e.target.matches('.modal-close, .modal-bg')) {
                  e.target.closest('.project-modal').classList.remove('open');
             }
@@ -892,6 +925,7 @@
         sendButton.addEventListener('click', handleSendMessage);
         chatInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
+                e.preventDefault();
                 handleSendMessage();
             }
         });
@@ -1022,8 +1056,6 @@
         }
 
         // --- GAMIFICATION LOGIC ---
-        
-        // 1. Achievement System
         const unlockedAchievements = new Set();
         const achievementContainer = document.getElementById('achievement-container');
         const achievementObserver = new IntersectionObserver((entries) => {
@@ -1064,7 +1096,6 @@
             }, 5000);
         }
 
-        // 2. Konami Code Easter Egg (Retro Mode)
         const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
         let konamiIndex = 0;
         const konamiModal = document.getElementById('konami-success');
@@ -1094,7 +1125,43 @@
              konamiModal.classList.remove('open');
         });
         
-        // Initialize scripts on load
+        // --- NEW: Home Section Animations ---
+        const homeSection = document.getElementById('home');
+        const spotlight = document.querySelector('.spotlight');
+        const nameHeader = document.querySelector('.name-header');
+
+        // Wrap each letter of the name in a span
+        const nameText = nameHeader.textContent;
+        nameHeader.innerHTML = ''; // Clear original text
+        nameText.split('').forEach(char => {
+            const letterSpan = document.createElement('span');
+            letterSpan.className = 'letter';
+            letterSpan.textContent = char === ' ' ? '\u00A0' : char; // Use non-breaking space
+            nameHeader.appendChild(letterSpan);
+        });
+
+        // Spotlight follower
+        homeSection.addEventListener('mousemove', (e) => {
+            spotlight.style.left = e.pageX + 'px';
+            spotlight.style.top = e.pageY + 'px';
+        });
+
+        // Interactive letters
+        const letters = document.querySelectorAll('.name-header .letter');
+        const fonts = ["'Poppins', sans-serif", "'Roboto', sans-serif", "serif", "monospace", "cursive"];
+        
+        letters.forEach((letter, index) => {
+            // Staggered transition for wavy effect
+            letter.style.transitionDelay = `${index * 0.03}s`;
+
+            // Random font on hover
+            letter.addEventListener('mouseover', () => {
+                const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+                letter.style.fontFamily = randomFont;
+            });
+        });
+
+        // --- Initialize scripts on load ---
         window.onload = () => {
             setupCarousel();
             animateCarousel();
