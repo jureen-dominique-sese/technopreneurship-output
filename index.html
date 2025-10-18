@@ -7,7 +7,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -19,6 +19,12 @@
             --text-dark: #1A2E39;
             --text-light: #344955;
             --bg-color: #F0F2F5;       /* Light grey */
+            --primary-color: #0D1B2A; /* Rich Black */
+            --accent-color: #778DA9;  /* Light Steel Blue */
+            --secondary-color: #415A77; /* Paynes Gray */
+            --text-dark: #0D1B2A;
+            --text-light: #415A77;
+            --bg-color: #EDF2F4;  
             --surface-color: #ffffff;
             --radius: 12px;
             --shadow-1: 0 2px 4px rgba(0,0,0,0.08);
@@ -37,6 +43,7 @@
             font-family: 'Roboto', sans-serif;
             color: var(--text-dark);
             line-height: 1.7;
+            transition: font-family 0.4s ease;
         }
 
         .container {
@@ -49,6 +56,21 @@
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateY(20px); }
+        }
+        
+        @keyframes subtle-pan {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .fade-in {
@@ -209,14 +231,22 @@
         /* --- Section Styling --- */
         .section {
             padding: 100px 0;
+            position: relative;
         }
 
         .section-title {
             text-align: center;
             font-family: 'Poppins', sans-serif;
             font-size: 2.8rem;
-            margin-bottom: 64px;
+            margin-bottom: 12px;
             position: relative;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 64px;
+            font-size: 1.1rem;
         }
         
         .section-title::after {
@@ -231,11 +261,30 @@
             border-radius: 2px;
         }
 
-        /* --- Portfolio Section --- */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 32px;
+        /* --- PORTFOLIO CAROUSEL --- */
+        #portfolio {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .carousel-container {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            perspective: 1200px;
+            margin-top: 40px;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.2s linear;
         }
 
         .portfolio-card {
@@ -244,33 +293,41 @@
             box-shadow: var(--shadow-1);
             overflow: hidden;
             transition: all 0.3s ease-in-out;
+            position: absolute;
+            width: 320px;
+            height: 450px;
+            left: 50%;
+            top: 50%;
+            margin-left: -160px;
+            margin-top: -225px;
             cursor: pointer;
-            border: 1px solid #eee;
+            transition: transform 0.5s ease, opacity 0.5s ease;
         }
 
         .portfolio-card:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: var(--shadow-2);
+            transform: var(--card-transform) scale(1.05) !important;
         }
-        
-        .portfolio-image img { width: 100%; height: 220px; object-fit: cover; }
-        
-        .portfolio-content {
-            padding: 24px;
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
             background: var(--surface-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        .portfolio-content h3 {
-            margin: 0 0 8px;
-            font-family: 'Poppins', sans-serif;
-            color: var(--primary-color);
-        }
+        .portfolio-image { width: 100%; height: 220px; overflow: hidden; }
+        .portfolio-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .portfolio-card:hover .portfolio-image img { transform: scale(1.1); }
+        .portfolio-content { padding: 24px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+        .portfolio-content h3 { margin: 0 0 8px; font-family: 'Poppins', sans-serif; color: var(--primary-color); }
+        .portfolio-content p { margin: 0; color: var(--text-light); font-size: 0.95rem; }
 
-        .portfolio-content p {
-            margin: 0;
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
 
         /* --- Accomplishments Section --- */
         #accomplishments {
@@ -289,16 +346,8 @@
             display: inline-block;
             margin-bottom: 24px;
         }
-        .accomplishments-col ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .accomplishments-col li {
-            margin-bottom: 12px;
-            padding-left: 28px;
-            position: relative;
-        }
+        .accomplishments-col ul { list-style: none; padding: 0; margin: 0; }
+        .accomplishments-col li { margin-bottom: 12px; padding-left: 28px; position: relative; }
         .accomplishments-col li::before {
             content: '✓';
             color: var(--accent-color);
@@ -308,21 +357,10 @@
         }
 
         /* --- Contact Section --- */
-        .contact-content {
-            text-align: center;
-        }
-
-        .contact-info p {
-            max-width: 600px;
-            margin: 0 auto 32px;
-        }
+        .contact-content { text-align: center; }
+        .contact-info p { max-width: 600px; margin: 0 auto 32px; }
         
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
+        .contact-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
         
         .contact-link-item {
             display: inline-flex;
@@ -344,37 +382,140 @@
             color: var(--primary-color);
         }
         
-        .contact-link-item i {
-            color: var(--primary-color);
+        .contact-link-item i { color: var(--primary-color); }
+        
+        .gemini-button {
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+            color: white;
         }
 
         /* --- Footer --- */
         footer { text-align: center; padding: 32px 0; background: var(--primary-color); color: white; font-size: 0.9rem; }
-
-        /* --- Modal --- */
-        .modal {
+        
+        /* --- Project Modal --- */
+        .project-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); display: flex; align-items: center; justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .modal.open { opacity: 1; visibility: visible; }
+        .project-modal.open { opacity: 1; visibility: visible; }
+        
+        .modal-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(13, 27, 42, 0.8), rgba(65, 90, 119, 0.8));
+            background-size: 400% 400%;
+            animation: subtle-pan 15s ease infinite;
+            backdrop-filter: blur(5px);
+        }
 
         .modal-content {
             background: var(--surface-color); padding: 32px; border-radius: var(--radius);
             max-width: 750px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative;
-            transform: scale(0.95) translateY(10px); transition: transform 0.3s ease, opacity 0.3s ease;
+            transform: scale(0.95) translateY(10px); transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
-        .modal.open .modal-content { transform: scale(1) translateY(0); }
+        .project-modal.open .modal-content { transform: scale(1) translateY(0); }
         .modal-close { position: absolute; top: 16px; right: 16px; cursor: pointer; color: var(--text-light); transition: all 0.3s ease; }
         .modal-close:hover { color: var(--text-dark); transform: rotate(90deg); }
-        .modal-content h2 { font-family: 'Poppins', sans-serif; margin: 0 0 24px; color: var(--primary-color); }
+        .modal-body h2 { font-family: 'Poppins', sans-serif; margin: 0 0 24px; color: var(--primary-color); }
         .modal-body img { max-width: 100%; border-radius: var(--radius); margin: 16px 0; box-shadow: var(--shadow-1); }
         .modal-body h3 {
             font-family: 'Poppins', sans-serif; font-size: 1.2rem; margin: 32px 0 12px;
             color: var(--primary-color); display: flex; align-items: center; gap: 10px;
         }
+
+        /* --- Gemini Chat Modal --- */
+        .gemini-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center;
+            z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .gemini-modal.open { opacity: 1; visibility: visible; }
+
+        .gemini-modal-content {
+            background: var(--surface-color); border-radius: var(--radius);
+            width: 90%; max-width: 600px; height: 80vh; max-height: 700px;
+            display: flex; flex-direction: column;
+            box-shadow: var(--shadow-2);
+            transform: scale(0.95) translateY(10px); transition: transform 0.3s ease;
+        }
+        .gemini-modal.open .gemini-modal-content { transform: scale(1) translateY(0); }
         
+        .gemini-modal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 16px 24px; border-bottom: 1px solid var(--bg-color);
+        }
+        .gemini-modal-header h2 { font-family: 'Poppins', sans-serif; margin: 0; font-size: 1.2rem; color: var(--primary-color); }
+        .gemini-modal-close { cursor: pointer; color: var(--text-light); transition: all 0.3s ease; }
+        .gemini-modal-close:hover { color: var(--text-dark); transform: rotate(90deg); }
+
+        .gemini-modal-body { flex-grow: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+        .chat-message { display: flex; max-width: 85%; }
+        .chat-message .icon { width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: var(--bg-color); display: flex; align-items: center; justify-content: center; margin-right: 12px; }
+        .chat-message p { margin: 0; padding: 12px 16px; border-radius: var(--radius); line-height: 1.6; }
+
+        .user-message { align-self: flex-end; }
+        .user-message .icon { background: var(--secondary-color); color: white; }
+        .user-message p { background: var(--secondary-color); color: white; border-bottom-right-radius: 2px;}
+
+        .ai-message p { background: var(--bg-color); color: var(--text-dark); border-bottom-left-radius: 2px;}
+        .ai-message.loading p { display: flex; gap: 5px; align-items: center; }
+        .dot-flashing { position: relative; width: 5px; height: 5px; border-radius: 50%; background-color: var(--text-light); color: var(--text-light); animation: dotFlashing 1s infinite linear alternate; animation-delay: .5s; }
+        .dot-flashing::before, .dot-flashing::after { content: ''; display: inline-block; position: absolute; top: 0; }
+        .dot-flashing::before { left: -10px; width: 5px; height: 5px; border-radius: 50%; background-color: var(--text-light); color: var(--text-light); animation: dotFlashing 1s infinite alternate; animation-delay: 0s; }
+        .dot-flashing::after { left: 10px; width: 5px; height: 5px; border-radius: 50%; background-color: var(--text-light); color: var(--text-light); animation: dotFlashing 1s infinite alternate; animation-delay: 1s; }
+        @keyframes dotFlashing { 0% { background-color: var(--text-light); } 50%, 100% { background-color: rgba(65, 90, 119, 0.3); } }
+
+        .gemini-modal-footer { padding: 16px 24px; border-top: 1px solid var(--bg-color); display: flex; gap: 12px; }
+        #chatInput { flex-grow: 1; border: 1px solid #ccc; border-radius: 50px; padding: 12px 18px; font-size: 1rem; font-family: 'Roboto', sans-serif; transition: border-color 0.3s ease; }
+        #chatInput:focus { outline: none; border-color: var(--accent-color); }
+        #sendButton { background: var(--secondary-color); border: none; color: white; padding: 0 16px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.3s ease; }
+        #sendButton:hover { background: var(--primary-color); }
+        
+        /* --- GAMIFICATION ELEMENTS --- */
+        #achievement-container { position: fixed; bottom: 20px; left: 20px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; }
+        .achievement-toast { background: var(--surface-color); color: var(--text-dark); padding: 16px 24px; border-radius: var(--radius); box-shadow: var(--shadow-2); display: flex; align-items: center; gap: 12px; animation: slideInRight 0.5s ease-out, fadeOut 0.5s ease-in 4.5s forwards; border-left: 5px solid var(--accent-color); }
+        .achievement-toast i { color: var(--accent-color); }
+        .achievement-toast h4 { margin: 0 0 4px; font-family: 'Poppins', sans-serif; }
+        .achievement-toast p { margin: 0; font-size: 0.9rem; color: var(--text-light); }
+        
+        .konami-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 4000; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .konami-modal.open { opacity: 1; visibility: visible; }
+        .konami-content { background: #111; color: #0f0; font-family: 'Press Start 2P', cursive; text-align: center; padding: 40px; border: 4px solid #0f0; box-shadow: 0 0 20px #0f0; animation: fadeInUp 0.5s ease; }
+        .konami-content h2 { margin: 0 0 16px; font-size: 1.5rem; text-transform: uppercase; }
+        .konami-content p { margin: 0 0 24px; font-size: 0.9rem; line-height: 1.8; }
+        #konami-close { background: #0f0; color: #111; border: none; padding: 12px 24px; font-family: 'Press Start 2P', cursive; cursor: pointer; transition: all 0.2s ease; }
+        #konami-close:hover { background: #fff; color: #111; }
+
+        .scanline-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2500; background: repeating-linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,0.3) 3px); opacity: 0; transition: opacity 0.4s ease; }
+
+        body.retro-mode { font-family: 'Press Start 2P', cursive; image-rendering: pixelated; }
+        body.retro-mode .scanline-overlay { opacity: 0.1; }
+        body.retro-mode .logo, body.retro-mode h1, body.retro-mode h2, body.retro-mode h3, body.retro-mode h4, body.retro-mode a, body.retro-mode p, body.retro-mode li, body.retro-mode span, body.retro-mode button { font-family: 'Press Start 2P', cursive !important; letter-spacing: 1px; }
+        body.retro-mode .hero-content .name-header { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+        body.retro-mode .section-title { font-size: 2rem; }
+        body.retro-mode * { border-radius: 0 !important; }
+
         /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .carousel-container {
+                perspective: none;
+                height: auto;
+            }
+            .carousel {
+                position: relative;
+                transform-style: flat;
+            }
+            .portfolio-card {
+                position: relative;
+                transform: none !important;
+                margin: 16px auto;
+                left: auto;
+                top: auto;
+            }
+        }
+
+
         @media (max-width: 768px) {
             .nav-links {
                 position: absolute; top: 70px; left: 0; width: 100%;
@@ -388,6 +529,7 @@
             .hero-shape { width: 300px; height: 300px; }
             .accomplishments-grid { grid-template-columns: 1fr; }
             .section { padding: 80px 0; }
+            #achievement-container { left: 50%; transform: translateX(-50%); width: 90%; }
         }
 
     </style>
@@ -411,6 +553,8 @@
 
     <main>
         <section id="home">
+        <!-- HERO SECTION -->
+        <section id="home" data-achievement="Explorer">
             <div class="container">
                 <div class="hero-content">
                     <h1 class="name-header">Jureen Dominique E. Sese</h1>
@@ -425,6 +569,8 @@
         </section>
 
         <section id="portfolio" class="section">
+        <!-- PORTFOLIO SECTION -->
+        <section id="portfolio" class="section" data-achievement="Curator">
             <div class="container">
                 <h2 class="section-title fade-in">Portfolio</h2>
                 <div class="portfolio-grid">
@@ -446,11 +592,41 @@
                         <div class="portfolio-content"> <h3>GMM & Technical Workshops</h3> <p>Session 4: Hosting a GMM featuring four professional workshops.</p> </div>
                     </div>
 
+                <p class="section-subtitle fade-in">A collection of my recent work. Move your mouse to spin the carousel!</p>
+            </div>
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="portfolio-card fade-in" data-modal-id="modal1">
+                         <div class="card-inner">
+                            <div class="portfolio-image"> <img src="https://placehold.co/600x400/0D1B2A/FFFFFF?text=Thermal+Imaging" alt="Thermal Camera Placeholder"> </div>
+                            <div class="portfolio-content"> <h3>Thermal Camera for Inspection</h3> <p>Session 1: A virtual lecture on using thermal cameras.</p> </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-card fade-in" data-modal-id="modal2">
+                         <div class="card-inner">
+                            <div class="portfolio-image"> <img src="https://placehold.co/600x400/415A77/FFFFFF?text=Solar+Design" alt="Solar Design Placeholder"> </div>
+                            <div class="portfolio-content"> <h3>Basic Solar Design & Installation</h3> <p>Session 2: A webinar on solar power system design.</p> </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-card fade-in" data-modal-id="modal3">
+                         <div class="card-inner">
+                            <div class="portfolio-image"> <img src="https://placehold.co/600x400/0D1B2A/FFFFFF?text=Technopreneurship" alt="Technopreneurship Placeholder"> </div>
+                            <div class="portfolio-content"> <h3>Technopreneurship</h3> <p>Session 3: Turning technology into business opportunities.</p> </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-card fade-in" data-modal-id="modal4">
+                         <div class="card-inner">
+                            <div class="portfolio-image"> <img src="https://placehold.co/600x400/415A77/FFFFFF?text=GMM+Workshops" alt="GMM Workshops Placeholder"> </div>
+                            <div class="portfolio-content"> <h3>GMM & Technical Workshops</h3> <p>Session 4: Hosting a GMM with four professional workshops.</p> </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
         
         <section id="accomplishments" class="section">
+        <!-- ACCOMPLISHMENTS SECTION -->
+        <section id="accomplishments" class="section" data-achievement="High Achiever">
             <div class="container">
                 <h2 class="section-title fade-in">Accomplishments</h2>
                 <div class="accomplishments-grid fade-in">
@@ -482,6 +658,8 @@
         </section>
 
         <section id="contact" class="section">
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="section" data-achievement="Networker">
              <div class="container">
                 <h2 class="section-title fade-in">Get In Touch</h2>
                 <div class="contact-content fade-in">
@@ -496,6 +674,13 @@
                                  <i data-feather="facebook"></i>
                                  <span>Facebook Profile</span>
                              </a>
+                                <i data-feather="facebook"></i>
+                                <span>Facebook Profile</span>
+                            </a>
+                            <a href="#" id="gemini-chat-button" class="contact-link-item gemini-button">
+                                <i data-feather="message-circle"></i>
+                                <span>✨ Ask About Me</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -563,6 +748,71 @@
                 <p>I learned about the latest advancements in solar technology, including various types of solar panels, their efficiency ratings, and the factors influencing their performance. I also gained a deeper understanding of the fundamental principles of photovoltaic systems, encompassing components like inverters, batteries, and charge controllers. The importance of system sizing, site assessment, and regulatory requirements for solar installations in the Philippines were also highlighted.</p>
                 <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings & Hosting Experience</h3>
                 <p>Furthermore, I learned about the standards and best practices in the electrical engineering field, particularly how the Institute of Integrated Electrical Engineers (IIEE) actively promotes professional development and knowledge sharing among its members. The event showcased the dedication of the IIEE in organizing high-quality technical workshops and fostering a collaborative environment for engineers. It was a fun and engaging day of hosting, working alongside my partner, Ma. Fatima Faye Balilo, and the diligent working committee, all expertly headed by Engr. Pee Jay Gealone.</p>
+
+    <!-- MODALS CONTAINER -->
+    <div id="modals-container">
+         <div id="modal1" class="project-modal">
+            <div class="modal-bg"></div>
+            <div class="modal-content">
+                <i class="modal-close" data-feather="x"></i>
+                <div class="modal-body">
+                    <h2>Use of Thermal Camera for Electromechanical Inspection</h2>
+                    <img src="https://placehold.co/600x300/0D1B2A/FFFFFF?text=Documentation+1" alt="Placeholder">
+                    <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
+                    <p>I learned that this seminar was made possible by the Bicol University Electrical Engineering Department, in partnership with the Institute of Integrated Electrical Engineers - United Arab Emirates Chapter. The event was part of the ProfDev Series titled: Charting the Frontiers of Emerging Technologies in Electrical Engineering.</p>
+                    <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
+                    <p>Engr. Ferdinand B. Borlongan truly illuminated the world of thermal cameras! He provided a fantastic overview of how these handy devices are used for electromechanical inspection and troubleshooting, making complex topics surprisingly accessible and engaging.</p>
+                    <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
+                    <p>I learned how thermal cameras are essential for detecting anomalies like overheating, faulty connections, and insulation defects in electromechanical systems. Their ability to provide non-contact temperature measurements makes them a powerful tool for preventative maintenance.</p>
+                </div>
+            </div>
+        </div>
+        <div id="modal2" class="project-modal">
+            <div class="modal-bg"></div>
+            <div class="modal-content">
+                <i class="modal-close" data-feather="x"></i>
+                <div class="modal-body">
+                    <h2>Basic Solar Design and Installation</h2>
+                    <img src="https://placehold.co/600x300/415A77/FFFFFF?text=Documentation+2" alt="Placeholder">
+                    <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
+                    <p>I was able to attend this seminar, Basic Solar Design, with the speaker being Engr. Constantine Reymundo. Although I was a bit late because of the internet outage, I was still able to participate in the interactive quiz at the end.</p>
+                    <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
+                    <p>The webinar delved into the intricacies of solar design, covering topics such as different types of solar panels, their efficiency ratings, and the key components of a photovoltaic system, including inverters, batteries, and charge controllers.</p>
+                    <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
+                    <p>I learned that solar design is a multi-faceted business that requires significant capital investment, which is why it is not widely adopted yet despite its benefits. The session was very informative on the current trends and the future of solar energy in the Philippines.</p>
+                </div>
+            </div>
+        </div>
+        <div id="modal3" class="project-modal">
+            <div class="modal-bg"></div>
+            <div class="modal-content">
+                <i class="modal-close" data-feather="x"></i>
+                <div class="modal-body">
+                    <h2>Technopreneurship: Turning Technology into Business</h2>
+                    <img src="https://placehold.co/600x300/0D1B2A/FFFFFF?text=Documentation+3" alt="Placeholder">
+                    <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
+                    <p>Our group hosted the webinar titled “Technopreneurship.” In this event, I was assigned to be a part of the technical team, but unfortunately, my schedule conflicted with DRRM training. Understanding the situation, I volunteered to assist the documentation team instead.</p>
+                    <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Experience</h3>
+                    <p>On the day of the event, there was a last-minute change. I was originally scheduled to deliver the closing remarks, but I was asked to read the certificate citations instead. This required me to be adaptable and ready to take on a different role on the spot.</p>
+                    <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
+                    <p>This seminar provided valuable insights into the world of technopreneurship, teaching us how to leverage technological innovations to create viable business ventures. The experience also reinforced the importance of teamwork and adaptability.</p>
+                </div>
+            </div>
+        </div>
+        <div id="modal4" class="project-modal">
+            <div class="modal-bg"></div>
+            <div class="modal-content">
+                <i class="modal-close" data-feather="x"></i>
+                <div class="modal-body">
+                    <h2>GMM Meeting & Technical Workshops</h2>
+                    <img src="https://placehold.co/600x300/415A77/FFFFFF?text=Documentation+4" alt="Placeholder">
+                    <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
+                    <p>I was not able to attend as I was the host during the GMM Meeting held in the Gymnasium with Four(4) separate professional technical workshops. However, I gained valuable insights into the topics covered.</p>
+                    <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Gained Knowledge</h3>
+                    <p>I learned about the latest advancements in solar technology, including various types of solar panels and their efficiency ratings. I also gained a deeper understanding of the fundamental principles of photovoltaic systems and their components.</p>
+                    <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings & Hosting Experience</h3>
+                    <p>I learned about the standards and best practices in the electrical engineering field. The event showcased the dedication of the IIEE in organizing high-quality technical workshops. It was a fun and engaging day of hosting, working alongside my partner and the diligent working committee.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -577,10 +827,45 @@
         </div>
     </div>
 
+
+    <!-- GEMINI CHAT MODAL -->
+    <div id="geminiChatModal" class="gemini-modal">
+        <div class="gemini-modal-content">
+            <div class="gemini-modal-header">
+                <h2>AI Assistant</h2>
+                <i class="gemini-modal-close" data-feather="x"></i>
+            </div>
+            <div class="gemini-modal-body" id="chatBody">
+                 <div class="chat-message ai-message">
+                    <div class="icon"><i data-feather="cpu"></i></div>
+                    <p>Hello! I'm Jureen's AI assistant. Feel free to ask me any questions about her skills, projects, or experience.</p>
+                </div>
+            </div>
+            <div class="gemini-modal-footer">
+                <input type="text" id="chatInput" placeholder="e.g., What are her leadership roles?">
+                <button id="sendButton">
+                    <i data-feather="send"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAMIFICATION ELEMENTS -->
+    <div id="achievement-container"></div>
+    <div id="konami-success" class="konami-modal">
+        <div class="konami-content">
+            <h2>SECRET UNLOCKED!</h2>
+            <p>Retro Mode Activated. Enjoy the 8-bit vibes!</p>
+            <button id="konami-close">AWESOME</button>
+        </div>
+    </div>
+    <div class="scanline-overlay"></div>
+    
     <script>
         feather.replace();
 
         // Mobile menu toggle
+        // --- Mobile Menu Toggle ---
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
         menuToggle.addEventListener('click', () => {
@@ -591,6 +876,7 @@
         });
 
         // Active nav link on scroll
+        // --- Active Nav Link on Scroll ---
         const sections = document.querySelectorAll('section');
         const navA = document.querySelectorAll('.nav-links a');
         window.addEventListener('scroll', () => {
@@ -615,6 +901,48 @@
         const closeButtons = document.querySelectorAll('.modal-close');
         
         portfolioCards.forEach(card => {
+        
+        // --- Carousel Logic ---
+        const carousel = document.querySelector('.carousel');
+        const carouselContainer = document.querySelector('.carousel-container');
+        const cards = document.querySelectorAll('.portfolio-card');
+        const cardCount = cards.length;
+        const angle = 360 / cardCount;
+        let rotation = 0;
+        let targetRotation = 0;
+        let currentSpeed = 0;
+
+        function setupCarousel() {
+            const radius = (cards[0].offsetWidth / 2) / Math.tan(Math.PI / cardCount) + 100;
+            cards.forEach((card, index) => {
+                const cardAngle = angle * index;
+                card.style.setProperty('--card-transform', `rotateY(${cardAngle}deg) translateZ(${radius}px)`);
+                card.style.transform = `rotateY(${cardAngle}deg) translateZ(${radius}px)`;
+            });
+        }
+        
+        carouselContainer.addEventListener('mousemove', e => {
+            const containerRect = carouselContainer.getBoundingClientRect();
+            const mouseX = e.clientX - containerRect.left;
+            const percentage = mouseX / containerRect.width;
+            const maxSpeed = 1.5; 
+            targetRotation = (percentage - 0.5) * maxSpeed * -1;
+        });
+        
+        carouselContainer.addEventListener('mouseleave', () => {
+            targetRotation = 0;
+        });
+
+        function animateCarousel() {
+            const easing = 0.05;
+            currentSpeed += (targetRotation - currentSpeed) * easing;
+            rotation += currentSpeed;
+            carousel.style.transform = `rotateY(${rotation}deg)`;
+            requestAnimationFrame(animateCarousel);
+        }
+        
+        // --- Modal Logic ---
+        cards.forEach(card => {
             card.addEventListener('click', () => {
                 const modalId = card.getAttribute('data-modal');
                 document.getElementById(modalId).classList.add('open');
@@ -625,6 +953,12 @@
         closeButtons.forEach(button => {
             button.addEventListener('click', () => {
                 button.closest('.modal').classList.remove('open');
+                const modalId = card.dataset.modalId;
+                const modal = document.getElementById(modalId);
+                if(modal) {
+                    modal.classList.add('open');
+                    feather.replace();
+                }
             });
         });
         
@@ -647,7 +981,14 @@
             });
         });
 
+        document.querySelectorAll('.modal-close, .modal-bg').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.currentTarget.closest('.project-modal').classList.remove('open');
+            });
+        });
+
         // Fade-in animation on scroll
+        // --- Fade-in on Scroll Animation ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -656,6 +997,242 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+        // --- Gemini Chat Logic ---
+        const geminiModal = document.getElementById('geminiChatModal');
+        const openChatButton = document.getElementById('gemini-chat-button');
+        const closeChatButton = geminiModal.querySelector('.gemini-modal-close');
+        const chatBody = document.getElementById('chatBody');
+        const chatInput = document.getElementById('chatInput');
+        const sendButton = document.getElementById('sendButton');
+
+        openChatButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            geminiModal.classList.add('open');
+            feather.replace();
+        });
+
+        closeChatButton.addEventListener('click', () => {
+            geminiModal.classList.remove('open');
+        });
+        
+        geminiModal.addEventListener('click', (e) => {
+            if (e.target === geminiModal) {
+                 geminiModal.classList.remove('open');
+            }
+        });
+
+        sendButton.addEventListener('click', handleSendMessage);
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                handleSendMessage();
+            }
+        });
+
+        async function handleSendMessage() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            appendMessage(userMessage, 'user');
+            chatInput.value = '';
+            showLoadingIndicator();
+
+            try {
+                const aiResponse = await callGeminiApi(userMessage);
+                removeLoadingIndicator();
+                appendMessage(aiResponse, 'ai');
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                removeLoadingIndicator();
+                appendMessage("Sorry, I'm having trouble connecting right now. Please try again later.", 'ai');
+            }
+        }
+
+        function appendMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message', `${sender}-message`);
+
+            const iconDiv = document.createElement('div');
+            iconDiv.classList.add('icon');
+            const iconName = sender === 'user' ? 'user' : 'cpu';
+            iconDiv.innerHTML = `<i data-feather="${iconName}"></i>`;
+
+            const p = document.createElement('p');
+            p.textContent = text;
+
+            messageDiv.appendChild(iconDiv);
+            messageDiv.appendChild(p);
+            chatBody.appendChild(messageDiv);
+            feather.replace();
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function showLoadingIndicator() {
+             const loadingDiv = document.createElement('div');
+            loadingDiv.classList.add('chat-message', 'ai-message', 'loading');
+            loadingDiv.id = 'loading-indicator';
+
+            const iconDiv = document.createElement('div');
+            iconDiv.classList.add('icon');
+            iconDiv.innerHTML = `<i data-feather="cpu"></i>`;
+            
+            const p = document.createElement('p');
+            p.innerHTML = `<span class="dot-flashing"></span>`;
+
+            loadingDiv.appendChild(iconDiv);
+            loadingDiv.appendChild(p);
+            chatBody.appendChild(loadingDiv);
+            feather.replace();
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function removeLoadingIndicator() {
+            const indicator = document.getElementById('loading-indicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+        
+        function getPortfolioContext() {
+            let context = `This is a portfolio for Jureen Dominique E. Sese, an Electrical Engineering student.`;
+            
+            const heroSubtitle = document.querySelector('.hero-content .subtitle');
+            if(heroSubtitle) context += `\n\nIntroduction: ${heroSubtitle.innerText}`;
+
+            const orgs = document.querySelector('#accomplishments .accomplishments-col:nth-child(1)');
+            if(orgs) context += `\n\nOrganizations Handled:\n${orgs.innerText}`;
+            
+            const involvements = document.querySelector('#accomplishments .accomplishments-col:nth-child(2)');
+            if(involvements) context += `\n\nNotable Involvements:\n${involvements.innerText}`;
+            
+            document.querySelectorAll('.modal-body').forEach((modal, index) => {
+                const title = modal.querySelector('h2').innerText;
+                const content = Array.from(modal.querySelectorAll('p')).map(p => p.innerText).join(' ');
+                context += `\n\nProject ${index + 1}: ${title}\nDetails: ${content}`;
+            });
+            
+            return context;
+        }
+
+
+        async function callGeminiApi(userQuery, retryCount = 0) {
+            const apiKey = ""; // API Key will be injected by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            const portfolioContext = getPortfolioContext();
+            const systemPrompt = `You are a helpful and professional AI assistant for the portfolio of Jureen Dominique E. Sese. Your role is to answer questions from potential employers or collaborators based ONLY on the information provided in this portfolio. Be concise, friendly, and professional. Do not invent information. If the answer is not in the provided context, politely state that the information is not available in the portfolio. Here is the portfolio information:\n\n${portfolioContext}`;
+            
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                 if (response.status === 429 && retryCount < 3) { // Too Many Requests
+                    const delay = Math.pow(2, retryCount) * 1000;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return callGeminiApi(userQuery, retryCount + 1);
+                }
+                throw new Error(`API call failed with status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            const candidate = result.candidates?.[0];
+
+            if (candidate && candidate.content?.parts?.[0]?.text) {
+                return candidate.content.parts[0].text;
+            } else {
+                return "I'm sorry, I couldn't generate a response at this moment.";
+            }
+        }
+
+        // --- GAMIFICATION LOGIC ---
+        
+        // 1. Achievement System
+        const unlockedAchievements = new Set();
+        const achievementContainer = document.getElementById('achievement-container');
+        const achievementObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const achievementName = entry.target.dataset.achievement;
+                    if (achievementName && !unlockedAchievements.has(achievementName)) {
+                        unlockedAchievements.add(achievementName);
+                        showAchievement(achievementName);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('[data-achievement]').forEach(el => achievementObserver.observe(el));
+
+        function showAchievement(name) {
+            const description = {
+                'Explorer': 'You started the adventure!',
+                'Curator': 'You\'ve discovered the portfolio.',
+                'High Achiever': 'You\'ve seen the accomplishments.',
+                'Networker': 'You found the contact options!'
+            }[name];
+
+            const toast = document.createElement('div');
+            toast.classList.add('achievement-toast');
+            toast.innerHTML = `
+                <div><i data-feather="award"></i></div>
+                <div>
+                    <h4>Achievement Unlocked!</h4>
+                    <p>${name}: ${description}</p>
+                </div>
+            `;
+            achievementContainer.appendChild(toast);
+            feather.replace();
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
+
+        // 2. Konami Code Easter Egg (Retro Mode)
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+        const konamiModal = document.getElementById('konami-success');
+        const konamiClose = document.getElementById('konami-close');
+
+        document.addEventListener('keydown', e => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    activateRetroMode();
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        function activateRetroMode() {
+            document.body.classList.toggle('retro-mode');
+            const isRetro = document.body.classList.contains('retro-mode');
+            if(isRetro) {
+                konamiModal.classList.add('open');
+            }
+        }
+        
+        konamiClose.addEventListener('click', () => {
+             konamiModal.classList.remove('open');
+        });
+        
+        // Initialize scripts on load
+        window.onload = () => {
+            setupCarousel();
+            animateCarousel();
+        };
+
     </script>
 </body>
 </html>
