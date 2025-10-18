@@ -19,12 +19,6 @@
             --text-dark: #1A2E39;
             --text-light: #344955;
             --bg-color: #F0F2F5;       /* Light grey */
-            --primary-color: #0D1B2A; /* Rich Black */
-            --accent-color: #778DA9;  /* Light Steel Blue */
-            --secondary-color: #415A77; /* Paynes Gray */
-            --text-dark: #0D1B2A;
-            --text-light: #415A77;
-            --bg-color: #EDF2F4;  
             --surface-color: #ffffff;
             --radius: 12px;
             --shadow-1: 0 2px 4px rgba(0,0,0,0.08);
@@ -176,8 +170,8 @@
             font-size: clamp(1rem, 2vw, 1.2rem);
             color: var(--secondary-color);
             margin-bottom: 24px;
-            animation: fadeInUp 0.8s ease-out 0.2s forwards;
-            opacity: 0;
+              animation: fadeInUp 0.8s ease-out 0.2s forwards;
+              opacity: 0;
         }
 
         .hero-content .subtitle {
@@ -198,7 +192,7 @@
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
             box-shadow: var(--shadow-2);
-            transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease;
             animation: fadeInUp 0.8s ease-out 0.6s forwards;
             opacity: 0; /* Start hidden for animation */
         }
@@ -288,11 +282,6 @@
         }
 
         .portfolio-card {
-            background: var(--surface-color);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-1);
-            overflow: hidden;
-            transition: all 0.3s ease-in-out;
             position: absolute;
             width: 320px;
             height: 450px;
@@ -305,8 +294,6 @@
         }
 
         .portfolio-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: var(--shadow-2);
             transform: var(--card-transform) scale(1.05) !important;
         }
 
@@ -402,7 +389,7 @@
         
         .modal-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(13, 27, 42, 0.8), rgba(65, 90, 119, 0.8));
+            background: linear-gradient(135deg, rgba(26, 46, 57, 0.8), rgba(52, 73, 85, 0.8));
             background-size: 400% 400%;
             animation: subtle-pan 15s ease infinite;
             backdrop-filter: blur(5px);
@@ -415,7 +402,7 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
         .project-modal.open .modal-content { transform: scale(1) translateY(0); }
-        .modal-close { position: absolute; top: 16px; right: 16px; cursor: pointer; color: var(--text-light); transition: all 0.3s ease; }
+        .modal-close { position: absolute; top: 16px; right: 16px; cursor: pointer; color: var(--text-light); transition: all 0.3s ease; z-index: 10;}
         .modal-close:hover { color: var(--text-dark); transform: rotate(90deg); }
         .modal-body h2 { font-family: 'Poppins', sans-serif; margin: 0 0 24px; color: var(--primary-color); }
         .modal-body img { max-width: 100%; border-radius: var(--radius); margin: 16px 0; box-shadow: var(--shadow-1); }
@@ -552,8 +539,6 @@
     </header>
 
     <main>
-        <section id="home">
-        <!-- HERO SECTION -->
         <section id="home" data-achievement="Explorer">
             <div class="container">
                 <div class="hero-content">
@@ -568,49 +553,28 @@
             <div class="hero-shape"></div>
         </section>
 
-        <section id="portfolio" class="section">
-        <!-- PORTFOLIO SECTION -->
         <section id="portfolio" class="section" data-achievement="Curator">
             <div class="container">
                 <h2 class="section-title fade-in">Portfolio</h2>
-                <div class="portfolio-grid">
-                    
-                    <div class="portfolio-card fade-in" data-modal="modal1">
-                        <div class="portfolio-image"> <img src="images/p-1.jpg" alt="Thermal Camera Programme"> </div>
-                        <div class="portfolio-content"> <h3>Thermal Camera for Inspection</h3> <p>Session 1: A virtual lecture on using thermal cameras for electromechanical troubleshooting.</p> </div>
-                    </div>
-                    <div class="portfolio-card fade-in" data-modal="modal2">
-                         <div class="portfolio-image"> <img src="images/p-2.jpg" alt="Solar Design Programme"> </div>
-                        <div class="portfolio-content"> <h3>Basic Solar Design & Installation</h3> <p>Session 2: An engaging webinar on the fundamentals of solar power system design.</p> </div>
-                    </div>
-                    <div class="portfolio-card fade-in" data-modal="modal3">
-                        <div class="portfolio-image"> <img src="images/p-3.jpg" alt="Technopreneurship Programme"> </div>
-                        <div class="portfolio-content"> <h3>Technopreneurship</h3> <p>Session 3: A hosted webinar on turning technology into viable business opportunities.</p> </div>
-                    </div>
-                    <div class="portfolio-card fade-in" data-modal="modal4">
-                         <div class="portfolio-image"> <img src="https://placehold.co/600x400/415A77/FFFFFF?text=GMM+Workshops" alt="GMM Workshops Placeholder"> </div>
-                        <div class="portfolio-content"> <h3>GMM & Technical Workshops</h3> <p>Session 4: Hosting a GMM featuring four professional workshops.</p> </div>
-                    </div>
-
                 <p class="section-subtitle fade-in">A collection of my recent work. Move your mouse to spin the carousel!</p>
             </div>
             <div class="carousel-container">
                 <div class="carousel">
                     <div class="portfolio-card fade-in" data-modal-id="modal1">
                          <div class="card-inner">
-                            <div class="portfolio-image"> <img src="https://placehold.co/600x400/0D1B2A/FFFFFF?text=Thermal+Imaging" alt="Thermal Camera Placeholder"> </div>
+                            <div class="portfolio-image"> <img src="images/p-1.jpg" alt="Thermal Camera Programme"> </div>
                             <div class="portfolio-content"> <h3>Thermal Camera for Inspection</h3> <p>Session 1: A virtual lecture on using thermal cameras.</p> </div>
                         </div>
                     </div>
                     <div class="portfolio-card fade-in" data-modal-id="modal2">
                          <div class="card-inner">
-                            <div class="portfolio-image"> <img src="https://placehold.co/600x400/415A77/FFFFFF?text=Solar+Design" alt="Solar Design Placeholder"> </div>
+                            <div class="portfolio-image"> <img src="images/p-2.jpg" alt="Solar Design Programme"> </div>
                             <div class="portfolio-content"> <h3>Basic Solar Design & Installation</h3> <p>Session 2: A webinar on solar power system design.</p> </div>
                         </div>
                     </div>
                     <div class="portfolio-card fade-in" data-modal-id="modal3">
                          <div class="card-inner">
-                            <div class="portfolio-image"> <img src="https://placehold.co/600x400/0D1B2A/FFFFFF?text=Technopreneurship" alt="Technopreneurship Placeholder"> </div>
+                            <div class="portfolio-image"> <img src="images/p-3.jpg" alt="Technopreneurship Programme"> </div>
                             <div class="portfolio-content"> <h3>Technopreneurship</h3> <p>Session 3: Turning technology into business opportunities.</p> </div>
                         </div>
                     </div>
@@ -624,8 +588,6 @@
             </div>
         </section>
         
-        <section id="accomplishments" class="section">
-        <!-- ACCOMPLISHMENTS SECTION -->
         <section id="accomplishments" class="section" data-achievement="High Achiever">
             <div class="container">
                 <h2 class="section-title fade-in">Accomplishments</h2>
@@ -657,8 +619,6 @@
             </div>
         </section>
 
-        <section id="contact" class="section">
-        <!-- CONTACT SECTION -->
         <section id="contact" class="section" data-achievement="Networker">
              <div class="container">
                 <h2 class="section-title fade-in">Get In Touch</h2>
@@ -674,13 +634,10 @@
                                  <i data-feather="facebook"></i>
                                  <span>Facebook Profile</span>
                              </a>
-                                <i data-feather="facebook"></i>
-                                <span>Facebook Profile</span>
-                            </a>
                             <a href="#" id="gemini-chat-button" class="contact-link-item gemini-button">
-                                <i data-feather="message-circle"></i>
-                                <span>✨ Ask About Me</span>
-                            </a>
+                                 <i data-feather="message-circle"></i>
+                                 <span>✨ Ask About Me</span>
+                             </a>
                         </div>
                     </div>
                 </div>
@@ -689,67 +646,7 @@
     </main>
     
     <footer> <div class="container"> © 2025 Jureen Dominique E. Sese. All Rights Reserved. </div> </footer>
-    
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <i class="modal-close" data-feather="x"></i>
-            <div class="modal-body">
-                <h2>Use of Thermal Camera for Electromechanical Inspection</h2>
-                <img src="images/docu-session1.png" alt="Session 1 Documentation">
-                <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
-                <p>This seminar, a collaboration between the Bicol University Electrical Engineering Department and the Institute of Integrated Electrical Engineers - UAE Chapter, was a deep dive into the practical applications of thermal imaging. As part of the 'Charting the Frontiers of Emerging Technologies in Electrical Engineering' series, it promised to be an insightful session, and it delivered.</p>
-                <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
-                <p>Engr. Borlongan's presentation was a masterclass in clarity. He didn't just explain the 'what' of thermal imaging but the 'why' and 'how.' We learned to interpret thermal signatures, identify potential failure points in electrical systems, and understand the nuances of predictive maintenance. The case studies were particularly illuminating, showing how this technology saves companies millions in downtime and repairs.</p>
-                <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                <p>My key takeaway was the proactive power of thermal imaging. It's not just about fixing problems; it's about preventing them. This technology allows for a shift from reactive to predictive maintenance, a concept that is revolutionizing the industry. I am now inspired to explore this technology further and see how I can incorporate it into my future projects.</p>
-                <a href="#" class="cta-button" data-modal-button="modal-pdf" style="margin-top: 20px;">View Certificate</a>
-            </div>
-        </div>
-    </div>
-    <div id="modal2" class="modal">
-        <div class="modal-content">
-            <i class="modal-close" data-feather="x"></i>
-            <div class="modal-body">
-                <h2>Basic Solar Design and Installation</h2>
-                <img src="images/docu-session2.png" alt="Session 2 Documentation">
-                <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
-                <p>Despite a rocky start with an internet outage, I was determined to catch as much of Engr. Constantine Reymundo's seminar on solar design as possible. The energy in the virtual room was palpable, and I was eager to learn from an expert in the field.</p>
-                <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
-                <p>The webinar was a comprehensive overview of the solar landscape. We covered everything from the physics of photovoltaic cells to the economics of solar installations. The discussion on government incentives and the future of renewable energy in the Philippines was particularly insightful, highlighting the immense potential for growth in this sector.</p>
-                <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                <p>I now have a much clearer understanding of the complexities of solar design. It's a field that requires a blend of technical expertise, financial acumen, and a deep understanding of environmental factors. The seminar has given me the confidence to explore this field further and perhaps even consider a career in renewable energy.</p>
-            </div>
-        </div>
-    </div>
-    <div id="modal3" class="modal">
-        <div class="modal-content">
-            <i class="modal-close" data-feather="x"></i>
-            <div class="modal-body">
-                <h2>Technopreneurship: Turning Technology into Business</h2>
-                <img src="images/p-3.jpg" alt="Session 3 Programme">
-                <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
-                <p>This webinar was a project that I was deeply invested in. While my initial role was on the technical team, a scheduling conflict led me to the documentation team. This unexpected change turned out to be a blessing in disguise, as it gave me a unique perspective on the event and allowed me to work closely with the content.</p>
-                <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Experience</h3>
-                <p>The last-minute change in the program was a test of our team's adaptability. I was proud of how we all pulled together to ensure a seamless experience for our attendees. Reading the certificate citations was a small but important role, and I was honored to be a part of recognizing the hard work of our speakers and participants.</p>
-                <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                <p>This experience was a crash course in event management. I learned the importance of clear communication, contingency planning, and the ability to think on your feet. But the biggest lesson was in the power of teamwork. When a group of dedicated individuals comes together with a shared vision, anything is possible.</p>
-            </div>
-        </div>
-    </div>
-    <div id="modal4" class="modal">
-        <div class="modal-content">
-            <i class="modal-close" data-feather="x"></i>
-            <div class="modal-body">
-                <h2>GMM Meeting & Technical Workshops</h2>
-                <img src="https://placehold.co/600x300/415A77/FFFFFF?text=Documentation+4" alt="Placeholder">
-                <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
-                <p>I was not able to attend as I was the host during the GMM Meeting held in the Gymnasium with Four(4) separate professional technical workshops. However, through discussions with attendees and the organizing committee, I gained valuable insights into the topics covered in the workshops.</p>
-                <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Gained Knowledge</h3>
-                <p>I learned about the latest advancements in solar technology, including various types of solar panels, their efficiency ratings, and the factors influencing their performance. I also gained a deeper understanding of the fundamental principles of photovoltaic systems, encompassing components like inverters, batteries, and charge controllers. The importance of system sizing, site assessment, and regulatory requirements for solar installations in the Philippines were also highlighted.</p>
-                <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings & Hosting Experience</h3>
-                <p>Furthermore, I learned about the standards and best practices in the electrical engineering field, particularly how the Institute of Integrated Electrical Engineers (IIEE) actively promotes professional development and knowledge sharing among its members. The event showcased the dedication of the IIEE in organizing high-quality technical workshops and fostering a collaborative environment for engineers. It was a fun and engaging day of hosting, working alongside my partner, Ma. Fatima Faye Balilo, and the diligent working committee, all expertly headed by Engr. Pee Jay Gealone.</p>
 
-    <!-- MODALS CONTAINER -->
     <div id="modals-container">
          <div id="modal1" class="project-modal">
             <div class="modal-bg"></div>
@@ -757,13 +654,14 @@
                 <i class="modal-close" data-feather="x"></i>
                 <div class="modal-body">
                     <h2>Use of Thermal Camera for Electromechanical Inspection</h2>
-                    <img src="https://placehold.co/600x300/0D1B2A/FFFFFF?text=Documentation+1" alt="Placeholder">
+                    <img src="images/docu-session1.png" alt="Session 1 Documentation">
                     <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
-                    <p>I learned that this seminar was made possible by the Bicol University Electrical Engineering Department, in partnership with the Institute of Integrated Electrical Engineers - United Arab Emirates Chapter. The event was part of the ProfDev Series titled: Charting the Frontiers of Emerging Technologies in Electrical Engineering.</p>
+                    <p>This seminar, a collaboration between the Bicol University Electrical Engineering Department and the Institute of Integrated Electrical Engineers - UAE Chapter, was a deep dive into the practical applications of thermal imaging. As part of the 'Charting the Frontiers of Emerging Technologies in Electrical Engineering' series, it promised to be an insightful session, and it delivered.</p>
                     <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
-                    <p>Engr. Ferdinand B. Borlongan truly illuminated the world of thermal cameras! He provided a fantastic overview of how these handy devices are used for electromechanical inspection and troubleshooting, making complex topics surprisingly accessible and engaging.</p>
+                    <p>Engr. Borlongan's presentation was a masterclass in clarity. He didn't just explain the 'what' of thermal imaging but the 'why' and 'how.' We learned to interpret thermal signatures, identify potential failure points in electrical systems, and understand the nuances of predictive maintenance. The case studies were particularly illuminating, showing how this technology saves companies millions in downtime and repairs.</p>
                     <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                    <p>I learned how thermal cameras are essential for detecting anomalies like overheating, faulty connections, and insulation defects in electromechanical systems. Their ability to provide non-contact temperature measurements makes them a powerful tool for preventative maintenance.</p>
+                    <p>My key takeaway was the proactive power of thermal imaging. It's not just about fixing problems; it's about preventing them. This technology allows for a shift from reactive to predictive maintenance, a concept that is revolutionizing the industry. I am now inspired to explore this technology further and see how I can incorporate it into my future projects.</p>
+                    <a href="#" class="cta-button" data-modal-button="modal-pdf" style="margin-top: 20px;">View Certificate</a>
                 </div>
             </div>
         </div>
@@ -773,13 +671,13 @@
                 <i class="modal-close" data-feather="x"></i>
                 <div class="modal-body">
                     <h2>Basic Solar Design and Installation</h2>
-                    <img src="https://placehold.co/600x300/415A77/FFFFFF?text=Documentation+2" alt="Placeholder">
+                    <img src="images/docu-session2.png" alt="Session 2 Documentation">
                     <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
-                    <p>I was able to attend this seminar, Basic Solar Design, with the speaker being Engr. Constantine Reymundo. Although I was a bit late because of the internet outage, I was still able to participate in the interactive quiz at the end.</p>
+                    <p>Despite a rocky start with an internet outage, I was determined to catch as much of Engr. Constantine Reymundo's seminar on solar design as possible. The energy in the virtual room was palpable, and I was eager to learn from an expert in the field.</p>
                     <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
-                    <p>The webinar delved into the intricacies of solar design, covering topics such as different types of solar panels, their efficiency ratings, and the key components of a photovoltaic system, including inverters, batteries, and charge controllers.</p>
+                    <p>The webinar was a comprehensive overview of the solar landscape. We covered everything from the physics of photovoltaic cells to the economics of solar installations. The discussion on government incentives and the future of renewable energy in the Philippines was particularly insightful, highlighting the immense potential for growth in this sector.</p>
                     <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                    <p>I learned that solar design is a multi-faceted business that requires significant capital investment, which is why it is not widely adopted yet despite its benefits. The session was very informative on the current trends and the future of solar energy in the Philippines.</p>
+                    <p>I now have a much clearer understanding of the complexities of solar design. It's a field that requires a blend of technical expertise, financial acumen, and a deep understanding of environmental factors. The seminar has given me the confidence to explore this field further and perhaps even consider a career in renewable energy.</p>
                 </div>
             </div>
         </div>
@@ -789,13 +687,13 @@
                 <i class="modal-close" data-feather="x"></i>
                 <div class="modal-body">
                     <h2>Technopreneurship: Turning Technology into Business</h2>
-                    <img src="https://placehold.co/600x300/0D1B2A/FFFFFF?text=Documentation+3" alt="Placeholder">
+                    <img src="images/p-3.jpg" alt="Session 3 Programme">
                     <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
-                    <p>Our group hosted the webinar titled “Technopreneurship.” In this event, I was assigned to be a part of the technical team, but unfortunately, my schedule conflicted with DRRM training. Understanding the situation, I volunteered to assist the documentation team instead.</p>
+                    <p>This webinar was a project that I was deeply invested in. While my initial role was on the technical team, a scheduling conflict led me to the documentation team. This unexpected change turned out to be a blessing in disguise, as it gave me a unique perspective on the event and allowed me to work closely with the content.</p>
                     <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Experience</h3>
-                    <p>On the day of the event, there was a last-minute change. I was originally scheduled to deliver the closing remarks, but I was asked to read the certificate citations instead. This required me to be adaptable and ready to take on a different role on the spot.</p>
+                    <p>The last-minute change in the program was a test of our team's adaptability. I was proud of how we all pulled together to ensure a seamless experience for our attendees. Reading the certificate citations was a small but important role, and I was honored to be a part of recognizing the hard work of our speakers and participants.</p>
                     <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                    <p>This seminar provided valuable insights into the world of technopreneurship, teaching us how to leverage technological innovations to create viable business ventures. The experience also reinforced the importance of teamwork and adaptability.</p>
+                    <p>This experience was a crash course in event management. I learned the importance of clear communication, contingency planning, and the ability to think on your feet. But the biggest lesson was in the power of teamwork. When a group of dedicated individuals comes together with a shared vision, anything is possible.</p>
                 </div>
             </div>
         </div>
@@ -815,20 +713,18 @@
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div id="modal-pdf" class="modal">
-        <div class="modal-content" style="max-width: 850px; height: 90vh;">
-            <i class="modal-close" data-feather="x"></i>
-            <div class="modal-body" style="height: 100%; padding-top: 40px;">
-                <h2 style="position: absolute; top: 32px;">Session 1 Certificate</h2>
-                <iframe src="pdfs/IIEE-UAE_Webinar_Thermal.pdf" width="100%" height="95%" style="border: none;"></iframe>
+        <div id="modal-pdf" class="project-modal">
+            <div class="modal-bg"></div>
+            <div class="modal-content" style="max-width: 850px; height: 90vh;">
+                <i class="modal-close" data-feather="x"></i>
+                <div class="modal-body" style="height: 100%; padding-top: 40px;">
+                    <h2 style="position: absolute; top: 32px;">Session 1 Certificate</h2>
+                    <iframe src="pdfs/IIEE-UAE_Webinar_Thermal.pdf" width="100%" height="95%" style="border: none;"></iframe>
+                </div>
             </div>
         </div>
     </div>
 
-
-    <!-- GEMINI CHAT MODAL -->
     <div id="geminiChatModal" class="gemini-modal">
         <div class="gemini-modal-content">
             <div class="gemini-modal-header">
@@ -850,7 +746,6 @@
         </div>
     </div>
 
-    <!-- GAMIFICATION ELEMENTS -->
     <div id="achievement-container"></div>
     <div id="konami-success" class="konami-modal">
         <div class="konami-content">
@@ -864,7 +759,6 @@
     <script>
         feather.replace();
 
-        // Mobile menu toggle
         // --- Mobile Menu Toggle ---
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
@@ -875,7 +769,6 @@
             });
         });
 
-        // Active nav link on scroll
         // --- Active Nav Link on Scroll ---
         const sections = document.querySelectorAll('section');
         const navA = document.querySelectorAll('.nav-links a');
@@ -894,13 +787,6 @@
                 }
             });
         });
-
-        // Main modal logic
-        const portfolioCards = document.querySelectorAll('.portfolio-card');
-        const modals = document.querySelectorAll('.modal');
-        const closeButtons = document.querySelectorAll('.modal-close');
-        
-        portfolioCards.forEach(card => {
         
         // --- Carousel Logic ---
         const carousel = document.querySelector('.carousel');
@@ -944,15 +830,6 @@
         // --- Modal Logic ---
         cards.forEach(card => {
             card.addEventListener('click', () => {
-                const modalId = card.getAttribute('data-modal');
-                document.getElementById(modalId).classList.add('open');
-                feather.replace(); // Re-initialize icons in the modal
-            });
-        });
-
-        closeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                button.closest('.modal').classList.remove('open');
                 const modalId = card.dataset.modalId;
                 const modal = document.getElementById(modalId);
                 if(modal) {
@@ -961,33 +838,22 @@
                 }
             });
         });
-        
-        modals.forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if(e.target === modal) {
-                    modal.classList.remove('open');
-                }
-            });
-        });
 
-        // PDF Modal logic
-        const pdfModalButtons = document.querySelectorAll('[data-modal-button="modal-pdf"]');
-        pdfModalButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
+        // Event listener for all modal buttons (including the new PDF one)
+        document.addEventListener('click', function(e) {
+            // Open certificate modal
+            if (e.target.closest('[data-modal-button]')) {
                 e.preventDefault();
-                e.stopPropagation(); // Prevents the parent modal from closing
-                const modalId = button.getAttribute('data-modal-button');
+                const modalId = e.target.closest('[data-modal-button]').dataset.modalButton;
                 document.getElementById(modalId).classList.add('open');
-            });
+            }
+            
+            // Close any open project modal
+            if (e.target.matches('.modal-close, .modal-bg')) {
+                 e.target.closest('.project-modal').classList.remove('open');
+            }
         });
 
-        document.querySelectorAll('.modal-close, .modal-bg').forEach(el => {
-            el.addEventListener('click', (e) => {
-                e.currentTarget.closest('.project-modal').classList.remove('open');
-            });
-        });
-
-        // Fade-in animation on scroll
         // --- Fade-in on Scroll Animation ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -1105,7 +971,7 @@
             const involvements = document.querySelector('#accomplishments .accomplishments-col:nth-child(2)');
             if(involvements) context += `\n\nNotable Involvements:\n${involvements.innerText}`;
             
-            document.querySelectorAll('.modal-body').forEach((modal, index) => {
+            document.querySelectorAll('.project-modal:not(#modal-pdf)').forEach((modal, index) => {
                 const title = modal.querySelector('h2').innerText;
                 const content = Array.from(modal.querySelectorAll('p')).map(p => p.innerText).join(' ');
                 context += `\n\nProject ${index + 1}: ${title}\nDetails: ${content}`;
@@ -1117,7 +983,7 @@
 
         async function callGeminiApi(userQuery, retryCount = 0) {
             const apiKey = ""; // API Key will be injected by the environment
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-1.5-pro-latest:generateContent?key=${apiKey}`;
 
             const portfolioContext = getPortfolioContext();
             const systemPrompt = `You are a helpful and professional AI assistant for the portfolio of Jureen Dominique E. Sese. Your role is to answer questions from potential employers or collaborators based ONLY on the information provided in this portfolio. Be concise, friendly, and professional. Do not invent information. If the answer is not in the provided context, politely state that the information is not available in the portfolio. Here is the portfolio information:\n\n${portfolioContext}`;
