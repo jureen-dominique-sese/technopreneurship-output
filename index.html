@@ -96,6 +96,52 @@
             color: var(--accent-cyan);
             text-shadow: 0 0 15px var(--glow-cyan);
             margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Glitch effect on h1 */
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+            }
+            20% {
+                transform: translate(-2px, 2px);
+            }
+            40% {
+                transform: translate(-2px, -2px);
+            }
+            60% {
+                transform: translate(2px, 2px);
+            }
+            80% {
+                transform: translate(2px, -2px);
+            }
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        h1:hover::before,
+        h1:hover::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        h1:hover::before {
+            animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            color: #ff00de;
+            z-index: -1;
+        }
+
+        h1:hover::after {
+            animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+            color: #00fff9;
+            z-index: -2;
         }
 
         .subtitle {
@@ -112,12 +158,37 @@
             color: var(--text-main);
             font-size: 1rem;
             line-height: 1.8;
+            overflow: hidden;
+        }
+
+        /* Typing animation */
+       /* Typing animation */
+.typing-text {
+    display: inline;
+    border-right: 2px solid var(--accent-cyan);
+    padding-right: 5px;
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--accent-cyan) }
+}
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-cyan) }
         }
 
         /* Navigation */
         nav {
             position: sticky;
-            top: 0;
+            top: -100px;
             background: rgba(13, 17, 23, 0.98);
             backdrop-filter: blur(10px);
             z-index: 100;
@@ -125,6 +196,11 @@
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 40px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            transition: top 0.3s ease-in-out;
+        }
+
+        nav.nav-visible {
+            top: 0;
         }
 
         .nav-links {
@@ -178,6 +254,29 @@
             z-index: 2;
         }
 
+        /* Glitch on section headers */
+        .section-divider h2:hover::before,
+        .section-divider h2:hover::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 30px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .section-divider h2:hover::before {
+            animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            color: #ff00de;
+            z-index: -1;
+        }
+
+        .section-divider h2:hover::after {
+            animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+            color: #00fff9;
+            z-index: -2;
+        }
+
         .section-divider::before {
             content: '';
             position: absolute;
@@ -189,7 +288,7 @@
             z-index: 1;
         }
 
-        /* Session Cards */
+        /* Session Cards - Staggered Fade In */
         .session-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -199,6 +298,19 @@
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .session-card.reveal {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .session-card:hover {
@@ -207,6 +319,7 @@
             border-color: var(--accent-cyan);
         }
 
+        /* Animated corner brackets */
         .session-card::before {
             content: '';
             position: absolute;
@@ -216,6 +329,7 @@
             height: 10px;
             border-top: 2px solid var(--accent-cyan);
             border-left: 2px solid var(--accent-cyan);
+            transition: all 0.3s ease;
         }
 
         .session-card::after {
@@ -227,6 +341,17 @@
             height: 10px;
             border-bottom: 2px solid var(--accent-cyan);
             border-right: 2px solid var(--accent-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .session-card:hover::before {
+            width: 30px;
+            height: 30px;
+        }
+
+        .session-card:hover::after {
+            width: 30px;
+            height: 30px;
         }
 
         .card-header {
@@ -302,6 +427,147 @@
             margin-bottom: 15px;
             color: #b0b8c4;
             line-height: 1.8;
+        }
+
+        /* EXPANDABLE REPORT CARDS */
+        .report-card-container {
+            margin-bottom: 30px;
+        }
+
+        .report-card-collapsed {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .report-card-collapsed:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px var(--glow-cyan);
+        }
+
+        .report-card-collapsed h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-cyan);
+            font-size: 1.3rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .report-card-collapsed .expand-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .report-card-collapsed:hover .expand-icon {
+            transform: scale(1.2);
+        }
+
+        /* Pixel spark overlay */
+        .pixel-spark-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pixel-spark-overlay.active {
+            display: flex;
+        }
+
+        .spark-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .pixel-spark {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+            animation: sparkBurst 0.8s ease-out forwards;
+        }
+
+        @keyframes sparkBurst {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Expanded report card */
+        .report-card-expanded {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 4px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(88, 166, 255, 0.3);
+            animation: expandCard 0.5s ease forwards;
+            position: relative;
+        }
+
+        .report-card-expanded.active {
+            display: block;
+        }
+
+        @keyframes expandCard {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .report-card-expanded .card-header {
+            background: rgba(88, 166, 255, 0.1);
+            border-bottom: 2px solid var(--accent-cyan);
+        }
+
+        .close-report {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 2px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-report:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-color);
+            transform: rotate(90deg);
         }
 
         /* Accomplishments Grid */
@@ -451,18 +717,22 @@
 
     <div class="scanlines"></div>
 
+    <!-- Pixel Spark Overlay -->
+    <div class="pixel-spark-overlay" id="sparkOverlay">
+        <div class="spark-container" id="sparkContainer"></div>
+    </div>
+
     <header>
         <div class="container">
-            <h1>Jureen Dominique E. Sese</h1>
+            <h1 data-text="Jureen Dominique E. Sese">Jureen Dominique E. Sese</h1>
             <div class="subtitle">BSEE-4A | Batch 2026 | Bicol University</div>
             <div class="intro-text">
-                <strong>Hello! I'm juju!</strong><br>
-                Versatile Electrical Engineering student with strong academics and experience in technical, creative, and leadership roles. Skilled in CAD, PLC Simulation, and microcontroller projects. Recognized student leader and graphic designer active in major college and departmental organizations.
+                <span class="typing-text"><strong>Hello! I'm juju!</strong> Versatile Electrical Engineering student with strong academics and experience in technical, creative, and leadership roles. Skilled in CAD, PLC Simulation, and microcontroller projects. Recognized student leader and graphic designer active in major college and departmental organizations.</span>
             </div>
         </div>
     </header>
 
-    <nav>
+    <nav id="mainNav">
         <ul class="nav-links">
             <li><a href="#profdev">ProfDev Series</a></li>
             <li><a href="#technopotential">Technopotential Hub</a></li>
@@ -476,7 +746,7 @@
         <!-- ===== PROFDEV SERIES SECTION ===== -->
         <div id="profdev" class="major-section">
             <div class="section-divider">
-                <h2>ProfDev Series</h2>
+                <h2 data-text="ProfDev Series">ProfDev Series</h2>
             </div>
 
             <article class="session-card">
@@ -558,11 +828,20 @@
         <!-- ===== TECHNOPOTENTIAL HUB SECTION ===== -->
         <div id="technopotential" class="major-section">
             <div class="section-divider">
-                <h2>Technopotential Hub</h2>
+                <h2 data-text="Technopotential Hub">Technopotential Hub</h2>
             </div>
 
-            <article class="session-card">
-                <div class="card-header">
+            <!-- Report Card 1 -->
+            <div class="report-card-container">
+                <div class="report-card-collapsed" data-report="1">
+                    <h3>
+                        <span>Part 1: Ideas in Motion</span>
+                        <span class="expand-icon">▸</span>
+                    </h3>
+                </div>
+                <article class="report-card-expanded" id="report-1">
+                    <button class="close-report" data-close="1">×</button>
+                    <div class="card-header">
                     <span class="session-number">Part 1</span>
                     <h2>Ideas in Motion</h2>
                     <div class="sub-header">Engineering Thinking Beyond the Schematic</div>
@@ -581,8 +860,18 @@
                     <p>This session revealed how even well-engineered solutions need visibility and communication to survive. Engineers often focus on precision and function, but technopreneurs must also learn how to attract attention and earn trust. Learning that the government has concrete support systems for innovation made the pathway from classroom concepts to viable startups feel less abstract and more attainable.</p>
                 </div>
             </article>
+        </div>
 
-            <article class="session-card">
+        <!-- Report Card 2 -->
+        <div class="report-card-container">
+            <div class="report-card-collapsed" data-report="2">
+                <h3>
+                    <span>Part 2: Blueprints for Breakthroughs</span>
+                    <span class="expand-icon">▸</span>
+                </h3>
+            </div>
+            <article class="report-card-expanded" id="report-2">
+                <button class="close-report" data-close="2">×</button>
                 <div class="card-header">
                     <span class="session-number">Part 2</span>
                     <h2>Blueprints for Breakthroughs</h2>
@@ -602,8 +891,18 @@
                     <p>This session clarified that technopreneurship involves both exciting digital tools and the less glamorous but essential infrastructure behind them. Engr. Javier showcased how advanced our tools have become, but Engr. Esparas reminded us that technology must be grounded in institutions, people and societal needs. I found the view of AI as an enabler—not a replacement—particularly meaningful.</p>
                 </div>
             </article>
+        </div>
 
-            <article class="session-card">
+        <!-- Report Card 3 -->
+        <div class="report-card-container">
+            <div class="report-card-collapsed" data-report="3">
+                <h3>
+                    <span>Part 3: Lighting Possibilities</span>
+                    <span class="expand-icon">▸</span>
+                </h3>
+            </div>
+            <article class="report-card-expanded" id="report-3">
+                <button class="close-report" data-close="3">×</button>
                 <div class="card-header">
                     <span class="session-number">Part 3</span>
                     <h2>Lighting Possibilities</h2>
@@ -623,8 +922,18 @@
                     <p>The biggest shift in perspective for me was seeing solar not as a product but as a tailored service. Engineers now study the client's habits before choosing an arrangement. In the Philippine context, solar isn't just about lowering bills; it also protects households from frequent outages. It feels encouraging to know that our training can directly address real community concerns.</p>
                 </div>
             </article>
+        </div>
 
-            <article class="session-card">
+        <!-- Report Card 4 -->
+        <div class="report-card-container">
+            <div class="report-card-collapsed" data-report="4">
+                <h3>
+                    <span>Part 4: Engineering the Ledger</span>
+                    <span class="expand-icon">▸</span>
+                </h3>
+            </div>
+            <article class="report-card-expanded" id="report-4">
+                <button class="close-report" data-close="4">×</button>
                 <div class="card-header">
                     <span class="session-number">Part 4</span>
                     <h2>Engineering the Ledger</h2>
@@ -645,10 +954,20 @@
                     <p>This session made me realize that financial literacy allows engineers to defend and communicate their ideas. A design becomes persuasive only when supported by strong numbers. Understanding how money flows inside a project gives engineers the confidence and credibility to lead larger initiatives.</p>
                 </div>
             </article>
+        </div>
 
-            <article class="session-card">
+        <!-- Report Card 5 -->
+        <div class="report-card-container">
+            <div class="report-card-collapsed" data-report="5">
+                <h3>
+                    <span>Part 5: Inside the Connected Home</span>
+                    <span class="expand-icon">▸</span>
+                </h3>
+            </div>
+            <article class="report-card-expanded" id="report-5">
+                <button class="close-report" data-close="5">×</button>
                 <div class="card-header">
-                    <span class="session-number">Part5</span>
+                    <span class="session-number">Part 5</span>
                     <h2>Inside the Connected Home</h2>
                     <div class="sub-header">Automation for the Modern Filipino</div>
                     <div class="speakers">Based on "Smart Edge" | Speaker: Ms. Ayessa Nixzel Dumlao</div>
@@ -657,41 +976,54 @@
                 <div class="card-body">
                     <h3>Introduction</h3>
                     <p>In the afternoon, our class continued the sessions with a talk from Ms. Ayessa Nixzel Dumlao of Neovega SmartHome. Her discussion explored how automation quietly reshapes household living in the Philippines.</p>
+                    
                     <h3>Summary</h3>
-                <p>Ms. Dumlao explained that smart homes function through connection rather than through individual devices. Lights, appliances, cameras and entertainment systems interact as one environment, controlled through a phone or voice input. She highlighted how convenience, security and energy efficiency emerge when devices work together instead of performing separately.</p>
-                <p>To demonstrate this, she showcased products used by her company. The automated curtains adjust based on time, helping control indoor temperature. The switchable smart film changes from transparent to opaque instantly, offering privacy on command. Each example showed how small but persistent inconveniences can be solved through a mix of hardware and logical programming.</p>
+                    <p>Ms. Dumlao explained that smart homes function through connection rather than through individual devices. Lights, appliances, cameras and entertainment systems interact as one environment, controlled through a phone or voice input. She highlighted how convenience, security and energy efficiency emerge when devices work together instead of performing separately.</p>
+                    <p>To demonstrate this, she showcased products used by her company. The automated curtains adjust based on time, helping control indoor temperature. The switchable smart film changes from transparent to opaque instantly, offering privacy on command. Each example showed how small but persistent inconveniences can be solved through a mix of hardware and logical programming.</p>
 
-                <h3>Learnings and Reflection</h3>
-                <p>This talk broadened my view of the electrical engineering profession. Smart homes show that our work also shapes the comfort and rhythm of daily life. The field is not limited to large-scale grids and industrial plants; it also involves personal spaces where subtle design and user experience matter. It revealed opportunities to build systems that adapt to people instead of making people adapt to systems.</p>
+                    <h3>Learnings and Reflection</h3>
+                    <p>This talk broadened my view of the electrical engineering profession. Smart homes show that our work also shapes the comfort and rhythm of daily life. The field is not limited to large-scale grids and industrial plants; it also involves personal spaces where subtle design and user experience matter. It revealed opportunities to build systems that adapt to people instead of making people adapt to systems.</p>
+                </div>
+            </article>
+        </div>
+
+        <!-- Report Card 6 -->
+        <div class="report-card-container">
+            <div class="report-card-collapsed" data-report="6">
+                <h3>
+                    <span>Part 6: Seeing the User</span>
+                    <span class="expand-icon">▸</span>
+                </h3>
             </div>
-        </article>
+            <article class="report-card-expanded" id="report-6">
+                <button class="close-report" data-close="6">×</button>
+                <div class="card-header">
+                    <span class="session-number">Part 6</span>
+                    <h2>Seeing the User</h2>
+                    <div class="sub-header">Building Innovations that People Actually Want</div>
+                    <div class="speakers">Based on "Charting Success" | Speaker: Ms. Marie Sachie Mitsui Turiano Academia</div>
+                </div>
+                <img src="images/TECHNO3-2.jpg" alt="Charting Success" class="card-image">
+                <div class="card-body">
+                    <h3>Introduction</h3>
+                    <p>To conclude the seminar series on the same afternoon, our block joined another group to host a final session with Ms. Sachie Turiano Academia, CEO of Fortem Auctrix. Her talk focused on the human side of innovation.</p>
 
-        <article class="session-card">
-            <div class="card-header">
-                <span class="session-number">Part 6</span>
-                <h2>Seeing the User</h2>
-                <div class="sub-header">Building Innovations that People Actually Want</div>
-                <div class="speakers">Based on "Charting Success" | Speaker: Ms. Marie Sachie Mitsui Turiano Academia</div>
-            </div>
-            <img src="images/TECHNO3-2.jpg" alt="Charting Success" class="card-image">
-            <div class="card-body">
-                <h3>Introduction</h3>
-                <p>To conclude the seminar series on the same afternoon, our block joined another group to host a final session with Ms. Sachie Turiano Academia, CEO of Fortem Auctrix. Her talk focused on the human side of innovation.</p>
+                    <h3>Summary</h3>
+                    <p>Ms. Academia opened by reframing technopreneurship as the creation of meaningful solutions rather than the mere invention of new tools. Many startups collapse, she explained, because they built something nobody needed.</p>
+                    <p>She introduced IMAP, a framework for uncovering user needs. It examines the problem, identifies users, studies the industry and locates gaps. She paired this with the ARC framework, which guides how ideas reach people—beginning with awareness, followed by emotional connection and ending with conversion or user adoption. She cited Tesla and Apple as examples of how technology and human behavior work hand in hand.</p>
 
-                <h3>Summary</h3>
-                <p>Ms. Academia opened by reframing technopreneurship as the creation of meaningful solutions rather than the mere invention of new tools. Many startups collapse, she explained, because they built something nobody needed.</p>
-                <p>She introduced IMAP, a framework for uncovering user needs. It examines the problem, identifies users, studies the industry and locates gaps. She paired this with the ARC framework, which guides how ideas reach people—beginning with awareness, followed by emotional connection and ending with conversion or user adoption. She cited Tesla and Apple as examples of how technology and human behavior work hand in hand.</p>
+                    <h3>Learnings and Reflection</h3>
+                    <p>This last talk reshaped how I understand innovation. I used to think that completing the technical design marked the end of the work. Now I see that a product becomes meaningful only when it answers a real need. The frameworks she shared felt like analytical tools for understanding people. Just as we compute for load, voltage or flux, we must also compute for value and relevance. It became clear that engineering and entrepreneurship intersect at the point where technology becomes truly useful.</p>
+                </div>
+            </article>
+        </div>
 
-                <h3>Learnings and Reflection</h3>
-                <p>This last talk reshaped how I understand innovation. I used to think that completing the technical design marked the end of the work. Now I see that a product becomes meaningful only when it answers a real need. The frameworks she shared felt like analytical tools for understanding people. Just as we compute for load, voltage or flux, we must also compute for value and relevance. It became clear that engineering and entrepreneurship intersect at the point where technology becomes truly useful.</p>
-            </div>
-        </article>
     </div>
 
     <!-- ===== ACCOMPLISHMENTS SECTION ===== -->
     <div id="accomplishments" class="major-section">
         <div class="section-divider">
-            <h2>Accomplishments</h2>
+            <h2 data-text="Accomplishments">Accomplishments</h2>
         </div>
 
         <div class="accomplishments-grid">
@@ -725,7 +1057,7 @@
     <!-- ===== CONTACT SECTION ===== -->
     <div id="contact" class="major-section">
         <div class="section-divider">
-            <h2>Get In Touch</h2>
+            <h2 data-text="Get In Touch">Get In Touch</h2>
         </div>
 
         <div class="contact-content">
@@ -780,11 +1112,23 @@
         });
     });
 
-    // Active nav link on scroll
+    // Active nav link on scroll + sticky nav reveal
     const sections = document.querySelectorAll('.major-section');
     const navLinks = document.querySelectorAll('.nav-links a');
+    const nav = document.getElementById('mainNav');
+    let lastScroll = 0;
 
     window.addEventListener('scroll', () => {
+        // Sticky nav slide down
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > 200) {
+            nav.classList.add('nav-visible');
+        } else {
+            nav.classList.remove('nav-visible');
+        }
+        lastScroll = currentScroll;
+
+        // Active section highlighting
         let current = '';
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
@@ -802,20 +1146,112 @@
         });
     });
 
-    // Add scroll reveal animation
+    // Staggered card reveal on scroll
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                setTimeout(() => {
+                    entry.target.classList.add('reveal');
+                }, index * 150); // Stagger by 150ms
             }
         });
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.session-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(card);
     });
+
+    // EXPANDABLE REPORT CARDS WITH PIXEL SPARK ANIMATION
+    const collapsedCards = document.querySelectorAll('.report-card-collapsed');
+    const sparkOverlay = document.getElementById('sparkOverlay');
+    const sparkContainer = document.getElementById('sparkContainer');
+
+    function createPixelSparks() {
+        sparkContainer.innerHTML = '';
+        const sparkCount = 30;
+        
+        for (let i = 0; i < sparkCount; i++) {
+            const spark = document.createElement('div');
+            spark.className = 'pixel-spark';
+            
+            const angle = (Math.PI * 2 * i) / sparkCount;
+            const distance = 100 + Math.random() * 50;
+            const tx = Math.cos(angle) * distance;
+            const ty = Math.sin(angle) * distance;
+            
+            spark.style.setProperty('--tx', `${tx}px`);
+            spark.style.setProperty('--ty', `${ty}px`);
+            spark.style.left = '50%';
+            spark.style.top = '50%';
+            
+            // Random colors from theme
+            const colors = ['#58a6ff', '#3fb950', '#bc8cff', '#d29922'];
+            spark.style.background = colors[Math.floor(Math.random() * colors.length)];
+            spark.style.boxShadow = `0 0 10px ${spark.style.background}`;
+            
+            sparkContainer.appendChild(spark);
+        }
+    }
+
+    collapsedCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const reportId = this.getAttribute('data-report');
+            const expandedCard = document.getElementById(`report-${reportId}`);
+            
+            // Show spark overlay
+            sparkOverlay.classList.add('active');
+            createPixelSparks();
+            
+            // After spark animation, show card
+            setTimeout(() => {
+                sparkOverlay.classList.remove('active');
+                this.style.display = 'none';
+                expandedCard.classList.add('active');
+                expandedCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 900);
+        });
+    });
+
+    // Close report cards
+    const closeButtons = document.querySelectorAll('.close-report');
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const reportId = this.getAttribute('data-close');
+            const expandedCard = document.getElementById(`report-${reportId}`);
+            const collapsedCard = document.querySelector(`[data-report="${reportId}"]`);
+            
+            expandedCard.classList.remove('active');
+            setTimeout(() => {
+                collapsedCard.style.display = 'block';
+                collapsedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        });
+    });
+
+    // Typing animation for intro (one-time on load)
+// Typing animation for intro (one-time on load)
+window.addEventListener('load', () => {
+    const typingElement = document.querySelector('.typing-text');
+    const text = typingElement.textContent;
+    typingElement.textContent = '';
+    typingElement.style.display = 'inline';
+    typingElement.style.whiteSpace = 'normal'; // Allow wrapping
+    
+    let i = 0;
+    function typeWriter() {
+        if (i < text.length) {
+            typingElement.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 30);
+        } else {
+            // Remove cursor after typing completes
+            setTimeout(() => {
+                typingElement.style.borderRight = 'none';
+            }, 500);
+        }
+    }
+    typeWriter();
+});
 </script>
+</body>
+</html>
