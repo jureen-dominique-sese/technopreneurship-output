@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technopreneurship Seminar Series Output</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-cyan: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-purple: #bc8cff;
+            --accent-yellow: #d29922;
+            --glow-cyan: rgba(88, 166, 255, 0.15);
+            --border-color: #30363d;
+            --scanline-color: rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-size: 18px;
+        }
+
+        /* Scanline Overlay */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0) 50%,
+                rgba(0, 0, 0, 0.2) 50%,
+                rgba(0, 0, 0, 0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.6;
+        }
+
+        .crt-flicker {
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.97; }
+            100% { opacity: 1; }
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 20%;
+            width: 60%;
+            height: 2px;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 15px var(--glow-cyan);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--text-muted);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 100;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 8px var(--glow-cyan);
+            background: rgba(88, 166, 255, 0.05);
+        }
+
+        /* Main Content Sections */
+        .session-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            margin-bottom: 60px;
+            padding: 0;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .session-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-color: var(--text-muted);
+        }
+
+        /* Corner accents for retro feel */
+        .session-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid var(--accent-cyan);
+            border-left: 2px solid var(--accent-cyan);
+        }
+
+        .session-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            border-bottom: 2px solid var(--accent-cyan);
+            border-right: 2px solid var(--accent-cyan);
+        }
+
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(22, 27, 34, 0.8);
+        }
+
+        .session-number {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--accent-purple);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .sub-header {
+            font-size: 1rem;
+            color: var(--accent-green);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .speakers {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .card-image {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid var(--border-color);
+            display: block;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+            max-height: 400px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .session-card:hover .card-image {
+            opacity: 1;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        h3 {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--accent-yellow);
+            font-size: 1.1rem;
+            margin: 25px 0 10px 0;
+            text-transform: uppercase;
+            border-left: 3px solid var(--accent-yellow);
+            padding-left: 10px;
+        }
+
+        h3:first-of-type {
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #b0b8c4;
+        }
+
+        /* Other Reports Section */
+        .other-reports {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px dashed var(--border-color);
+            text-align: center;
+        }
+
+        .other-reports h2 {
+            color: var(--accent-purple);
+            margin-bottom: 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .retro-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid var(--text-muted);
+            color: var(--text-muted);
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .retro-btn:hover {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            background: rgba(63, 185, 80, 0.1);
+            box-shadow: 0 0 15px rgba(63, 185, 80, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .nav-links { gap: 10px; }
+            .nav-links a { font-size: 0.8rem; }
+            .card-body { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <header>
+        <div class="container">
+            <h1>Technopreneurship</h1>
+            <div class="subtitle">Seminar Series Output | BSEE 2025-2026</div>
+        </div>
+    </header>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#part1">Primer</a></li>
+            <li><a href="#part2">Toolkit</a></li>
+            <li><a href="#part3">Solar Sparks</a></li>
+            <li><a href="#part4">Cashed In</a></li>
+            <li><a href="#part5">Smart Edge</a></li>
+            <li><a href="#part6">Success</a></li>
+            <li><a href="#archive">Archive</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <article id="part1" class="session-card">
+            <div class="card-header">
+                <span class="session-number">Session 01</span>
+                <h2>Ideas in Motion</h2>
+                <div class="sub-header">Engineering Thinking Beyond the Schematic</div>
+                <div class="speakers">Based on "The Pitcher’s Primer" | Speakers: Ms. Chriz Luminario & Ms. Almira Shane A. Manlapaz</div>
+            </div>
+            <img src="https://raw.githubusercontent.com/jureen-dominique-sese/technopreneurship-output/main/images/TECHNO1-1.jpg" alt="The Pitcher's Primer Poster" class="card-image">
+            <div class="card-body">
+                <h3>Introduction</h3>
+                <p>Our batch gathered at Bulwagang BUeño last November 6, 2025 for an event designed to stretch our understanding of how technical ideas travel into the real world. Organized by the groups of Ms. Llenaresas and Ms. Marmol, the session called “The Pitcher’s Primer” shifted our attention from pure engineering work toward how concepts evolve into ventures. Two speakers led the discussion: Ms. Chriz Luminario and Ms. Almira Shane A. Manlapaz.</p>
+
+                <h3>Summary</h3>
+                <p>Ms. Luminario, founder of Lumiere Studio, began by tracing the evolution of modern marketing. Instead of print and television, most persuasion now happens through screens people carry everywhere. She explained how digital tools determine visibility and how brands use strategies involving algorithms, social media, personality and humor to stand out. For her, a product’s character always begins with its intention and not merely its logo.</p>
+                <p>Ms. Manlapaz from the DICT followed with a deeper look into support structures available to Filipino innovators. She introduced the Innovative Startup Act, a national law that backs early-stage ideas through funding and mentorship. By citing familiar companies such as GCash and Angkas, she illustrated how local startups grow when supported by clear programs. She also described the ideal team setup for early ventures: the Hustler who handles the business side, the Hacker who manages the technical core and the Hipster who shapes user experience.</p>
+
+                <h3>Learnings and Reflection</h3>
+                <p>This session revealed how even well-engineered solutions need visibility and communication to survive. Engineers often focus on precision and function, but technopreneurs must also learn how to attract attention and earn trust. Learning that the government has concrete support systems for innovation made the pathway from classroom concepts to viable startups feel less abstract and more attainable.</p>
+            </div>
+        </article>
+
+        <article id="part2" class="session-card">
+            <div class="card-header">
+                <span class="session-number">Session 02</span>
+                <h2>Blueprints for Breakthroughs</h2>
+                <div class="sub-header">Making Technology Market-Ready</div>
+                <div class="speakers">Based on "Technopreneur’s Toolkit" | Speakers: Engr. Harvey S. Javier & Engr. Noli M. Esparas</div>
+            </div>
+            <img src="https://raw.githubusercontent.com/jureen-dominique-sese/technopreneurship-output/main/images/TECHNO1-2.jpg" alt="Technopreneur's Toolkit Poster" class="card-image">
+            <div class="card-body">
+                <h3>Introduction</h3>
+                <p>The seminar series continued on November 8, 2025 with a session that bridged real-world technology development and national innovation programs. This time, the perspectives came from both business and the public sector. Engr. Harvey Javier represented the private industry, while Engr. Noli Esparas of the DOST represented national scientific initiatives.</p>
+
+                <h3>Summary</h3>
+                <p>Engr. Javier opened with a discussion titled “Innovating the Future,” where he described how contemporary digital platforms combine various technologies. Using examples from SparkPoint and HSJ Technologies, he illustrated how blockchain improves transparency and how artificial intelligence enables automation and pattern recognition. His main point was clear: technology only lasts if people actually benefit from it.</p>
+                <p>Engr. Esparas then widened the lens by explaining how the DOST functions as an engine that transforms scientific knowledge into solutions communities can use. He presented their programs in three groups: direct support for business development, assistance for innovation hubs and tech commercialization, and livelihood projects that help communities adapt scientific tools. He stressed that startups thrive when supported by a functioning ecosystem that includes policies, mentors, investors, talent and clear demand.</p>
+
+                <h3>Learnings and Reflection</h3>
+                <p>This session clarified that technopreneurship involves both exciting digital tools and the less glamorous but essential infrastructure behind them. Engr. Javier showcased how advanced our tools have become, but Engr. Esparas reminded us that technology must be grounded in institutions, people and societal needs. I found the view of AI as an enabler—not a replacement—particularly meaningful.</p>
+            </div>
+        </article>
+
+        <article id="part3" class="session-card">
+            <div class="card-header">
+                <span class="session-number">Session 03</span>
+                <h2>Lighting Possibilities</h2>
+                <div class="sub-header">Solar Energy and the Entrepreneurial Mindset</div>
+                <div class="speakers">Based on "The Solar Sparks" | Speaker: Mr. Sony Sabdao, RME</div>
+            </div>
+            <img src="https://raw.githubusercontent.com/jureen-dominique-sese/technopreneurship-output/main/images/TECHNO2-3.jpg" alt="The Solar Sparks Poster" class="card-image">
+            <div class="card-body">
+                <h3>Introduction</h3>
+                <p>On November 22, our Technopreneurship class under Engr. Olesco held the third installment of our webinar series through Zoom. Our block invited Mr. Sony Sabdao, General Manager of S-S Enterprises, to share how solar technology offers practical solutions to everyday energy problems in the Philippines.</p>
+
+                <h3>Summary</h3>
+                <p>Mr. Sabdao began by connecting solar science with the engineering tasks performed in the field. He explained how the photovoltaic effect converts light into electricity and how system sizes change depending on the power needs of different clients. His comparison of grid-tie, hybrid and off-grid systems made it easier to understand which setup fits specific locations and lifestyles.</p>
+                <p>After the technical overview, he walked us through the realities of building a solar business. Proper financial calculations, accurate site assessments and complete permits form the backbone of any successful installation. He emphasized that engineers must design systems that are not only functional but also financially viable and precise in execution.</p>
+
+                <h3>Learnings and Reflection</h3>
+                <p>The biggest shift in perspective for me was seeing solar not as a product but as a tailored service. Engineers now study the client’s habits before choosing an arrangement. In the Philippine context, solar isn’t just about lowering bills; it also protects households from frequent outages. It feels encouraging to know that our training can directly address real community concerns.</p>
+            </div>
+        </article>
+
+        <article id="part4" class="session-card">
+            <div class="card-header">
+                <span class="session-number">Session 04</span>
+                <h2>Engineering the Ledger</h2>
+                <div class="sub-header">Why Numbers Define Innovation</div>
+                <div class="speakers">Based on "Cashed In" | Speaker: Ms. Clarice Schofield</div>
+            </div>
+            <img src="https://raw.githubusercontent.com/jureen-dominique-sese/technopreneurship-output/main/images/TECHNO2-4.jpg" alt="Cashed In Poster" class="card-image">
+            <div class="card-body">
+                <h3>Introduction</h3>
+                <p>Later that day, we attended the final webinar delivered by Ms. Clarice Schofield from Ernst and Young Global Consulting Services. Her talk, “Know Your Numbers,” shifted our focus from engineering design to financial discipline.</p>
+
+                <h3>Summary</h3>
+                <p>Ms. Schofield began by stating that engineers contribute to decision-making in every organization. Because of that, we must understand accounting fundamentals. She simplified the core ideas. Assets refer to what the company owns. Liabilities refer to obligations. Equity represents the owner’s interest. Revenue points to income earned from the business.</p>
+                <p>She also introduced financial indicators that founders rely on. Runway measures how long funds can sustain operations. Burn Rate shows monthly spending. The Break even point marks the point where total income finally equals operating costs.</p>
+                <p>She encouraged the use of AI tools for data cleanup and preliminary financial drafts, but she warned that these tools may produce errors, so every important figure must still be checked manually.</p>
+
+                <h3>Learnings and Reflection</h3>
+                <p>This session made me realize that financial literacy allows engineers to defend and communicate their ideas. A design becomes persuasive only when supported by strong numbers. Understanding how money flows inside a project gives engineers the confidence and credibility to lead larger initiatives.</p>
+            </div>
+        </article>
+
+        <article id="part5" class="session-card">
+            <div class="card-header">
+                <span class="session-number">Session 05</span>
+                <h2>Inside the Connected Home</h2>
+                <div class="sub-header">Automation for the Modern Filipino</div>
+                <div class="speakers">Based on "Smart Edge" | Speaker: Ms. Ayessa Nixzel Dumlao</div>
+            </div>
+            <img src="https://raw.githubusercontent.com/jureen-dominique-sese/technopreneurship-output/main/images/TECHNO3-1.jpg" alt="Smart Edge Poster" class="card-image">
+            <div class="card-body">
+                <h3>Introduction</h3>
+                <p>In the afternoon, our class continued the sessions with a talk from Ms. Ayessa Nixzel Dumlao of Neovega SmartHome. Her discussion explored how automation quietly reshapes household living in the Philippines.</p>
+
+                <h3>Summary</h3>
+                <p>Ms. Dumlao explained that smart homes function through connection rather than through individual devices. Lights, appliances, cameras and entertainment systems interact as one environment, controlled through a phone or voice input. She highlighted how convenience, security and energy efficiency emerge when devices work together instead of performing separately.</p>
+                <p>To demonstrate this, she showcased products used by her company. The automated curtains adjust based on time, helping control indoor temperature. The switchable smart film changes from transparent to opaque instantly, offering privacy on command. Each example showed how small but persistent inconveniences can be solved through a mix of hardware and logical programming.</p>
+
+                <h3>Learnings and Reflection</h3>
+                <p>This talk broadened my view of the electrical engineering profession. Smart homes show that our work also shapes the comfort and rhythm of daily life. The field is not limited to large-scale grids and industrial plants; it also involves personal spaces where subtle design and user experience matter. It revealed opportunities to build systems that adapt to people instead of making people adapt to systems.</p>
+            </div>
+        </article>
+
+        <article id="part6" class="session-card">
+            <div class="card-header">
+                <span class="session-number">Session 06</span>
+                <h2>Seeing the User</h2>
+                <div class="sub-header">Building Innovations that People Actually Want</div>
+                <div class="speakers">Based on "Charting Success" | Speaker: Ms. Marie Sachie Mitsui Turiano Academia</div>
+            </div>
+            <img src="https://raw.githubusercontent.com/jureen-dominique-sese/technopreneurship-output/main/images/TECHNO3-2.jpg" alt="Charting Success Poster" class="card-image">
+            <div class="card-body">
+                <h3>Introduction</h3>
+                <p>To conclude the seminar series on the same afternoon, our block joined another group to host a final session with Ms. Sachie Turiano Academia, CEO of Fortem Auctrix. Her talk focused on the human side of innovation.</p>
+
+                <h3>Summary</h3>
+                <p>Ms. Academia opened by reframing technopreneurship as the creation of meaningful solutions rather than the mere invention of new tools. Many startups collapse, she explained, because they built something nobody needed.</p>
+                <p>She introduced IMAP, a framework for uncovering user needs. It examines the problem, identifies users, studies the industry and locates gaps. She paired this with the ARC framework, which guides how ideas reach people—beginning with awareness, followed by emotional connection and ending with conversion or user adoption. She cited Tesla and Apple as examples of how technology and human behavior work hand in hand.</p>
+
+                <h3>Learnings and Reflection</h3>
+                <p>This last talk reshaped how I understand innovation. I used to think that completing the technical design marked the end of the work. Now I see that a product becomes meaningful only when it answers a real need. The frameworks she shared felt like analytical tools for understanding people. Just as we compute for load, voltage or flux, we must also compute for value and relevance. It became clear that engineering and entrepreneurship intersect at the point where technology becomes truly useful.</p>
+            </div>
+        </article>
+
+        <section id="archive" class="other-reports">
+            <h2>Archive & Related Documents</h2>
+            <div class="btn-group">
+                <a href="htmls/profdev1.html" class="retro-btn">View Technopreneurship Report (Individual)</a>
+                <a href="pdfs/IIEE-UAE_Webinar_Thermal.pdf" class="retro-btn" target="_blank">View Thermal Webinar Certificate</a>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>© 2025 Jureen Dominique E. Sese | Technopreneurship Output | Bicol University</p>
+    </footer>
+
+</body>
+</html>

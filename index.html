@@ -1,1181 +1,821 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jureen Dominique E. Sese | BSEE Portfolio</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jureen Dominique E. Sese | Professional Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&family=Share+Tech+Mono&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/feather-icons"></script>
-
     <style>
         :root {
-            /* NEW: Microsoft Edge Inspired Color Palette */
-            --primary-color: #00384D;   /* Deep Teal-Blue */
-            --accent-color: #46B1C9;    /* Vibrant Teal */
-            --secondary-color: #4A5C6A; /* Slate Gray */
-            --text-dark: #00232E;
-            --text-light: #4A5C6A;
-            --bg-color: #F5F7FA;       /* Light UI Gray */
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-cyan: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-purple: #bc8cff;
+            --accent-yellow: #d29922;
+            --glow-cyan: rgba(88, 166, 255, 0.15);
+            --border-color: #30363d;
             --surface-color: #ffffff;
-            --radius: 12px;
-            --shadow-1: 0 2px 4px rgba(0,0,0,0.08);
-            --shadow-2: 0 5px 15px rgba(0,0,0,0.1);
         }
-
+        
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             scroll-behavior: smooth;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg-color);
-            font-family: 'Roboto', sans-serif;
-            color: var(--text-dark);
-            line-height: 1.7;
-            transition: font-family 0.4s ease;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-size: 18px;
+        }
+
+        /* Scanline Overlay */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0) 50%,
+                rgba(0, 0, 0, 0.2) 50%,
+                rgba(0, 0, 0, 0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.3;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
         }
 
-        /* --- Animations --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        @keyframes fadeOut {
-            to { opacity: 0; transform: translateY(20px); }
-        }
-        
-        @keyframes subtle-pan {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* NEW: Keyframes for the hero background animation */
-        @keyframes gradient-flow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            transform: translateY(30px);
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- Header --- */
+        /* Header */
         header {
-            position: fixed;
+            text-align: center;
+            padding: 80px 0 60px;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 40px;
+            position: relative;
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.05), rgba(188, 140, 255, 0.05));
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 20%;
+            width: 60%;
+            height: 2px;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 15px var(--glow-cyan);
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .intro-text {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: var(--text-main);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
             top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(13, 17, 23, 0.98);
             backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-1);
-            z-index: 1000;
-            transition: background-color 0.3s ease;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary-color);
+            z-index: 100;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
 
         .nav-links {
             display: flex;
-            gap: 36px;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
+            color: var(--text-muted);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            padding: 8px 15px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
             position: relative;
-            padding: 8px 0;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background: var(--accent-color);
-            border-radius: 2px;
-            transition: width 0.3s ease;
         }
 
         .nav-links a:hover, .nav-links a.active {
-            color: var(--primary-color);
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 8px var(--glow-cyan);
+            background: rgba(88, 166, 255, 0.05);
         }
-        
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
-        }
-        
-        .menu-toggle { display: none; cursor: pointer; }
 
-        /* --- Hero Section --- */
-        #home {
-            padding-top: 70px;
-            text-align: left;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
+        /* Section Dividers */
+        .major-section {
+            margin: 80px 0;
+        }
+
+        .section-divider {
+            text-align: center;
+            margin: 100px 0 60px;
             position: relative;
-            overflow: hidden;
-            /* NEW: Animated Gradient Background */
-            background: linear-gradient(135deg, #00232E, #00384D, #005A78, #2E869B);
-            background-size: 400% 400%;
-            animation: gradient-flow 20s ease infinite;
         }
 
-        .hero-content {
+        .section-divider h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            display: inline-block;
+            padding: 0 30px;
+            background: var(--bg-color);
+            position: relative;
             z-index: 2;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+            z-index: 1;
+        }
+
+        /* Session Cards */
+        .session-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            margin-bottom: 60px;
+            padding: 0;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
         }
-        
-        .hero-content .name-header {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+
+        .session-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-color: var(--accent-cyan);
+        }
+
+        .session-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid var(--accent-cyan);
+            border-left: 2px solid var(--accent-cyan);
+        }
+
+        .session-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            border-bottom: 2px solid var(--accent-cyan);
+            border-right: 2px solid var(--accent-cyan);
+        }
+
+        .card-header {
+            padding: 25px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(22, 27, 34, 0.9);
+        }
+
+        .session-number {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--accent-purple);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            display: block;
             margin-bottom: 8px;
-            color: var(--surface-color); /* UPDATED for contrast */
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        .name-header .letter {
-            display: inline-block;
-            transition: transform 0.3s ease, color 0.3s ease, font-family 0.2s ease-out;
-        }
-        
-        .name-header:hover .letter {
-            transform: translateY(-10px) rotate(-5deg);
-            color: var(--bg-color); /* UPDATED for contrast */
-        }
-        .name-header .letter:hover {
-            transform: translateY(-15px) rotate(5deg) scale(1.1);
-            color: var(--accent-color) !important;
         }
 
-        .hero-content .name-subheader {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: rgba(245, 247, 250, 0.8); /* UPDATED for contrast */
-            margin-bottom: 24px;
-            animation: fadeInUp 0.8s ease-out 0.2s forwards;
-            opacity: 0;
+        .card-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-main);
+            font-size: 1.6rem;
+            margin-bottom: 8px;
         }
 
-        .hero-content .subtitle {
-            font-size: 1.1rem;
-            max-width: 650px;
-            margin-bottom: 32px;
-            color: rgba(245, 247, 250, 0.9); /* UPDATED for contrast */
-            animation: fadeInUp 0.8s ease-out 0.4s forwards;
-            opacity: 0;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: var(--accent-color); /* UPDATED for contrast */
-            color: var(--primary-color);
-            padding: 14px 32px;
-            border-radius: 50px;
-            text-decoration: none;
+        .sub-header {
+            font-size: 1.05rem;
+            color: var(--accent-green);
             font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            box-shadow: var(--shadow-2);
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.8s ease-out 0.6s forwards;
-            opacity: 0;
+            margin-bottom: 12px;
         }
 
-        .cta-button:hover {
-            background: var(--surface-color);
-            color: var(--primary-color);
-            box-shadow: 0 8px 20px rgba(70, 177, 201, 0.2);
-            transform: translateY(-4px) scale(1.02);
+        .speakers {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
-        
-        .hero-shape {
-            position: absolute;
-            bottom: -50px;
-            right: -50px;
-            width: 500px;
-            height: 500px;
-            background: var(--accent-color); /* UPDATED */
-            border-radius: 45% 55% 70% 30% / 30% 50% 50% 70%;
-            animation: morph 8s ease-in-out infinite both alternate;
-            opacity: 0.15; /* UPDATED */
-            z-index: 1;
+
+        .card-image {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid var(--border-color);
+            display: block;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+            max-height: 450px;
+            object-fit: cover;
+            object-position: center;
         }
-        
-        .spotlight {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(245, 247, 250, 0.1), transparent 60%);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            transition: opacity 0.4s ease, transform 0.05s linear;
-            opacity: 0;
-        }
-        #home:hover .spotlight {
+
+        .session-card:hover .card-image {
             opacity: 1;
         }
 
-        @keyframes morph {
-            0% { border-radius: 45% 55% 70% 30% / 30% 50% 50% 70%; }
-            100% { border-radius: 30% 70% 30% 70% / 70% 30% 70% 30%; transform: rotate(10deg); }
+        .card-body {
+            padding: 35px;
         }
 
-        /* --- Section Styling --- */
-        .section {
-            padding: 100px 0;
-            position: relative;
+        .card-body h3 {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--accent-yellow);
+            font-size: 1.15rem;
+            margin: 30px 0 12px 0;
+            text-transform: uppercase;
+            border-left: 3px solid var(--accent-yellow);
+            padding-left: 12px;
         }
 
-        .section-title {
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.8rem;
-            margin-bottom: 12px;
-            position: relative;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-light);
-            margin-bottom: 64px;
-            font-size: 1.1rem;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 5px;
-            background: var(--accent-color);
-            border-radius: 2px;
+        .card-body h3:first-of-type {
+            margin-top: 0;
         }
 
-        /* --- PORTFOLIO CAROUSEL --- */
-        #portfolio {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+        .card-body p {
+            margin-bottom: 15px;
+            color: #b0b8c4;
+            line-height: 1.8;
         }
 
-        .carousel-container {
-            width: 100%;
-            height: 500px;
-            position: relative;
-            perspective: 1200px;
-            margin-top: 40px;
-        }
-
-        .carousel {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            transform-style: preserve-3d;
-            transition: transform 0.2s linear;
-        }
-
-        .portfolio-card {
-            position: absolute;
-            width: 320px;
-            height: 450px;
-            left: 50%;
-            top: 50%;
-            margin-left: -160px;
-            margin-top: -225px;
-            cursor: pointer;
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-
-        .portfolio-card:hover {
-            transform: var(--card-transform) scale(1.05) !important;
-        }
-
-        .card-inner {
-            width: 100%;
-            height: 100%;
-            background: var(--surface-color);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-2);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .portfolio-image { width: 100%; height: 220px; overflow: hidden; }
-        .portfolio-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-        .portfolio-card:hover .portfolio-image img { transform: scale(1.1); }
-        .portfolio-content { padding: 24px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
-        .portfolio-content h3 { margin: 0 0 8px; font-family: 'Poppins', sans-serif; color: var(--primary-color); }
-        .portfolio-content p { margin: 0; color: var(--text-light); font-size: 0.95rem; }
-
-
-        /* --- Accomplishments Section --- */
-        #accomplishments {
-            background: var(--surface-color);
-        }
+        /* Accomplishments Grid */
         .accomplishments-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 48px;
+            gap: 40px;
+            margin: 40px 0;
         }
+
+        .accomplishments-col {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 4px;
+        }
+
         .accomplishments-col h3 {
-            font-family: 'Poppins', sans-serif;
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 8px;
-            display: inline-block;
-            margin-bottom: 24px;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-green);
+            border-bottom: 3px solid var(--accent-green);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
         }
-        .accomplishments-col ul { list-style: none; padding: 0; margin: 0; }
-        .accomplishments-col li { margin-bottom: 12px; padding-left: 28px; position: relative; }
+
+        .accomplishments-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .accomplishments-col li {
+            margin-bottom: 12px;
+            padding-left: 28px;
+            position: relative;
+            color: var(--text-main);
+        }
+
         .accomplishments-col li::before {
             content: '✓';
-            color: var(--accent-color);
+            color: var(--accent-green);
             position: absolute;
             left: 0;
             font-weight: bold;
         }
 
-        /* --- Contact Section --- */
-        .contact-content { text-align: center; }
-        .contact-info p { max-width: 600px; margin: 0 auto 32px; }
-        
-        .contact-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
-        
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            padding: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
         .contact-link-item {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: var(--surface-color);
+            background: transparent;
             padding: 12px 24px;
-            border-radius: 50px;
-            box-shadow: var(--shadow-1);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 4px;
             text-decoration: none;
-            color: var(--text-dark);
+            color: var(--accent-cyan);
             font-weight: 500;
             transition: all 0.3s ease;
+            font-family: 'Share Tech Mono', monospace;
         }
-        
+
         .contact-link-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-2);
-            color: var(--primary-color);
-        }
-        
-        .contact-link-item i { color: var(--primary-color); }
-        
-        .gemini-button {
-            background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
-            color: white;
-        }
-        .gemini-button:hover {
-            color: white;
+            background: rgba(88, 166, 255, 0.1);
+            box-shadow: 0 0 15px var(--glow-cyan);
+            transform: translateY(-3px);
         }
 
-        /* --- Footer --- */
-        footer { text-align: center; padding: 32px 0; background: var(--primary-color); color: white; font-size: 0.9rem; }
-        
-        /* --- Project Modal --- */
-        .project-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; align-items: center; justify-content: center;
-            z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .project-modal.open { opacity: 1; visibility: visible; }
-        
-        .modal-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(0, 35, 46, 0.8), rgba(0, 90, 120, 0.8));
-            background-size: 400% 400%;
-            animation: subtle-pan 15s ease infinite;
-            backdrop-filter: blur(5px);
+        .contact-link-item i {
+            color: var(--accent-cyan);
         }
 
-        .modal-content {
-            background: var(--surface-color); padding: 32px; border-radius: var(--radius);
-            max-width: 750px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative;
-            transform: scale(0.95) translateY(10px); transition: transform 0.3s ease;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-        }
-        .project-modal.open .modal-content { transform: scale(1) translateY(0); }
-        .modal-close { position: absolute; top: 16px; right: 16px; cursor: pointer; color: var(--text-light); transition: all 0.3s ease; z-index: 10;}
-        .modal-close:hover { color: var(--text-dark); transform: rotate(90deg); }
-        .modal-body h2 { font-family: 'Poppins', sans-serif; margin: 0 0 24px; color: var(--primary-color); }
-        .modal-body img { max-width: 100%; border-radius: var(--radius); margin: 16px 0; box-shadow: var(--shadow-1); }
-        .modal-body h3 {
-            font-family: 'Poppins', sans-serif; font-size: 1.2rem; margin: 32px 0 12px;
-            color: var(--primary-color); display: flex; align-items: center; gap: 10px;
-        }
-
-        /* --- Gemini Chat Modal --- */
-        .gemini-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center;
-            z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .gemini-modal.open { opacity: 1; visibility: visible; }
-
-        .gemini-modal-content {
-            background: var(--surface-color); border-radius: var(--radius);
-            width: 90%; max-width: 600px; height: 80vh; max-height: 700px;
-            display: flex; flex-direction: column;
-            box-shadow: var(--shadow-2);
-            transform: scale(0.95) translateY(10px); transition: transform 0.3s ease;
-        }
-        .gemini-modal.open .gemini-modal-content { transform: scale(1) translateY(0); }
-        
-        .gemini-modal-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 16px 24px; border-bottom: 1px solid var(--bg-color);
-        }
-        .gemini-modal-header h2 { font-family: 'Poppins', sans-serif; margin: 0; font-size: 1.2rem; color: var(--primary-color); }
-        .gemini-modal-close { cursor: pointer; color: var(--text-light); transition: all 0.3s ease; }
-        .gemini-modal-close:hover { color: var(--text-dark); transform: rotate(90deg); }
-
-        .gemini-modal-body { flex-grow: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
-        .chat-message { display: flex; max-width: 85%; }
-        .chat-message .icon { width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: var(--bg-color); display: flex; align-items: center; justify-content: center; margin-right: 12px; }
-        .chat-message p { margin: 0; padding: 12px 16px; border-radius: var(--radius); line-height: 1.6; }
-
-        .user-message { align-self: flex-end; }
-        .user-message .icon { background: var(--secondary-color); color: white; }
-        .user-message p { background: var(--secondary-color); color: white; border-bottom-right-radius: 2px;}
-
-        .ai-message p { background: var(--bg-color); color: var(--text-dark); border-bottom-left-radius: 2px;}
-        .ai-message.loading p { display: flex; gap: 5px; align-items: center; }
-        .dot-flashing { position: relative; width: 5px; height: 5px; border-radius: 50%; background-color: var(--text-light); color: var(--text-light); animation: dotFlashing 1s infinite linear alternate; animation-delay: .5s; }
-        .dot-flashing::before, .dot-flashing::after { content: ''; display: inline-block; position: absolute; top: 0; }
-        .dot-flashing::before { left: -10px; width: 5px; height: 5px; border-radius: 50%; background-color: var(--text-light); color: var(--text-light); animation: dotFlashing 1s infinite alternate; animation-delay: 0s; }
-        .dot-flashing::after { left: 10px; width: 5px; height: 5px; border-radius: 50%; background-color: var(--text-light); color: var(--text-light); animation: dotFlashing 1s infinite alternate; animation-delay: 1s; }
-        @keyframes dotFlashing { 0% { background-color: var(--text-light); } 50%, 100% { background-color: rgba(65, 90, 119, 0.3); } }
-
-        .gemini-modal-footer { padding: 16px 24px; border-top: 1px solid var(--bg-color); display: flex; gap: 12px; }
-        #chatInput { flex-grow: 1; border: 1px solid #ccc; border-radius: 50px; padding: 12px 18px; font-size: 1rem; font-family: 'Roboto', sans-serif; transition: border-color 0.3s ease; }
-        #chatInput:focus { outline: none; border-color: var(--accent-color); }
-        #sendButton { background: var(--secondary-color); border: none; color: white; padding: 0 16px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.3s ease; }
-        #sendButton:hover { background: var(--primary-color); }
-        
-        /* --- GAMIFICATION ELEMENTS --- */
-        #achievement-container { position: fixed; bottom: 20px; left: 20px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; }
-        .achievement-toast { background: var(--surface-color); color: var(--text-dark); padding: 16px 24px; border-radius: var(--radius); box-shadow: var(--shadow-2); display: flex; align-items: center; gap: 12px; animation: slideInRight 0.5s ease-out, fadeOut 0.5s ease-in 4.5s forwards; border-left: 5px solid var(--accent-color); }
-        .achievement-toast i { color: var(--accent-color); }
-        .achievement-toast h4 { margin: 0 0 4px; font-family: 'Poppins', sans-serif; }
-        .achievement-toast p { margin: 0; font-size: 0.9rem; color: var(--text-light); }
-        
-        .konami-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 4000; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
-        .konami-modal.open { opacity: 1; visibility: visible; }
-        .konami-content { background: #111; color: #0f0; font-family: 'Press Start 2P', cursive; text-align: center; padding: 40px; border: 4px solid #0f0; box-shadow: 0 0 20px #0f0; animation: fadeInUp 0.5s ease; }
-        .konami-content h2 { margin: 0 0 16px; font-size: 1.5rem; text-transform: uppercase; }
-        .konami-content p { margin: 0 0 24px; font-size: 0.9rem; line-height: 1.8; }
-        #konami-close { background: #0f0; color: #111; border: none; padding: 12px 24px; font-family: 'Press Start 2P', cursive; cursor: pointer; transition: all 0.2s ease; }
-        #konami-close:hover { background: #fff; color: #111; }
-
-        .scanline-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2500; background: repeating-linear-gradient(rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,0.3) 3px); opacity: 0; transition: opacity 0.4s ease; }
-
-        body.retro-mode { font-family: 'Press Start 2P', cursive; image-rendering: pixelated; }
-        body.retro-mode .scanline-overlay { opacity: 0.1; }
-        body.retro-mode .logo, body.retro-mode h1, body.retro-mode h2, body.retro-mode h3, body.retro-mode h4, body.retro-mode a, body.retro-mode p, body.retro-mode li, body.retro-mode span, body.retro-mode button { font-family: 'Press Start 2P', cursive !important; letter-spacing: 1px; }
-        body.retro-mode .hero-content .name-header { font-size: clamp(1.5rem, 4vw, 2.5rem); }
-        body.retro-mode .section-title { font-size: 2rem; }
-        body.retro-mode * { border-radius: 0 !important; }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 992px) {
-            .carousel-container {
-                perspective: none;
-                height: auto;
-            }
-            .carousel {
-                position: relative;
-                transform-style: flat;
-            }
-            .portfolio-card {
-                position: relative;
-                transform: none !important;
-                margin: 16px auto;
-                left: auto;
-                top: auto;
-            }
+        /* Buttons */
+        .retro-btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: transparent;
+            border: 2px solid var(--accent-green);
+            color: var(--accent-green);
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            margin: 10px;
+            text-transform: uppercase;
         }
 
+        .retro-btn:hover {
+            background: rgba(63, 185, 80, 0.1);
+            box-shadow: 0 0 15px rgba(63, 185, 80, 0.3);
+            transform: translateY(-3px);
+        }
 
+        /* Archive Section */
+        .archive-section {
+            margin: 80px 0;
+            text-align: center;
+        }
+
+        .archive-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-purple);
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            margin-top: 100px;
+            border-top: 2px solid var(--border-color);
+            color: var(--text-muted);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                position: absolute; top: 70px; left: 0; width: 100%;
-                background: var(--surface-color); flex-direction: column; align-items: center;
-                gap: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out;
-            }
-            .nav-links.open { max-height: 300px; padding: 16px 0; box-shadow: var(--shadow-1); }
-            .nav-links a { padding: 16px 0; width: 100%; text-align: center; }
-            .nav-links a::after { display: none; }
-            .menu-toggle { display: block; }
-            .hero-shape { width: 300px; height: 300px; }
-            .accomplishments-grid { grid-template-columns: 1fr; }
-            .section { padding: 80px 0; }
-            #achievement-container { left: 50%; transform: translateX(-50%); width: 90%; }
+            h1 { font-size: 2rem; }
+            .section-divider h2 { font-size: 1.8rem; }
+            .accomplishments-grid { grid-template-columns: 1fr; gap: 30px; }
+            .nav-links { gap: 10px; }
+            .nav-links a { font-size: 0.8rem; padding: 6px 12px; }
+            .card-body { padding: 25px; }
+            .contact-links { flex-direction: column; align-items: center; }
         }
-
     </style>
 </head>
 <body>
 
+    <div class="scanlines"></div>
+
     <header>
-        <div class="container nav-container">
-            <div class="logo">Jureen Sese</div>
-            <nav class="nav-links">
-                <a href="#home" class="active">Home</a>
-                <a href="#portfolio">Portfolio</a>
-                <a href="#accomplishments">Accomplishments</a>
-                <a href="#contact">Contact</a>
-            </nav>
-            <div class="menu-toggle">
-                <i data-feather="menu"></i>
+        <div class="container">
+            <h1>Jureen Dominique E. Sese</h1>
+            <div class="subtitle">BSEE-4A | Batch 2026 | Bicol University</div>
+            <div class="intro-text">
+                <strong>Hello! I'm juju!</strong><br>
+                Versatile Electrical Engineering student with strong academics and experience in technical, creative, and leadership roles. Skilled in CAD, PLC Simulation, and microcontroller projects. Recognized student leader and graphic designer active in major college and departmental organizations.
             </div>
         </div>
     </header>
 
-    <main>
-        <section id="home" data-achievement="Explorer">
-            <div class="spotlight"></div>
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="name-header">Jureen Dominique E. Sese</h1>
-                    <p class="name-subheader">BSEE-4A, Batch 2026</p>
-                    <p class="subtitle"><strong>Hello! I'm juju!</strong><br>
-                        Versatile Electrical Engineering student with strong academics and experience in technical, creative, and leadership roles. Skilled in CAD, PLC Simulation, and microcontroller projects. Recognized student leader and graphic designer active in major college and departmental organizations.
-                    </p>
-                    <a href="#portfolio" class="cta-button">View My Work</a>
-                </div>
-            </div>
-            <div class="hero-shape"></div>
-        </section>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#profdev">ProfDev Series</a></li>
+            <li><a href="#technopotential">Technopotential Hub</a></li>
+            <li><a href="#accomplishments">Accomplishments</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-        <section id="portfolio" class="section" data-achievement="Curator">
-            <div class="container">
-                <h2 class="section-title fade-in">Portfolio</h2>
-                <p class="section-subtitle fade-in">A collection of my recent work. Move your mouse to spin the carousel!</p>
-            </div>
-            <div class="carousel-container">
-                <div class="carousel">
-                    <div class="portfolio-card fade-in" data-modal-id="modal1">
-                         <div class="card-inner">
-                            <div class="portfolio-image"> <img src="images/p-1.jpg" alt="Thermal Camera Programme"> </div>
-                            <div class="portfolio-content"> <h3>Thermal Camera for Inspection</h3> <p>Session 1: A virtual lecture on using thermal cameras.</p> </div>
-                        </div>
-                    </div>
-                    <div class="portfolio-card fade-in" data-modal-id="modal2">
-                         <div class="card-inner">
-                            <div class="portfolio-image"> <img src="images/p-2.jpg" alt="Solar Design Programme"> </div>
-                            <div class="portfolio-content"> <h3>Basic Solar Design & Installation</h3> <p>Session 2: A webinar on solar power system design.</p> </div>
-                        </div>
-                    </div>
-                    <div class="portfolio-card fade-in" data-modal-id="modal3">
-                         <div class="card-inner">
-                            <div class="portfolio-image"> <img src="images/p-3.jpg" alt="Technopreneurship Programme"> </div>
-                            <div class="portfolio-content"> <h3>Technopreneurship</h3> <p>Session 3: Turning technology into business opportunities.</p> </div>
-                        </div>
-                    </div>
-                    <div class="portfolio-card fade-in" data-modal-id="modal4">
-                         <div class="card-inner">
-                            <div class="portfolio-image"> <img src="https://placehold.co/600x400/4A5C6A/FFFFFF?text=GMM+Workshops" alt="GMM Workshops Placeholder"> </div>
-                            <div class="portfolio-content"> <h3>GMM & Technical Workshops</h3> <p>Session 4: Hosting a GMM with four professional workshops.</p> </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="accomplishments" class="section" data-achievement="High Achiever">
-            <div class="container">
-                <h2 class="section-title fade-in">Accomplishments</h2>
-                <div class="accomplishments-grid fade-in">
-                    <div class="accomplishments-col">
-                        <h3>Organizations Handled</h3>
-                        <ul>
-                            <li>President, BUCENG-BUSC</li>
-                            <li>Technical Vice President, IIEE-BUSC</li>
-                            <li>Vice President, BUCENG-CSC 2024-2025</li>
-                            <li>Majority Floor Leader, BU Legislative Council 2023-2024</li>
-                            <li>President, Masbate City Division Federated Supreme Student Government (2021-2022)</li>
-                            <li>Chairperson, Student Coordinating Council - Masbate National Comprehensive High School (2021-2022)</li>
-                            <li>Member, Local Youth Development Council (LYDC) Masbate City (2022)</li>
-                        </ul>
-                    </div>
-                    <div class="accomplishments-col">
-                        <h3>Notable Involvements</h3>
-                        <ul>
-                            <li>Gerry Roxas Leadership Awardee, 2022</li>
-                            <li>Philippine Startup Challenge Regional Champion, Bicol Region (2022)</li>
-                            <li>2nd Runner Up, Regional Science and Technology Fair (RSTF)</li>
-                            <li>Event Head, Lead Initiatives 2023</li>
-                            <li>Host, Nexus Futura: Engineering Week 2024</li>
-                            <li>Creative Director, EE JAM 2023 Event Head, EE Art Jam</li>
-                            <li>Host, TechHarbor 2024</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="container">
 
-        <section id="contact" class="section" data-achievement="Networker">
-             <div class="container">
-                <h2 class="section-title fade-in">Get In Touch</h2>
-                <div class="contact-content fade-in">
-                    <div class="contact-info">
-                        <p>Feel free to reach out! I'm always open to discussing new projects, creative ideas, or opportunities to collaborate.</p>
-                        <div class="contact-links">
-                             <a href="mailto:jdes2022-6474-33556@bicol-u.edu.ph" class="contact-link-item">
-                                 <i data-feather="mail"></i>
-                                 <span>jdes2022-6474-33556@bicol-u.edu.ph</span>
-                             </a>
-                            <a href="https://www.facebook.com/jureen.s" target="_blank" class="contact-link-item">
-                                 <i data-feather="facebook"></i>
-                                 <span>Facebook Profile</span>
-                             </a>
-                            <a href="#" id="gemini-chat-button" class="contact-link-item gemini-button">
-                                 <i data-feather="message-circle"></i>
-                                 <span>✨ Ask About Me</span>
-                             </a>
-                        </div>
-                    </div>
-                </div>
+        <!-- ===== PROFDEV SERIES SECTION ===== -->
+        <div id="profdev" class="major-section">
+            <div class="section-divider">
+                <h2>ProfDev Series</h2>
             </div>
-        </section>
-    </main>
-    
-    <footer> <div class="container"> © 2025 Jureen Dominique E. Sese. All Rights Reserved. </div> </footer>
 
-    <div id="modals-container">
-         <div id="modal1" class="project-modal">
-            <div class="modal-bg"></div>
-            <div class="modal-content">
-                <i class="modal-close" data-feather="x"></i>
-                <div class="modal-body">
+            <article class="session-card">
+                <div class="card-header">
+                    <span class="session-number">Session 01</span>
                     <h2>Use of Thermal Camera for Electromechanical Inspection</h2>
-                    <img src="images/docu-session1.png" alt="Session 1 Documentation">
-                    <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
-                    <p>This seminar, a collaboration between the Bicol University Electrical Engineering Department and the Institute of Integrated Electrical Engineers - UAE Chapter, was a deep dive into the practical applications of thermal imaging. As part of the 'Charting the Frontiers of Emerging Technologies in Electrical Engineering' series, it promised to be an insightful session, and it delivered.</p>
-                    <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
-                    <p>Engr. Borlongan's presentation was a masterclass in clarity. He didn't just explain the 'what' of thermal imaging but the 'why' and 'how.' We learned to interpret thermal signatures, identify potential failure points in electrical systems, and understand the nuances of predictive maintenance. The case studies were particularly illuminating, showing how this technology saves companies millions in downtime and repairs.</p>
-                    <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
-                    <p>My key takeaway was the proactive power of thermal imaging. It's not just about fixing problems; it's about preventing them. This technology allows for a shift from reactive to predictive maintenance, a concept that is revolutionizing the industry. I am now inspired to explore this technology further and see how I can incorporate it into my future projects.</p>
-                    <a href="#" class="cta-button" data-modal-button="modal-pdf" style="margin-top: 20px;">View Certificate</a>
+                    <div class="speakers">Speaker: Engr. Borlongan | Collaboration: BU EE Dept & IIEE-UAE Chapter</div>
                 </div>
-            </div>
-        </div>
-        <div id="modal2" class="project-modal">
-            <div class="modal-bg"></div>
-            <div class="modal-content">
-                <i class="modal-close" data-feather="x"></i>
-                <div class="modal-body">
+                <img src="images/docu-session1.png" alt="Session 1 Documentation" class="card-image">
+                <div class="card-body">
+                    <h3>Introduction</h3>
+                    <p>This seminar, a collaboration between the Bicol University Electrical Engineering Department and the Institute of Integrated Electrical Engineers - UAE Chapter, was a deep dive into the practical applications of thermal imaging. As part of the 'Charting the Frontiers of Emerging Technologies in Electrical Engineering' series, it promised to be an insightful session, and it delivered.</p>
+
+                    <h3>Summary</h3>
+                    <p>Engr. Borlongan's presentation was a masterclass in clarity. He didn't just explain the 'what' of thermal imaging but the 'why' and 'how.' We learned to interpret thermal signatures, identify potential failure points in electrical systems, and understand the nuances of predictive maintenance. The case studies were particularly illuminating, showing how this technology saves companies millions in downtime and repairs.</p>
+
+                    <h3>Learnings</h3>
+                    <p>My key takeaway was the proactive power of thermal imaging. It's not just about fixing problems; it's about preventing them. This technology allows for a shift from reactive to predictive maintenance, a concept that is revolutionizing the industry. I am now inspired to explore this technology further and see how I can incorporate it into my future projects.</p>
+                </div>
+            </article>
+
+            <article class="session-card">
+                <div class="card-header">
+                    <span class="session-number">Session 02</span>
                     <h2>Basic Solar Design and Installation</h2>
-                    <img src="images/docu-session2.jpeg" alt="Session 2 Documentation">
-                    <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction</h3>
+                    <div class="speakers">Speaker: Engr. Constantine Reymundo</div>
+                </div>
+                <img src="images/docu-session2.jpeg" alt="Session 2 Documentation" class="card-image">
+                <div class="card-body">
+                    <h3>Introduction</h3>
                     <p>Despite a rocky start with an internet outage, I was determined to catch as much of Engr. Constantine Reymundo's seminar on solar design as possible. The energy in the virtual room was palpable, and I was eager to learn from an expert in the field.</p>
-                    <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary</h3>
+
+                    <h3>Summary</h3>
                     <p>The webinar was a comprehensive overview of the solar landscape. We covered everything from the physics of photovoltaic cells to the economics of solar installations. The discussion on government incentives and the future of renewable energy in the Philippines was particularly insightful, highlighting the immense potential for growth in this sector.</p>
-                    <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
+
+                    <h3>Learnings</h3>
                     <p>I now have a much clearer understanding of the complexities of solar design. It's a field that requires a blend of technical expertise, financial acumen, and a deep understanding of environmental factors. The seminar has given me the confidence to explore this field further and perhaps even consider a career in renewable energy.</p>
                 </div>
-            </div>
-        </div>
-        <div id="modal3" class="project-modal">
-            <div class="modal-bg"></div>
-            <div class="modal-content">
-                <i class="modal-close" data-feather="x"></i>
-                <div class="modal-body">
+            </article>
+
+            <article class="session-card">
+                <div class="card-header">
+                    <span class="session-number">Session 03</span>
                     <h2>Technopreneurship: Turning Technology into Business</h2>
-                    <img src="images/p-3.jpg" alt="Session 3 Programme">
-                    <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
+                    <div class="speakers">Multiple Speakers | Event Management Experience</div>
+                </div>
+                <img src="images/p-3.jpg" alt="Session 3 Programme" class="card-image">
+                <div class="card-body">
+                    <h3>Introduction & Role</h3>
                     <p>This webinar was a project that I was deeply invested in. While my initial role was on the technical team, a scheduling conflict led me to the documentation team. This unexpected change turned out to be a blessing in disguise, as it gave me a unique perspective on the event and allowed me to work closely with the content.</p>
-                    <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Experience</h3>
+
+                    <h3>Summary of Experience</h3>
                     <p>The last-minute change in the program was a test of our team's adaptability. I was proud of how we all pulled together to ensure a seamless experience for our attendees. Reading the certificate citations was a small but important role, and I was honored to be a part of recognizing the hard work of our speakers and participants.</p>
-                    <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings</h3>
+
+                    <h3>Learnings</h3>
                     <p>This experience was a crash course in event management. I learned the importance of clear communication, contingency planning, and the ability to think on your feet. But the biggest lesson was in the power of teamwork. When a group of dedicated individuals comes together with a shared vision, anything is possible.</p>
                 </div>
-            </div>
-        </div>
-        <div id="modal4" class="project-modal">
-            <div class="modal-bg"></div>
-            <div class="modal-content">
-                <i class="modal-close" data-feather="x"></i>
-                <div class="modal-body">
+            </article>
+
+            <article class="session-card">
+                <div class="card-header">
+                    <span class="session-number">Session 04</span>
                     <h2>GMM Meeting & Technical Workshops</h2>
-                    <img src="https://placehold.co/600x300/4A5C6A/FFFFFF?text=Documentation+4" alt="Placeholder">
-                    <h3><i data-feather="align-left" style="width:20px; height:20px;"></i>Introduction & Role</h3>
+                    <div class="speakers">Four Separate Professional Technical Workshops | Hosting Role</div>
+                </div>
+                <div class="card-body">
+                    <h3>Introduction & Role</h3>
                     <p>I was not able to attend as I was the host during the GMM Meeting held in the Gymnasium with Four(4) separate professional technical workshops. However, I gained valuable insights into the topics covered.</p>
-                    <h3><i data-feather="file-text" style="width:20px; height:20px;"></i>Summary of Gained Knowledge</h3>
+
+                    <h3>Summary of Gained Knowledge</h3>
                     <p>I learned about the latest advancements in solar technology, including various types of solar panels and their efficiency ratings. I also gained a deeper understanding of the fundamental principles of photovoltaic systems and their components.</p>
-                    <h3><i data-feather="star" style="width:20px; height:20px;"></i>Learnings & Hosting Experience</h3>
+
+                    <h3>Learnings & Hosting Experience</h3>
                     <p>I learned about the standards and best practices in the electrical engineering field. The event showcased the dedication of the IIEE in organizing high-quality technical workshops. It was a fun and engaging day of hosting, working alongside my partner and the diligent working committee.</p>
                 </div>
-            </div>
+            </article>
         </div>
-        <div id="modal-pdf" class="project-modal">
-            <div class="modal-bg"></div>
-            <div class="modal-content" style="max-width: 850px; height: 90vh;">
-                <i class="modal-close" data-feather="x"></i>
-                <div class="modal-body" style="height: 100%; padding-top: 40px;">
-                    <h2 style="position: absolute; top: 32px;">Session 1 Certificate</h2>
-                    <iframe src="pdfs/IIEE-UAE_Webinar_Thermal.pdf" width="100%" height="95%" style="border: none;"></iframe>
+
+        <!-- ===== TECHNOPOTENTIAL HUB SECTION ===== -->
+        <div id="technopotential" class="major-section">
+            <div class="section-divider">
+                <h2>Technopotential Hub</h2>
+            </div>
+
+            <article class="session-card">
+                <div class="card-header">
+                    <span class="session-number">Part 1</span>
+                    <h2>Ideas in Motion</h2>
+                    <div class="sub-header">Engineering Thinking Beyond the Schematic</div>
+                    <div class="speakers">Based on "The Pitcher's Primer" | Speakers: Ms. Chriz Luminario & Ms. Almira Shane A. Manlapaz</div>
                 </div>
-            </div>
-        </div>
-    </div>
+                <img src="images/TECHNO1-1.jpg" alt="The Pitcher's Primer" class="card-image">
+                <div class="card-body">
+                    <h3>Introduction</h3>
+                    <p>Our batch gathered at Bulwagang Bueño last November 6, 2025 for an event designed to stretch our understanding of how technical ideas travel into the real world. Organized by the groups of Ms. Llenaresas and Ms. Marmol, the session called "The Pitcher's Primer" shifted our attention from pure engineering work toward how concepts evolve into ventures. Two speakers led the discussion: Ms. Chriz Luminario and Ms. Almira Shane A. Manlapaz.</p>
 
-    <div id="geminiChatModal" class="gemini-modal">
-        <div class="gemini-modal-content">
-            <div class="gemini-modal-header">
-                <h2>AI Assistant</h2>
-                <i class="gemini-modal-close" data-feather="x"></i>
-            </div>
-            <div class="gemini-modal-body" id="chatBody">
-                 <div class="chat-message ai-message">
-                    <div class="icon"><i data-feather="cpu"></i></div>
-                    <p>Hello! I'm Jureen's AI assistant. Feel free to ask me any questions about her skills, projects, or experience.</p>
+                    <h3>Summary</h3>
+                    <p>Ms. Luminario, founder of Lumiere Studio, began by tracing the evolution of modern marketing. Instead of print and television, most persuasion now happens through screens people carry everywhere. She explained how digital tools determine visibility and how brands use strategies involving algorithms, social media, personality and humor to stand out. For her, a product's character always begins with its intention and not merely its logo.</p>
+                    <p>Ms. Manlapaz from the DICT followed with a deeper look into support structures available to Filipino innovators. She introduced the Innovative Startup Act, a national law that backs early-stage ideas through funding and mentorship. By citing familiar companies such as GCash and Angkas, she illustrated how local startups grow when supported by clear programs. She also described the ideal team setup for early ventures: the Hustler who handles the business side, the Hacker who manages the technical core and the Hipster who shapes user experience.</p>
+
+                    <h3>Learnings and Reflection</h3>
+                    <p>This session revealed how even well-engineered solutions need visibility and communication to survive. Engineers often focus on precision and function, but technopreneurs must also learn how to attract attention and earn trust. Learning that the government has concrete support systems for innovation made the pathway from classroom concepts to viable startups feel less abstract and more attainable.</p>
                 </div>
+            </article>
+
+            <article class="session-card">
+                <div class="card-header">
+                    <span class="session-number">Part 2</span>
+                    <h2>Blueprints for Breakthroughs</h2>
+                    <div class="sub-header">Making Technology Market-Ready</div>
+                    <div class="speakers">Based on "Technopreneur's Toolkit" | Speakers: Engr. Harvey S. Javier & Engr. Noli M. Esparas</div>
+                </div>
+                <img src="images/TECHNO1-2.jpg" alt="Technopreneur's Toolkit" class="card-image">
+                <div class="card-body">
+                    <h3>Introduction</h3>
+                    <p>The seminar series continued on November 8, 2025 with a session that bridged real-world technology development and national innovation programs. This time, the perspectives came from both business and the public sector. Engr. Harvey Javier represented the private industry, while Engr. Noli Esparas of the DOST represented national scientific initiatives.</p>
+
+                    <h3>Summary</h3>
+                    <p>Engr. Javier opened with a discussion titled "Innovating the Future," where he described how contemporary digital platforms combine various technologies. Using examples from SparkPoint and HSJ Technologies, he illustrated how blockchain improves transparency and how artificial intelligence enables automation and pattern recognition. His main point was clear: technology only lasts if people actually benefit from it.</p>
+                    <p>Engr. Esparas then widened the lens by explaining how the DOST functions as an engine that transforms scientific knowledge into solutions communities can use. He presented their programs in three groups: direct support for business development, assistance for innovation hubs and tech commercialization, and livelihood projects that help communities adapt scientific tools. He stressed that startups thrive when supported by a functioning ecosystem that includes policies, mentors, investors, talent and clear demand.</p>
+
+                    <h3>Learnings and Reflection</h3>
+                    <p>This session clarified that technopreneurship involves both exciting digital tools and the less glamorous but essential infrastructure behind them. Engr. Javier showcased how advanced our tools have become, but Engr. Esparas reminded us that technology must be grounded in institutions, people and societal needs. I found the view of AI as an enabler—not a replacement—particularly meaningful.</p>
+                </div>
+            </article>
+
+            <article class="session-card">
+                <div class="card-header">
+                    <span class="session-number">Part 3</span>
+                    <h2>Lighting Possibilities</h2>
+                    <div class="sub-header">Solar Energy and the Entrepreneurial Mindset</div>
+                    <div class="speakers">Based on "The Solar Sparks" | Speaker: Mr. Sony Sabdao, RME</div>
+                </div>
+                <img src="images/TECHNO2-1.jpg" alt="The Solar Sparks" class="card-image">
+                <div class="card-body">
+                    <h3>Introduction</h3>
+                    <p>On November 22, our Technopreneurship class under Engr. Olesco held the third installment of our webinar series through Zoom. Our block invited Mr. Sony Sabdao, General Manager of S-S Enterprises, to share how solar technology offers practical solutions to everyday energy problems in the Philippines.</p>
+
+                    <h3>Summary</h3>
+                    <p>Mr. Sabdao began by connecting solar science with the engineering tasks performed in the field. He explained how the photovoltaic effect converts light into electricity and how system sizes change depending on the power needs of different clients. His comparison of grid-tie, hybrid and off-grid systems made it easier to understand which setup fits specific locations and lifestyles.</p>
+                    <p>After the technical overview, he walked us through the realities of building a solar business. Proper financial calculations, accurate site assessments and complete permits form the backbone of any successful installation. He emphasized that engineers must design systems that are not only functional but also financially viable and precise in execution.</p>
+
+                    <h3>Learnings and Reflection</h3>
+                    <p>The biggest shift in perspective for me was seeing solar not as a product but as a tailored service. Engineers now study the client's habits before choosing an arrangement. In the Philippine context, solar isn't just about lowering bills; it also protects households from frequent outages. It feels encouraging to know that our training can directly address real community concerns.</p>
+                </div>
+            </article>
+
+            <article class="session-card">
+                <div class="card-header">
+                    <span class="session-number">Part 4</span>
+                    <h2>Engineering the Ledger</h2>
+                    <div class="sub-header">Why Numbers Define Innovation</div>
+                    <div class="speakers">Based on "Cashed In" | Speaker: Ms. Clarice Schofield</div>
+                </div>
+                <img src="images/TECHNO2-2.jpg" alt="Cashed In" class="card-image">
+                <div class="card-body">
+                    <h3>Introduction</h3>
+                    <p>Later that day, we attended the final webinar delivered by Ms. Clarice Schofield from Ernst and Young Global Consulting Services. Her talk, "Know Your Numbers," shifted our focus from engineering design to financial discipline.</p>
+
+                    <h3>Summary</h3>
+                    <p>Ms. Schofield began by stating that engineers contribute to decision-making in every organization. Because of that, we must understand accounting fundamentals. She simplified the core ideas. Assets refer to what the company owns. Liabilities refer to obligations. Equity represents the owner's interest. Revenue points to income earned from the business.</p>
+                    <p>She also introduced financial indicators that founders rely on. Runway measures how long funds can sustain operations. Burn Rate shows monthly spending. The Break even point marks the point where total income finally equals operating costs.</p>
+                    <p>She encouraged the use of AI tools for data cleanup and preliminary financial drafts, but she warned that these tools may produce errors, so every important figure must still be checked manually.</p>
+
+                    <h3>Learnings and Reflection</h3>
+                    <p>This session made me realize that financial literacy allows engineers to defend and communicate their ideas. A design becomes persuasive only when supported by strong numbers. Understanding how money flows inside a project gives engineers the confidence and credibility to lead larger initiatives.</p>
+                </div>
+            </article>
+
+            <article class="session-card">
+                <div class="card-header">
+                    <span class="session-number">Part5</span>
+                    <h2>Inside the Connected Home</h2>
+                    <div class="sub-header">Automation for the Modern Filipino</div>
+                    <div class="speakers">Based on "Smart Edge" | Speaker: Ms. Ayessa Nixzel Dumlao</div>
+                </div>
+                <img src="images/TECHNO3-1.jpg" alt="Smart Edge" class="card-image">
+                <div class="card-body">
+                    <h3>Introduction</h3>
+                    <p>In the afternoon, our class continued the sessions with a talk from Ms. Ayessa Nixzel Dumlao of Neovega SmartHome. Her discussion explored how automation quietly reshapes household living in the Philippines.</p>
+                    <h3>Summary</h3>
+                <p>Ms. Dumlao explained that smart homes function through connection rather than through individual devices. Lights, appliances, cameras and entertainment systems interact as one environment, controlled through a phone or voice input. She highlighted how convenience, security and energy efficiency emerge when devices work together instead of performing separately.</p>
+                <p>To demonstrate this, she showcased products used by her company. The automated curtains adjust based on time, helping control indoor temperature. The switchable smart film changes from transparent to opaque instantly, offering privacy on command. Each example showed how small but persistent inconveniences can be solved through a mix of hardware and logical programming.</p>
+
+                <h3>Learnings and Reflection</h3>
+                <p>This talk broadened my view of the electrical engineering profession. Smart homes show that our work also shapes the comfort and rhythm of daily life. The field is not limited to large-scale grids and industrial plants; it also involves personal spaces where subtle design and user experience matter. It revealed opportunities to build systems that adapt to people instead of making people adapt to systems.</p>
             </div>
-            <div class="gemini-modal-footer">
-                <input type="text" id="chatInput" placeholder="e.g., What are her leadership roles?">
-                <button id="sendButton">
-                    <i data-feather="send"></i>
-                </button>
+        </article>
+
+        <article class="session-card">
+            <div class="card-header">
+                <span class="session-number">Part 6</span>
+                <h2>Seeing the User</h2>
+                <div class="sub-header">Building Innovations that People Actually Want</div>
+                <div class="speakers">Based on "Charting Success" | Speaker: Ms. Marie Sachie Mitsui Turiano Academia</div>
+            </div>
+            <img src="images/TECHNO3-2.jpg" alt="Charting Success" class="card-image">
+            <div class="card-body">
+                <h3>Introduction</h3>
+                <p>To conclude the seminar series on the same afternoon, our block joined another group to host a final session with Ms. Sachie Turiano Academia, CEO of Fortem Auctrix. Her talk focused on the human side of innovation.</p>
+
+                <h3>Summary</h3>
+                <p>Ms. Academia opened by reframing technopreneurship as the creation of meaningful solutions rather than the mere invention of new tools. Many startups collapse, she explained, because they built something nobody needed.</p>
+                <p>She introduced IMAP, a framework for uncovering user needs. It examines the problem, identifies users, studies the industry and locates gaps. She paired this with the ARC framework, which guides how ideas reach people—beginning with awareness, followed by emotional connection and ending with conversion or user adoption. She cited Tesla and Apple as examples of how technology and human behavior work hand in hand.</p>
+
+                <h3>Learnings and Reflection</h3>
+                <p>This last talk reshaped how I understand innovation. I used to think that completing the technical design marked the end of the work. Now I see that a product becomes meaningful only when it answers a real need. The frameworks she shared felt like analytical tools for understanding people. Just as we compute for load, voltage or flux, we must also compute for value and relevance. It became clear that engineering and entrepreneurship intersect at the point where technology becomes truly useful.</p>
+            </div>
+        </article>
+    </div>
+
+    <!-- ===== ACCOMPLISHMENTS SECTION ===== -->
+    <div id="accomplishments" class="major-section">
+        <div class="section-divider">
+            <h2>Accomplishments</h2>
+        </div>
+
+        <div class="accomplishments-grid">
+            <div class="accomplishments-col">
+                <h3>Organizations Handled</h3>
+                <ul>
+                    <li>President, BUCENG-BUSC</li>
+                    <li>Technical Vice President, IIEE-BUSC</li>
+                    <li>Vice President, BUCENG-CSC 2024-2025</li>
+                    <li>Majority Floor Leader, BU Legislative Council 2023-2024</li>
+                    <li>President, Masbate City Division Federated Supreme Student Government (2021-2022)</li>
+                    <li>Chairperson, Student Coordinating Council - Masbate National Comprehensive High School (2021-2022)</li>
+                    <li>Member, Local Youth Development Council (LYDC) Masbate City (2022)</li>
+                </ul>
+            </div>
+            <div class="accomplishments-col">
+                <h3>Notable Involvements</h3>
+                <ul>
+                    <li>Gerry Roxas Leadership Awardee, 2022</li>
+                    <li>Philippine Startup Challenge Regional Champion, Bicol Region (2022)</li>
+                    <li>2nd Runner Up, Regional Science and Technology Fair (RSTF)</li>
+                    <li>Event Head, Lead Initiatives 2023</li>
+                    <li>Host, Nexus Futura: Engineering Week 2024</li>
+                    <li>Creative Director, EE JAM 2023 Event Head, EE Art Jam</li>
+                    <li>Host, TechHarbor 2024</li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <div id="achievement-container"></div>
-    <div id="konami-success" class="konami-modal">
-        <div class="konami-content">
-            <h2>SECRET UNLOCKED!</h2>
-            <p>Retro Mode Activated. Enjoy the 8-bit vibes!</p>
-            <button id="konami-close">AWESOME</button>
+    <!-- ===== CONTACT SECTION ===== -->
+    <div id="contact" class="major-section">
+        <div class="section-divider">
+            <h2>Get In Touch</h2>
+        </div>
+
+        <div class="contact-content">
+            <p style="margin-bottom: 30px; font-size: 1.1rem;">Feel free to reach out! I'm always open to discussing new projects, creative ideas, or opportunities to collaborate.</p>
+            <div class="contact-links">
+                <a href="mailto:jdes2022-6474-33556@bicol-u.edu.ph" class="contact-link-item">
+                    <i data-feather="mail"></i>
+                    <span>Email</span>
+                </a>
+                <a href="https://www.facebook.com/jureen.s" target="_blank" class="contact-link-item">
+                    <i data-feather="facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://github.com/jureen-dominique-sese" target="_blank" class="contact-link-item">
+                    <i data-feather="github"></i>
+                    <span>GitHub</span>
+                </a>
+            </div>
         </div>
     </div>
-    <div class="scanline-overlay"></div>
-    
-    <script>
-        feather.replace();
 
-        // --- Mobile Menu Toggle ---
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-            navLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => navLinks.classList.remove('open'));
-            });
-        });
+    <!-- ===== ARCHIVE SECTION ===== -->
+    <div class="archive-section">
+        <h2>Archive & Related Documents</h2>
+        <div>
+            <a href="pdfs/IIEE-UAE_Webinar_Thermal.pdf" class="retro-btn" target="_blank">View Thermal Webinar Certificate</a>
+            <a href="https://github.com/jureen-dominique-sese/technopreneurship-output" class="retro-btn" target="_blank">View GitHub Repository</a>
+        </div>
+    </div>
 
-        // --- Active Nav Link on Scroll ---
-        const sections = document.querySelectorAll('section');
-        const navA = document.querySelectorAll('.nav-links a');
-        window.addEventListener('scroll', () => {
-            let current = 'home';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 75) {
-                    current = section.getAttribute('id');
-                }
-            });
-            navA.forEach(a => {
-                a.classList.remove('active');
-                if (a.getAttribute('href') == '#' + current) {
-                    a.classList.add('active');
-                }
-            });
-        });
-        
-        // --- Carousel Logic ---
-        const carousel = document.querySelector('.carousel');
-        const carouselContainer = document.querySelector('.carousel-container');
-        const cards = document.querySelectorAll('.portfolio-card');
-        const cardCount = cards.length;
-        const angle = 360 / cardCount;
-        let rotation = 0;
-        let targetRotation = 0;
-        let currentSpeed = 0;
+</div>
 
-        function setupCarousel() {
-            if (cards.length === 0) return;
-            const radius = (cards[0].offsetWidth / 2) / Math.tan(Math.PI / cardCount) + 100;
-            cards.forEach((card, index) => {
-                const cardAngle = angle * index;
-                card.style.setProperty('--card-transform', `rotateY(${cardAngle}deg) translateZ(${radius}px)`);
-                card.style.transform = `rotateY(${cardAngle}deg) translateZ(${radius}px)`;
-            });
-        }
-        
-        if (carouselContainer) {
-            carouselContainer.addEventListener('mousemove', e => {
-                const containerRect = carouselContainer.getBoundingClientRect();
-                const mouseX = e.clientX - containerRect.left;
-                const percentage = mouseX / containerRect.width;
-                const maxSpeed = 1.5; 
-                targetRotation = (percentage - 0.5) * maxSpeed * -1;
-            });
-            
-            carouselContainer.addEventListener('mouseleave', () => {
-                targetRotation = 0;
-            });
-        }
+<footer>
+    <p>© 2025 Jureen Dominique E. Sese | Professional Portfolio | Bicol University College of Engineering</p>
+    <p style="margin-top: 10px; font-size: 0.75rem;">Electrical Engineering | Batch 2026</p>
+</footer>
 
-        function animateCarousel() {
-            if (!carousel) return;
-            const easing = 0.05;
-            currentSpeed += (targetRotation - currentSpeed) * easing;
-            rotation += currentSpeed;
-            carousel.style.transform = `rotateY(${rotation}deg)`;
-            requestAnimationFrame(animateCarousel);
-        }
-        
-        // --- Modal Logic ---
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                const modalId = card.dataset.modalId;
-                const modal = document.getElementById(modalId);
-                if(modal) {
-                    modal.classList.add('open');
-                    feather.replace();
-                }
-            });
-        });
+<script>
+    feather.replace();
 
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('[data-modal-button]')) {
-                e.preventDefault();
-                const modalId = e.target.closest('[data-modal-button]').dataset.modalButton;
-                document.getElementById(modalId).classList.add('open');
-            }
-            
-            if (e.target.matches('.modal-close, .modal-bg')) {
-                 e.target.closest('.project-modal').classList.remove('open');
-            }
-        });
-
-        // --- Fade-in on Scroll Animation ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
-
-        // --- Gemini Chat Logic ---
-        const geminiModal = document.getElementById('geminiChatModal');
-        const openChatButton = document.getElementById('gemini-chat-button');
-        const closeChatButton = geminiModal.querySelector('.gemini-modal-close');
-        const chatBody = document.getElementById('chatBody');
-        const chatInput = document.getElementById('chatInput');
-        const sendButton = document.getElementById('sendButton');
-
-        openChatButton.addEventListener('click', (e) => {
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            geminiModal.classList.add('open');
-            feather.replace();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         });
+    });
 
-        closeChatButton.addEventListener('click', () => {
-            geminiModal.classList.remove('open');
-        });
-        
-        geminiModal.addEventListener('click', (e) => {
-            if (e.target === geminiModal) {
-                 geminiModal.classList.remove('open');
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('.major-section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute('id');
             }
         });
 
-        sendButton.addEventListener('click', handleSendMessage);
-        chatInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleSendMessage();
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
             }
         });
+    });
 
-        async function handleSendMessage() {
-            const userMessage = chatInput.value.trim();
-            if (!userMessage) return;
-
-            appendMessage(userMessage, 'user');
-            chatInput.value = '';
-            showLoadingIndicator();
-
-            try {
-                const aiResponse = await callGeminiApi(userMessage);
-                removeLoadingIndicator();
-                appendMessage(aiResponse, 'ai');
-            } catch (error) {
-                console.error("Error calling Gemini API:", error);
-                removeLoadingIndicator();
-                appendMessage("Sorry, I'm having trouble connecting right now. Please try again later.", 'ai');
-            }
-        }
-
-        function appendMessage(text, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('chat-message', `${sender}-message`);
-
-            const iconDiv = document.createElement('div');
-            iconDiv.classList.add('icon');
-            const iconName = sender === 'user' ? 'user' : 'cpu';
-            iconDiv.innerHTML = `<i data-feather="${iconName}"></i>`;
-
-            const p = document.createElement('p');
-            p.textContent = text;
-
-            messageDiv.appendChild(iconDiv);
-            messageDiv.appendChild(p);
-            chatBody.appendChild(messageDiv);
-            feather.replace();
-            chatBody.scrollTop = chatBody.scrollHeight;
-        }
-
-        function showLoadingIndicator() {
-             const loadingDiv = document.createElement('div');
-            loadingDiv.classList.add('chat-message', 'ai-message', 'loading');
-            loadingDiv.id = 'loading-indicator';
-
-            const iconDiv = document.createElement('div');
-            iconDiv.classList.add('icon');
-            iconDiv.innerHTML = `<i data-feather="cpu"></i>`;
-            
-            const p = document.createElement('p');
-            p.innerHTML = `<span class="dot-flashing"></span>`;
-
-            loadingDiv.appendChild(iconDiv);
-            loadingDiv.appendChild(p);
-            chatBody.appendChild(loadingDiv);
-            feather.replace();
-            chatBody.scrollTop = chatBody.scrollHeight;
-        }
-
-        function removeLoadingIndicator() {
-            const indicator = document.getElementById('loading-indicator');
-            if (indicator) {
-                indicator.remove();
-            }
-        }
-        
-        function getPortfolioContext() {
-            let context = `This is a portfolio for Jureen Dominique E. Sese, an Electrical Engineering student.`;
-            
-            const heroSubtitle = document.querySelector('.hero-content .subtitle');
-            if(heroSubtitle) context += `\n\nIntroduction: ${heroSubtitle.innerText}`;
-
-            const orgs = document.querySelector('#accomplishments .accomplishments-col:nth-child(1)');
-            if(orgs) context += `\n\nOrganizations Handled:\n${orgs.innerText}`;
-            
-            const involvements = document.querySelector('#accomplishments .accomplishments-col:nth-child(2)');
-            if(involvements) context += `\n\nNotable Involvements:\n${involvements.innerText}`;
-            
-            document.querySelectorAll('.project-modal:not(#modal-pdf)').forEach((modal, index) => {
-                const title = modal.querySelector('h2').innerText;
-                const content = Array.from(modal.querySelectorAll('p')).map(p => p.innerText).join(' ');
-                context += `\n\nProject ${index + 1}: ${title}\nDetails: ${content}`;
-            });
-            
-            return context;
-        }
-
-
-        async function callGeminiApi(userQuery, retryCount = 0) {
-            const apiKey = ""; // API Key will be injected by the environment
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-1.5-pro-latest:generateContent?key=${apiKey}`;
-
-            const portfolioContext = getPortfolioContext();
-            const systemPrompt = `You are a helpful and professional AI assistant for the portfolio of Jureen Dominique E. Sese. Your role is to answer questions from potential employers or collaborators based ONLY on the information provided in this portfolio. Be concise, friendly, and professional. Do not invent information. If the answer is not in the provided context, politely state that the information is not available in the portfolio. Here is the portfolio information:\n\n${portfolioContext}`;
-            
-            const payload = {
-                contents: [{ parts: [{ text: userQuery }] }],
-                systemInstruction: {
-                    parts: [{ text: systemPrompt }]
-                },
-            };
-
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                 if (response.status === 429 && retryCount < 3) { // Too Many Requests
-                    const delay = Math.pow(2, retryCount) * 1000;
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                    return callGeminiApi(userQuery, retryCount + 1);
-                }
-                throw new Error(`API call failed with status: ${response.status}`);
-            }
-
-            const result = await response.json();
-            const candidate = result.candidates?.[0];
-
-            if (candidate && candidate.content?.parts?.[0]?.text) {
-                return candidate.content.parts[0].text;
-            } else {
-                return "I'm sorry, I couldn't generate a response at this moment.";
-            }
-        }
-
-        // --- GAMIFICATION LOGIC ---
-        const unlockedAchievements = new Set();
-        const achievementContainer = document.getElementById('achievement-container');
-        const achievementObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const achievementName = entry.target.dataset.achievement;
-                    if (achievementName && !unlockedAchievements.has(achievementName)) {
-                        unlockedAchievements.add(achievementName);
-                        showAchievement(achievementName);
-                    }
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('[data-achievement]').forEach(el => achievementObserver.observe(el));
-
-        function showAchievement(name) {
-            const description = {
-                'Explorer': 'You started the adventure!',
-                'Curator': 'You\'ve discovered the portfolio.',
-                'High Achiever': 'You\'ve seen the accomplishments.',
-                'Networker': 'You found the contact options!'
-            }[name];
-
-            const toast = document.createElement('div');
-            toast.classList.add('achievement-toast');
-            toast.innerHTML = `
-                <div><i data-feather="award"></i></div>
-                <div>
-                    <h4>Achievement Unlocked!</h4>
-                    <p>${name}: ${description}</p>
-                </div>
-            `;
-            achievementContainer.appendChild(toast);
-            feather.replace();
-            setTimeout(() => {
-                toast.remove();
-            }, 5000);
-        }
-
-        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-        let konamiIndex = 0;
-        const konamiModal = document.getElementById('konami-success');
-        const konamiClose = document.getElementById('konami-close');
-
-        document.addEventListener('keydown', e => {
-            if (e.key === konamiCode[konamiIndex]) {
-                konamiIndex++;
-                if (konamiIndex === konamiCode.length) {
-                    activateRetroMode();
-                    konamiIndex = 0;
-                }
-            } else {
-                konamiIndex = 0;
+    // Add scroll reveal animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
         });
+    }, { threshold: 0.1 });
 
-        function activateRetroMode() {
-            document.body.classList.toggle('retro-mode');
-            const isRetro = document.body.classList.contains('retro-mode');
-            if(isRetro) {
-                konamiModal.classList.add('open');
-            }
-        }
-        
-        konamiClose.addEventListener('click', () => {
-             konamiModal.classList.remove('open');
-        });
-        
-        // --- Home Section Animations ---
-        const homeSection = document.getElementById('home');
-        const spotlight = document.querySelector('.spotlight');
-        const nameHeader = document.querySelector('.name-header');
-
-        const nameText = nameHeader.textContent;
-        nameHeader.innerHTML = ''; 
-        nameText.split('').forEach(char => {
-            const letterSpan = document.createElement('span');
-            letterSpan.className = 'letter';
-            letterSpan.textContent = char === ' ' ? '\u00A0' : char;
-            nameHeader.appendChild(letterSpan);
-        });
-
-        homeSection.addEventListener('mousemove', (e) => {
-            spotlight.style.left = e.pageX + 'px';
-            spotlight.style.top = e.pageY + 'px';
-        });
-
-        const letters = document.querySelectorAll('.name-header .letter');
-        const fonts = ["'Poppins', sans-serif", "'Roboto', sans-serif", "serif", "monospace", "cursive"];
-        
-        letters.forEach((letter, index) => {
-            letter.style.transitionDelay = `${index * 0.03}s`;
-            letter.addEventListener('mouseover', () => {
-                const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-                letter.style.fontFamily = randomFont;
-            });
-        });
-
-        // --- Initialize scripts on load ---
-        window.onload = () => {
-            setupCarousel();
-            animateCarousel();
-        };
-
-    </script>
-</body>
-</html>
+    document.querySelectorAll('.session-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+    });
+</script>
