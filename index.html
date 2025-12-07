@@ -3,2600 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jureen Dominique E. Sese | Professional Portfolio</title>
+    <title>JUJU'S PORTFOLIO - HYPERSPACE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;600&family=Share+Tech+Mono&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/feather-icons"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent-cyan: #58a6ff;
-            --accent-green: #3fb950;
-            --accent-purple: #bc8cff;
-            --accent-yellow: #d29922;
-            --glow-cyan: rgba(88, 166, 255, 0.15);
-            --border-color: #30363d;
-            --surface-color: #ffffff;
+            --neon-cyan: #00ffff;
+            --neon-amber: #ffb300; 
+            --neon-green: #00ff41;
+            --screen-bg: #050505;
+            --grid-color: rgba(0, 255, 255, 0.2);
         }
 
-        /* Add/Replace these in your <style> section */
-/* About Me Section Responsive */
-@media (max-width: 968px) {
-    .about-me-container {
-        grid-template-columns: 1fr !important;
-        gap: 30px !important;
-    }
-    
-    .about-me-text {
-        padding: 30px !important;
-    }
-}
-/* Header with enhanced background animation */
-header {
-    text-align: center;
-    padding: 80px 0 60px;
-    border-bottom: 2px solid var(--border-color);
-    margin-bottom: 40px;
-    position: relative;
-    background: linear-gradient(135deg, rgba(88, 166, 255, 0.05), rgba(188, 140, 255, 0.05));
-    overflow: hidden;
-}
-
-/* Animated grid background */
-.retro-grid {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        linear-gradient(rgba(88, 166, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(88, 166, 255, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: gridScroll 20s linear infinite;
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-@keyframes gridScroll {
-    0% {
-        transform: perspective(500px) rotateX(60deg) translateY(0);
-    }
-    100% {
-        transform: perspective(500px) rotateX(60deg) translateY(50px);
-    }
-}
-
-/* Stars background */
-.stars-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    border-radius: 50%;
-    animation: twinkle linear infinite;
-    box-shadow: 0 0 3px white;
-}
-
-@keyframes twinkle {
-    0%, 100% {
-        opacity: 0.3;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.5);
-    }
-}
-
-/* Spaceship and retro elements container */
-.spaceship-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-    opacity: 0.4;
-    z-index: 1;
-}
-
-.retro-element {
-    position: absolute;
-    font-size: 28px;
-    animation: floatAcross linear infinite;
-    filter: drop-shadow(0 0 8px var(--accent-cyan));
-}
-
-@keyframes floatAcross {
-    0% {
-        transform: translateX(-100px) translateY(var(--start-y)) rotate(0deg);
-    }
-    100% {
-        transform: translateX(calc(100vw + 100px)) translateY(var(--end-y)) rotate(var(--rotation));
-    }
-}
-
-/* Pac-Man specific animation */
-.pacman {
-    font-size: 32px;
-    animation: pacmanChomp 0.3s steps(2) infinite, floatAcross linear infinite;
-}
-
-@keyframes pacmanChomp {
-    0%, 100% {
-        transform: scaleX(1);
-    }
-    50% {
-        transform: scaleX(-1);
-    }
-}
-
-/* Ghost trail for Pac-Man */
-.ghost {
-    animation: ghostFloat 2s ease-in-out infinite, floatAcross linear infinite;
-}
-
-@keyframes ghostFloat {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-/* Pixel clouds */
-.pixel-cloud {
-    position: absolute;
-    animation: cloudDrift linear infinite;
-    opacity: 0.2;
-}
-
-.pixel-cloud::before {
-    content: '▓▓▓▓▓';
-    font-size: 20px;
-    color: var(--accent-cyan);
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px var(--accent-cyan);
-}
-
-@keyframes cloudDrift {
-    0% {
-        transform: translateX(-100px);
-    }
-    100% {
-        transform: translateX(calc(100vw + 100px));
-    }
-}
-
-/* Glitch effect overlay */
-.glitch-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(88, 166, 255, 0.03) 50%,
-        transparent 100%
-    );
-    animation: glitchScan 8s linear infinite;
-    pointer-events: none;
-    mix-blend-mode: overlay;
-}
-
-@keyframes glitchScan {
-    0% {
-        transform: translateY(-100%);
-    }
-    100% {
-        transform: translateY(100%);
-    }
-}
-
-/* Retro border corners */
-.corner-decoration {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border: 3px solid var(--accent-purple);
-    z-index: 10;
-    animation: cornerGlow 2s ease-in-out infinite;
-}
-
-.corner-decoration.top-left {
-    top: 10px;
-    left: 10px;
-    border-right: none;
-    border-bottom: none;
-}
-
-.corner-decoration.top-right {
-    top: 10px;
-    right: 10px;
-    border-left: none;
-    border-bottom: none;
-}
-
-.corner-decoration.bottom-left {
-    bottom: 10px;
-    left: 10px;
-    border-right: none;
-    border-top: none;
-}
-
-.corner-decoration.bottom-right {
-    bottom: 10px;
-    right: 10px;
-    border-left: none;
-    border-top: none;
-}
-
-@keyframes cornerGlow {
-    0%, 100% {
-        box-shadow: 0 0 5px var(--accent-purple);
-        opacity: 0.7;
-    }
-    50% {
-        box-shadow: 0 0 15px var(--accent-purple);
-        opacity: 1;
-    }
-}
-
-/* Header content wrapper */
-.header-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-}
-
-/* Profile image styling */
-.profile-image-container {
-    position: relative;
-    width: 180px;
-    height: 180px;
-    flex-shrink: 0;
-}
-/* Parallax Background Layers */
-.parallax-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.parallax-layer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.1s ease-out;
-}
-
-.parallax-layer-1 {
-    background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(88, 166, 255, 0.03), transparent 50%);
-}
-
-.parallax-layer-2 {
-    background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(188, 140, 255, 0.02), transparent 60%);
-}
-
-.parallax-layer-3 {
-    opacity: 0.1;
-}
-
-.parallax-circuit {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border: 1px solid var(--accent-cyan);
-    border-radius: 50%;
-    opacity: 0.1;
-}
-
-/* Ensure main content stays above parallax */
-.container {
-    position: relative;
-    z-index: 1;
-}
-
-header {
-    position: relative;
-    z-index: 2;
-}
-.profile-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border: 3px solid var(--accent-cyan);
-    border-radius: 4px;
-    box-shadow: 
-        0 0 20px var(--glow-cyan),
-        inset 0 0 20px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 2;
-    filter: brightness(1.1) contrast(1.1);
-}
-
-/* Glitch corners on profile image */
-.profile-image-container::before,
-.profile-image-container::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--accent-purple);
-    z-index: 1;
-}
-
-.profile-image-container::before {
-    top: -8px;
-    left: -8px;
-    border-right: none;
-    border-bottom: none;
-    animation: cornerPulse 2s ease-in-out infinite;
-}
-
-.profile-image-container::after {
-    bottom: -8px;
-    right: -8px;
-    border-left: none;
-    border-top: none;
-    animation: cornerPulse 2s ease-in-out infinite 1s;
-}
-
-@keyframes cornerPulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.5;
-        transform: scale(1.1);
-    }
-}
-
-/* Scanline effect on image */
-.profile-image-container .image-scanline {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(88, 166, 255, 0.1) 50%,
-        transparent 100%
-    );
-    animation: scanlineMove 3s linear infinite;
-    pointer-events: none;
-    z-index: 3;
-}
-
-@keyframes scanlineMove {
-    0% {
-        transform: translateY(-100%);
-    }
-    100% {
-        transform: translateY(200%);
-    }
-}
-
-/* Text content beside image */
-.header-text {
-    flex: 1;
-    min-width: 300px;
-    text-align: left;
-}
-
-header::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 20%;
-    width: 60%;
-    height: 2px;
-    background: var(--accent-cyan);
-    box-shadow: 0 0 10px var(--accent-cyan);
-    z-index: 2;
-}
-
-/* Custom Cursor Trail */
-.cursor-trail {
-    position: fixed;
-    width: 8px;
-    height: 8px;
-    background: var(--accent-cyan);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    box-shadow: 0 0 10px var(--accent-cyan);
-    animation: fadeTrail 0.5s ease-out forwards;
-}
-
-@keyframes fadeTrail {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(0);
-        opacity: 0;
-    }
-}
-
-/* Custom cursor */
-body {
-    cursor: auto; /* Changed from 'none' - show default cursor as fallback */
-}
-
-.custom-cursor {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--accent-cyan);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 100001; /* Increased to be above boot overlay */
-    transition: transform 0.1s ease;
-    mix-blend-mode: difference;
-    display: none; /* Hidden by default */
-}
-
-.custom-cursor.active {
-    display: block; /* Show when activated */
-}
-
-body.custom-cursor-enabled {
-    cursor: none; /* Only hide default cursor after boot */
-}
-
-.custom-cursor.clicking {
-    transform: scale(0.8);
-    background: rgba(88, 166, 255, 0.3);
-}
-
-/* Mobile: restore default cursor */
-@media (max-width: 768px) {
-    body {
-        cursor: auto;
-    }
-    .custom-cursor {
-        display: none;
-    }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .header-text {
-        text-align: center;
-    }
-    
-    .profile-image-container {
-        width: 150px;
-        height: 150px;
-    }
-    
-    .retro-element {
-        font-size: 20px;
-    }
-    
-    .pacman {
-        font-size: 24px;
-    }
-}
-        /* Achievement Unlock Animation */
-.achievement-popup {
-    position: fixed;
-    top: -200px;
-    right: 20px;
-    background: linear-gradient(135deg, var(--card-bg), rgba(63, 185, 80, 0.2));
-    border: 2px solid var(--accent-green);
-    border-radius: 8px;
-    padding: 20px;
-    min-width: 300px;
-    z-index: 10001;
-    box-shadow: 0 0 30px rgba(63, 185, 80, 0.5);
-    animation: achievementSlideIn 0.5s ease-out forwards;
-}
-
-@keyframes achievementSlideIn {
-    0% {
-        top: -200px;
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    100% {
-        top: 20px;
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.achievement-popup.hide {
-    animation: achievementSlideOut 0.5s ease-out forwards;
-}
-
-@keyframes achievementSlideOut {
-    0% {
-        top: 20px;
-        opacity: 1;
-        transform: scale(1);
-    }
-    100% {
-        top: -200px;
-        opacity: 0;
-        transform: scale(0.8);
-    }
-}
-
-.achievement-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 10px;
-}
-
-.achievement-icon {
-    font-size: 2.5rem;
-    animation: achievementBounce 0.6s ease-out;
-}
-
-@keyframes achievementBounce {
-    0%, 100% { transform: scale(1); }
-    25% { transform: scale(1.3); }
-    50% { transform: scale(0.9); }
-    75% { transform: scale(1.1); }
-}
-
-.achievement-text h4 {
-    margin: 0;
-    color: var(--accent-green);
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1rem;
-    text-transform: uppercase;
-}
-/* Boot System Styles */
-.boot-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.5s ease;
-}
-
-.boot-overlay.fade-out {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.boot-container {
-    text-align: center;
-    max-width: 600px;
-    padding: 40px;
-}
-
-.boot-logo {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 4rem;
-    color: var(--accent-cyan);
-    text-shadow: 0 0 30px var(--glow-cyan);
-    margin-bottom: 20px;
-    animation: logoPulse 2s ease-in-out infinite;
-}
-
-@keyframes logoPulse {
-    0%, 100% {
-        transform: scale(1);
-        filter: brightness(1);
-    }
-    50% {
-        transform: scale(1.05);
-        filter: brightness(1.3);
-    }
-}
-
-.boot-text {
-    font-family: 'Share Tech Mono', monospace;
-    color: var(--accent-green);
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    opacity: 0;
-    animation: fadeInText 1s ease forwards 0.5s;
-}
-
-@keyframes fadeInText {
-    to {
-        opacity: 1;
-    }
-}
-
-.terminal-window {
-    background: rgba(22, 27, 34, 0.9);
-    border: 2px solid var(--accent-cyan);
-    border-radius: 8px;
-    padding: 20px;
-    margin: 30px 0;
-    text-align: left;
-    box-shadow: 0 0 30px var(--glow-cyan);
-}
-
-.terminal-header {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.terminal-btn {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--accent-green);
-}
-
-.terminal-btn.yellow {
-    background: var(--accent-yellow);
-}
-
-.terminal-btn.red {
-    background: #ff5555;
-}
-
-.terminal-output {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.9rem;
-    color: var(--accent-green);
-    line-height: 1.8;
-}
-
-.terminal-line {
-    opacity: 0;
-    animation: terminalTyping 0.5s ease forwards;
-}
-
-.terminal-line:nth-child(1) { animation-delay: 1s; }
-.terminal-line:nth-child(2) { animation-delay: 1.3s; }
-.terminal-line:nth-child(3) { animation-delay: 1.6s; }
-.terminal-line:nth-child(4) { animation-delay: 1.9s; }
-.terminal-line:nth-child(5) { animation-delay: 2.2s; }
-.terminal-line:nth-child(6) { animation-delay: 2.5s; }
-
-@keyframes terminalTyping {
-    to {
-        opacity: 1;
-    }
-}
-
-.boot-button {
-    display: inline-block;
-    padding: 15px 40px;
-    background: transparent;
-    border: 3px solid var(--accent-cyan);
-    color: var(--accent-cyan);
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeInButton 0.5s ease forwards 2.8s;
-}
-
-@keyframes fadeInButton {
-    to {
-        opacity: 1;
-    }
-}
-
-.boot-button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: var(--accent-cyan);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
-}
-
-.boot-button:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-.boot-button:hover {
-    color: var(--bg-color);
-    box-shadow: 0 0 30px var(--glow-cyan);
-    transform: translateY(-3px);
-}
-
-.boot-button span {
-    position: relative;
-    z-index: 1;
-}
-
-.loading-bar {
-    width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    margin-top: 30px;
-    overflow: hidden;
-    opacity: 0;
-}
-
-.loading-bar.active {
-    opacity: 1;
-}
-
-.loading-progress {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
-    border-radius: 2px;
-    box-shadow: 0 0 10px var(--accent-cyan);
-    transition: width 1s ease;
-}
-
-.boot-particles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.boot-particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: var(--accent-cyan);
-    border-radius: 50%;
-    animation: particleFloat 3s ease-in-out infinite;
-}
-
-@keyframes particleFloat {
-    0%, 100% {
-        transform: translateY(0) translateX(0);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-
-@media (max-width: 768px) {
-    .boot-logo {
-        font-size: 2.5rem;
-    }
-    
-    .boot-text {
-        font-size: 1rem;
-    }
-    
-    .boot-button {
-        font-size: 1rem;
-        padding: 12px 30px;
-    }
-}
-.achievement-text p {
-    margin: 5px 0 0 0;
-    color: var(--text-main);
-    font-size: 0.9rem;
-}
-
-.achievement-progress {
-    width: 100%;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-top: 10px;
-}
-
-.achievement-progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
-    animation: progressFill 1s ease-out forwards;
-    box-shadow: 0 0 10px var(--accent-green);
-}
-
-@keyframes progressFill {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-/* Lock/Unlock state for accomplishments */
-.accomplishments-col li {
-    position: relative;
-    opacity: 0;
-    transform: translateX(-20px);
-}
-
-.accomplishments-col li.unlocked {
-    animation: unlockSlide 0.5s ease-out forwards;
-}
-
-@keyframes unlockSlide {
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.accomplishments-col li::before {
-    transition: all 0.3s ease;
-}
-
-.accomplishments-col li.unlocked::before {
-    content: '✓';
-    color: var(--accent-green);
-    animation: checkPop 0.4s ease-out;
-}
-
-@keyframes checkPop {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.5); }
-}
-
-@media (max-width: 768px) {
-    .achievement-popup {
-        right: 10px;
-        min-width: 250px;
-        padding: 15px;
-    }
-}
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Rajdhani', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-            font-size: 18px;
-        }
-
-        /* Scanline Overlay */
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
+            background-color: #000;
             height: 100vh;
-            background: linear-gradient(
-                to bottom,
-                rgba(255, 255, 255, 0),
-                rgba(255, 255, 255, 0) 50%,
-                rgba(0, 0, 0, 0.2) 50%,
-                rgba(0, 0, 0, 0.2)
-            );
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 1000;
-            opacity: 0.3;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Share Tech Mono', monospace;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
+        /* --- 1. POWER OVERLAY --- */
+        #power-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.5s;
         }
 
-        /* Header */
-        header {
-            text-align: center;
-            padding: 80px 0 60px;
-            border-bottom: 2px solid var(--border-color);
-            margin-bottom: 40px;
-            position: relative;
-            background: linear-gradient(135deg, rgba(88, 166, 255, 0.05), rgba(188, 140, 255, 0.05));
+        .power-btn {
+            background: transparent; border: 2px solid #444; color: #666;
+            font-family: 'Press Start 2P', monospace; font-size: 1.2rem;
+            padding: 20px 40px; cursor: pointer; text-transform: uppercase;
+            transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; gap: 15px;
+        }
+        .power-icon { font-size: 3rem; margin-bottom: 10px; color: #444; transition: 0.3s; }
+        
+        .power-btn:hover {
+            border-color: var(--neon-cyan); color: var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+        }
+        .power-btn:hover .power-icon { color: var(--neon-cyan); text-shadow: 0 0 15px var(--neon-cyan); }
+
+        /* --- 2. TV / MONITOR FRAME --- */
+        .tv-bezel { position: relative; width: 100%; height: 100%; background: #000; overflow: hidden; }
+
+        .crt-screen {
+            position: relative; width: 100%; height: 100%;
+            background: var(--screen-bg); overflow: hidden;
+            box-shadow: inset 0 0 150px rgba(0,0,0,1);
+            opacity: 0; transform: scale(1, 0); filter: brightness(0);
         }
 
-        header::after {
-            content: '';
+        .crt-screen.turn-on { animation: tvTurnOn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+        @keyframes tvTurnOn {
+            0% { transform: scale(1, 0.01); opacity: 0; filter: brightness(30); }
+            30% { transform: scale(1, 0.01); opacity: 1; }
+            60% { transform: scale(1, 1); filter: brightness(5); }
+            100% { transform: scale(1, 1); opacity: 1; filter: brightness(1); }
+        }
+
+        .scanlines {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.5));
+            background-size: 100% 4px; z-index: 100; pointer-events: none; opacity: 0.6;
+        }
+
+        .crt-flicker {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.02); opacity: 0; z-index: 99; pointer-events: none;
+            animation: flicker 0.1s infinite;
+        }
+        @keyframes flicker { 0% { opacity: 0.02; } 50% { opacity: 0.05; } 100% { opacity: 0.02; } }
+
+        /* --- 3. WARP SPEED BACKGROUND --- */
+        .starfield-container {
+            position: absolute; 
+            top: 50%; left: 50%; 
+            width: 0; height: 0; 
+            z-index: 0; 
+            pointer-events: none; 
+            transition: top 0.1s ease-out, left 0.1s ease-out; /* Smoother tracking */
+        }
+
+        .warp-star {
             position: absolute;
-            bottom: -2px;
-            left: 20%;
-            width: 60%;
+            top: 0; left: 0;
+            width: 500px;
             height: 2px;
-            background: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--accent-cyan);
+            background: linear-gradient(90deg, transparent, white);
+            transform-origin: left center;
+            opacity: 0;
+            animation-name: warpSpeed;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
         }
+
+        @keyframes warpSpeed {
+            0% { transform: rotate(var(--angle)) translateX(0px) scaleX(0.1); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: rotate(var(--angle)) translateX(150vmax) scaleX(1); opacity: 0; }
+        }
+
+        /* UPDATED GRID FOR PARALLAX */
+        .grid-floor {
+            position: absolute; bottom: -30%; left: -50%; width: 200%; height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            /* Transform combines base perspective/rotation with mouse tilt variables */
+            transform: perspective(400px) rotateX(calc(70deg + var(--tiltX, 0deg))) rotateY(var(--tiltY, 0deg));
+            animation: gridScroll 4s linear infinite;
+            z-index: 1;
+            mask-image: linear-gradient(to top, black 20%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to top, black 20%, transparent 100%);
+            pointer-events: none;
+            transition: transform 0.1s ease-out; /* Smooth tilt */
+        }
+        @keyframes gridScroll { 0% { background-position: 0 0; } 100% { background-position: 0 50px; } }
+
+        /* --- 4. HUD ELEMENTS --- */
+        .hud-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10;
+            pointer-events: none;
+        }
+
+        .crosshair {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 400px; height: 400px; border: 1px dashed var(--grid-color);
+            border-radius: 50%; opacity: 0.3;
+        }
+        .crosshair::before, .crosshair::after {
+            content: ''; position: absolute; background: var(--neon-cyan); opacity: 0.5;
+        }
+        .crosshair::before { top: 50%; left: 0; width: 100%; height: 1px; }
+        .crosshair::after { top: 0; left: 50%; width: 1px; height: 100%; }
+
+        .radar {
+            position: absolute; bottom: 50px; left: 50px;
+            width: 100px; height: 100px;
+            border: 2px solid var(--neon-green); border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 65, 0.1) 0%, transparent 70%);
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+        .radar-sweep {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent 0deg, rgba(0, 255, 65, 0.5) 20deg, transparent 25deg);
+            animation: radarSpin 4s linear infinite;
+        }
+        @keyframes radarSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .data-col {
+            position: absolute; top: 20%;
+            font-size: 0.7rem; color: var(--neon-cyan); opacity: 0.7; line-height: 1.8;
+        }
+        .data-col.left { left: 40px; text-align: left; border-left: 2px solid var(--neon-cyan); padding-left: 10px; }
+        .data-col.right { right: 40px; text-align: right; border-right: 2px solid var(--neon-amber); padding-right: 10px; color: var(--neon-amber); }
+
+        /* --- 5. MAIN CONTENT BOX --- */
+        .content-layer {
+            position: relative; z-index: 50; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+
+        .main-box {
+            padding: 2.5rem; 
+            border: 2px solid var(--neon-cyan);
+            background: rgba(0, 10, 20, 0.9);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+            position: relative;
+            max-width: 800px; width: 90%;
+            backdrop-filter: blur(4px);
+        }
+
+        .main-box::before {
+            content: ''; position: absolute; top: -5px; left: -5px; width: 20px; height: 20px;
+            border-top: 2px solid var(--neon-cyan); border-left: 2px solid var(--neon-cyan);
+        }
+        .main-box::after {
+            content: ''; position: absolute; bottom: -5px; right: -5px; width: 20px; height: 20px;
+            border-bottom: 2px solid var(--neon-cyan); border-right: 2px solid var(--neon-cyan);
+        }
+
+        /* Typewriter Cursor Style */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: var(--neon-cyan);
+        }
+        @keyframes blink { 50% { opacity: 0; } }
 
         h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent-cyan);
-            text-shadow: 0 0 15px var(--glow-cyan);
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2.5rem; color: white; margin-bottom: 15px;
+            text-shadow: 4px 4px 0 var(--neon-cyan);
+            line-height: 1.4;
+            min-height: 3.5rem; /* Reserve space to prevent jumping during typing */
         }
 
-        /* Glitch effect on h1 */
-        @keyframes glitch {
-            0% {
-                transform: translate(0);
-            }
-            20% {
-                transform: translate(-2px, 2px);
-            }
-            40% {
-                transform: translate(-2px, -2px);
-            }
-            60% {
-                transform: translate(2px, 2px);
-            }
-            80% {
-                transform: translate(2px, -2px);
-            }
-            100% {
-                transform: translate(0);
-            }
+        .dept-title {
+            color: var(--neon-amber); font-size: 1.1rem; letter-spacing: 2px;
+            border-bottom: 1px solid var(--neon-amber); display: inline-block;
+            padding-bottom: 10px; margin-bottom: 25px;
+            min-height: 1.5rem;
         }
 
-        h1:hover::before,
-        h1:hover::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        /* JOKE SECTION */
+        .joke-container {
+            margin-top: 20px;
+            border-top: 1px dashed rgba(255,255,255,0.2);
+            padding-top: 20px;
         }
 
-        h1:hover::before {
-            animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-            color: #ff00de;
-            z-index: -1;
-        }
-
-        h1:hover::after {
-            animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
-            color: #00fff9;
-            z-index: -2;
-        }
-
-        .subtitle {
-            font-family: 'Share Tech Mono', monospace;
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .intro-text {
-            max-width: 700px;
-            margin: 20px auto 0;
-            color: var(--text-main);
+        .joke-text {
+            color: #ccc;
             font-size: 1rem;
-            line-height: 1.8;
-            overflow: hidden;
-        }
-
-        /* Typing animation */
-       /* Typing animation */
-.typing-text {
-    display: inline;
-    border-right: 2px solid var(--accent-cyan);
-    padding-right: 5px;
-    animation: blink-caret 0.75s step-end infinite;
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: var(--accent-cyan) }
-}
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--accent-cyan) }
-        }
-
-        /* Navigation */
-        nav {
-            position: sticky;
-            top: -100px;
-            background: rgba(13, 17, 23, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 40px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            transition: top 0.3s ease-in-out;
-        }
-
-        nav.nav-visible {
-            top: 0;
-        }
-
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            padding: 8px 15px;
-            border: 1px solid transparent;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-cyan);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 8px var(--glow-cyan);
-            background: rgba(88, 166, 255, 0.05);
-        }
-
-        /* Section Dividers */
-        .major-section {
-            margin: 80px 0;
-        }
-
-        .section-divider {
-            text-align: center;
-            margin: 100px 0 60px;
-            position: relative;
-        }
-
-        .section-divider h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            color: var(--accent-purple);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            display: inline-block;
-            padding: 0 30px;
-            background: var(--bg-color);
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Glitch on section headers */
-        .section-divider h2:hover::before,
-        .section-divider h2:hover::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 30px;
-            width: 100%;
-            height: 100%;
-        }
-
-        .section-divider h2:hover::before {
-            animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-            color: #ff00de;
-            z-index: -1;
-        }
-
-        .section-divider h2:hover::after {
-            animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
-            color: #00fff9;
-            z-index: -2;
-        }
-
-        .section-divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
-            z-index: 1;
-        }
-
-        /* Session Cards - Staggered Fade In */
-        .session-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            margin-bottom: 60px;
-            padding: 0;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-        .session-card.reveal {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .session-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border-color: var(--accent-cyan);
-        }
-
-        /* Animated corner brackets */
-        .session-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 10px;
-            height: 10px;
-            border-top: 2px solid var(--accent-cyan);
-            border-left: 2px solid var(--accent-cyan);
-            transition: all 0.3s ease;
-        }
-
-        .session-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 10px;
-            height: 10px;
-            border-bottom: 2px solid var(--accent-cyan);
-            border-right: 2px solid var(--accent-cyan);
-            transition: all 0.3s ease;
-        }
-
-        .session-card:hover::before {
-            width: 30px;
-            height: 30px;
-        }
-
-        .session-card:hover::after {
-            width: 30px;
-            height: 30px;
-        }
-
-        .card-header {
-            padding: 25px;
-            border-bottom: 1px solid var(--border-color);
-            background: rgba(22, 27, 34, 0.9);
-        }
-
-        .session-number {
-            font-family: 'Share Tech Mono', monospace;
-            color: var(--accent-purple);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .card-header h2 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--text-main);
-            font-size: 1.6rem;
-            margin-bottom: 8px;
-        }
-
-        .sub-header {
-            font-size: 1.05rem;
-            color: var(--accent-green);
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .speakers {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .card-image {
-            width: 100%;
-            height: auto;
-            border-bottom: 1px solid var(--border-color);
-            display: block;
-            opacity: 0.9;
-            transition: opacity 0.3s;
-            max-height: 450px;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        .session-card:hover .card-image {
-            opacity: 1;
-        }
-
-        .card-body {
-            padding: 35px;
-        }
-
-        .card-body h3 {
-            font-family: 'Share Tech Mono', monospace;
-            color: var(--accent-yellow);
-            font-size: 1.15rem;
-            margin: 30px 0 12px 0;
-            text-transform: uppercase;
-            border-left: 3px solid var(--accent-yellow);
-            padding-left: 12px;
-        }
-
-        .card-body h3:first-of-type {
-            margin-top: 0;
-        }
-
-        .card-body p {
             margin-bottom: 15px;
-            color: #b0b8c4;
-            line-height: 1.8;
+            font-style: italic;
+            min-height: 3rem;
         }
 
-        /* EXPANDABLE REPORT CARDS */
-        .report-card-container {
-            margin-bottom: 30px;
-        }
-
-        .report-card-collapsed {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .report-card-collapsed:hover {
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 15px var(--glow-cyan);
-        }
-
-        .report-card-collapsed h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--accent-cyan);
-            font-size: 1.3rem;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .report-card-collapsed .expand-icon {
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .report-card-collapsed:hover .expand-icon {
-            transform: scale(1.2);
-        }
-
-        /* Pixel spark overlay */
-        .pixel-spark-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .pixel-spark-overlay.active {
-            display: flex;
-        }
-
-        .spark-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-        }
-
-        .pixel-spark {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: var(--accent-cyan);
-            box-shadow: 0 0 10px var(--accent-cyan);
-            animation: sparkBurst 0.8s ease-out forwards;
-        }
-
-        @keyframes sparkBurst {
-            0% {
-                transform: translate(0, 0) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) scale(0);
-                opacity: 0;
-            }
-        }
-
-        /* Expanded report card */
-        .report-card-expanded {
-            display: none;
-            background: var(--card-bg);
-            border: 1px solid var(--accent-cyan);
-            border-radius: 4px;
-            padding: 0;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(88, 166, 255, 0.3);
-            animation: expandCard 0.5s ease forwards;
-            position: relative;
-        }
-
-        .report-card-expanded.active {
-            display: block;
-        }
-
-        @keyframes expandCard {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .report-card-expanded .card-header {
-            background: rgba(88, 166, 255, 0.1);
-            border-bottom: 2px solid var(--accent-cyan);
-        }
-
-        .close-report {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: transparent;
-            border: 2px solid var(--accent-cyan);
-            color: var(--accent-cyan);
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close-report:hover {
-            background: var(--accent-cyan);
-            color: var(--bg-color);
-            transform: rotate(90deg);
-        }
-
-        /* Accomplishments Grid */
-        .accomplishments-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 40px 0;
-        }
-
-        .accomplishments-col {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 30px;
-            border-radius: 4px;
-        }
-
-        .accomplishments-col h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--accent-green);
-            border-bottom: 3px solid var(--accent-green);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-            font-size: 1.2rem;
-        }
-
-        .accomplishments-col ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .accomplishments-col li {
-            margin-bottom: 12px;
-            padding-left: 28px;
-            position: relative;
-            color: var(--text-main);
-        }
-
-        .accomplishments-col li::before {
-            content: '✓';
-            color: var(--accent-green);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-
-        /* Contact Section */
-        .contact-content {
-            text-align: center;
-            padding: 40px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .contact-link-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: transparent;
-            padding: 12px 24px;
-            border: 2px solid var(--accent-cyan);
-            border-radius: 4px;
-            text-decoration: none;
-            color: var(--accent-cyan);
-            font-weight: 500;
-            transition: all 0.3s ease;
-            font-family: 'Share Tech Mono', monospace;
-        }
-
-        .contact-link-item:hover {
-            background: rgba(88, 166, 255, 0.1);
-            box-shadow: 0 0 15px var(--glow-cyan);
-            transform: translateY(-3px);
-        }
-
-        .contact-link-item i {
-            color: var(--accent-cyan);
-        }
-
-        /* Buttons */
-        .retro-btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background: transparent;
-            border: 2px solid var(--accent-green);
-            color: var(--accent-green);
-            font-family: 'Orbitron', sans-serif;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            margin: 10px;
+        .start-btn {
+            background: rgba(0, 255, 40, 0.15); 
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1rem; cursor: pointer;
+            padding: 15px 30px; 
             text-transform: uppercase;
+            animation: pulseBtn 2s infinite;
+            transition: all 0.2s;
         }
+        .start-btn:hover { background: var(--neon-green); color: black; box-shadow: 0 0 20px var(--neon-green); }
 
-        .retro-btn:hover {
-            background: rgba(63, 185, 80, 0.1);
-            box-shadow: 0 0 15px rgba(63, 185, 80, 0.3);
-            transform: translateY(-3px);
+        @keyframes pulseBtn { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+
+        /* Ticker */
+        .ticker-wrap {
+            position: absolute; bottom: 0; width: 100%; height: 30px;
+            background: var(--neon-cyan); color: black;
+            display: flex; align-items: center; overflow: hidden;
+            font-weight: bold; font-size: 0.9rem;
         }
+        .ticker { padding-left: 100%; animation: ticker 25s linear infinite; white-space: nowrap; }
+        @keyframes ticker { 100% { transform: translate3d(-100%, 0, 0); } }
 
-        /* Archive Section */
-        .archive-section {
-            margin: 80px 0;
-            text-align: center;
+        /* Loading */
+        #loading {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 999;
+            display: none; flex-direction: column; justify-content: center; align-items: center;
         }
+        .load-bar { width: 300px; height: 4px; background: #333; margin-top: 20px; position: relative; }
+        .load-fill { position: absolute; top: 0; left: 0; height: 100%; background: var(--neon-cyan); width: 0%; animation: fill 1.8s ease-in-out forwards; }
+        @keyframes fill { 100% { width: 100%; } }
 
-        .archive-section h2 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--accent-purple);
-            margin-bottom: 30px;
-            font-size: 2rem;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 50px 0;
-            margin-top: 100px;
-            border-top: 2px solid var(--border-color);
-            color: var(--text-muted);
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.85rem;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .section-divider h2 { font-size: 1.8rem; }
-            .accomplishments-grid { grid-template-columns: 1fr; gap: 30px; }
-            .nav-links { gap: 10px; }
-            .nav-links a { font-size: 0.8rem; padding: 6px 12px; }
-            .card-body { padding: 25px; }
-            .contact-links { flex-direction: column; align-items: center; }
+            h1 { font-size: 1.5rem; }
+            .data-col { display: none; }
+            .radar { width: 60px; height: 60px; left: 20px; bottom: 40px; }
         }
     </style>
 </head>
 <body>
-    <!-- Boot System Overlay -->
-<div class="boot-overlay" id="bootOverlay">
-    <div class="boot-particles" id="bootParticles"></div>
-    <div class="boot-container">
-        <div class="boot-logo">JDES.SYS</div>
-        <div class="boot-text">Initializing Portfolio Experience...</div>
-        
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-btn red"></div>
-                <div class="terminal-btn yellow"></div>
-                <div class="terminal-btn"></div>
-            </div>
-            <div class="terminal-output">
-                <div class="terminal-line">$ Loading user profile... <span style="color: var(--accent-green);">✓</span></div>
-                <div class="terminal-line">$ Initializing achievements system... <span style="color: var(--accent-green);">✓</span></div>
-                <div class="terminal-line">$ Rendering interactive elements... <span style="color: var(--accent-green);">✓</span></div>
-                <div class="terminal-line">$ Compiling accomplishments... <span style="color: var(--accent-green);">✓</span></div>
-                <div class="terminal-line">$ Connecting to experience matrix... <span style="color: var(--accent-green);">✓</span></div>
-                <div class="terminal-line" style="color: var(--accent-cyan); margin-top: 10px;">» System ready. Awaiting user input...</div>
-            </div>
-        </div>
-        
-        <button class="boot-button" id="bootButton">
-            <span>ENTER PORTFOLIO</span>
+
+    <audio id="bgMusic" loop>
+        <source src="mus/bgmusc.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="clickSfx">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-sci-fi-click-900.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="hoverSfx">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-sci-fi-interface-beep-901.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="power-overlay">
+        <button class="power-btn" id="powerBtn">
+            <span class="power-icon">⏻</span>
+            SYSTEM START
         </button>
-        
-        <div class="loading-bar" id="loadingBar">
-            <div class="loading-progress" id="loadingProgress"></div>
-        </div>
-    </div>
-</div>
-
-<!-- Hidden audio element -->
-<audio id="bgMusic" loop>
-    <source src="mus/bgmusc2.mp3" type="audio/mpeg">
-</audio>
-<div class="custom-cursor" id="customCursor"></div>
- <!-- Parallax Background -->
-    <div class="parallax-container" id="parallaxContainer">
-        <div class="parallax-layer parallax-layer-1" data-speed="0.5"></div>
-        <div class="parallax-layer parallax-layer-2" data-speed="0.3"></div>
-        <div class="parallax-layer parallax-layer-3" data-speed="0.7">
-            <div class="parallax-circuit" style="top: 10%; left: 20%;"></div>
-            <div class="parallax-circuit" style="top: 50%; right: 15%;"></div>
-            <div class="parallax-circuit" style="bottom: 20%; left: 60%;"></div>
-        </div>
-    </div>
-    <div class="scanlines"></div>
-
-    <!-- Pixel Spark Overlay -->
-    <div class="pixel-spark-overlay" id="sparkOverlay">
-        <div class="spark-container" id="sparkContainer"></div>
     </div>
 
-<!-- Replace your existing <header> section with this enhanced version: -->
-<header>
-    <!-- Retro grid background -->
-    <div class="retro-grid"></div>
-    
-    <!-- Stars layer -->
-    <div class="stars-container" id="starsContainer"></div>
-    
-    <!-- Pixel clouds -->
-    <div class="pixel-cloud" style="top: 20%; animation-duration: 40s; animation-delay: 0s;"></div>
-    <div class="pixel-cloud" style="top: 60%; animation-duration: 50s; animation-delay: 5s;"></div>
-    <div class="pixel-cloud" style="top: 40%; animation-duration: 45s; animation-delay: 10s;"></div>
-    
-    <!-- Retro elements container (spaceships, pac-man, etc) -->
-    <div class="spaceship-container" id="retroElements"></div>
-    
-    <!-- Glitch scan effect -->
-    <div class="glitch-overlay"></div>
-    
-    <!-- Corner decorations -->
-    <div class="corner-decoration top-left"></div>
-    <div class="corner-decoration top-right"></div>
-    <div class="corner-decoration bottom-left"></div>
-    <div class="corner-decoration bottom-right"></div>
-    
-    <div class="container">
-        <div class="header-content">
-            <div class="profile-image-container">
-                <img src="images/PAU_6705.png" alt="Jureen Dominique E. Sese" class="profile-image">
-                <div class="image-scanline"></div>
-            </div>
-            
-            <div class="header-text">
-                <h1 data-text="Jureen Dominique E. Sese">Jureen Dominique E. Sese</h1>
-                <div class="subtitle">BSEE-4A | Batch 2026 | Bicol University</div>
-                <div class="intro-text">
-                    <span class="typing-text"><strong>Hello! I'm juju!</strong> Versatile Electrical Engineering student with strong academics and experience in technical, creative, and leadership roles. Skilled in CAD, PLC Simulation, and microcontroller projects. Recognized student leader and graphic designer active in major college and departmental organizations.</span>
+    <div class="tv-bezel">
+        <div class="crt-screen" id="crtScreen">
+            <div class="scanlines"></div>
+            <div class="crt-flicker"></div>
+
+            <div class="starfield-container" id="starContainer"></div>
+            <div class="grid-floor" id="gridFloor"></div>
+
+            <div class="hud-layer">
+                <div class="crosshair"></div>
+                <div class="radar"><div class="radar-sweep"></div></div>
+
+                <div class="data-col left">
+                    SYS.VOLTAGE: 220V<br>
+                    FREQ: 60Hz<br>
+                    SPEED: MOUSE_TRACK<br>
+                    TEMP: NOMINAL
+                </div>
+
+                <div class="data-col right">
+                    TARGET: PORTFOLIO<br>
+                    SECURITY: LOW<br>
+                    NETWORK: BICOL_NET<br>
+                    STATUS: STABLE
                 </div>
             </div>
-        </div>
-    </div>
-</header>
 
-        <nav id="mainNav">
-            <ul class="nav-links">
-                <li><a href="#profdev">ProfDev Series</a></li>
-                <li><a href="#technopotential">Technopotential Hub</a></li>
-                <li><a href="#group-output">Group Output</a></li>
-                <li><a href="#about-me">About Me</a></li>
-                <li><a href="#accomplishments">Accomplishments</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-
-    <div class="container">
-
-        <!-- ===== PROFDEV SERIES SECTION ===== -->
-        <div id="profdev" class="major-section">
-            <div class="section-divider">
-                <h2 data-text="ProfDev Series">ProfDev Series</h2>
-            </div>
-
-            <article class="session-card">
-                <div class="card-header">
-                    <span class="session-number">Session 01</span>
-                    <h2>Use of Thermal Camera for Electromechanical Inspection</h2>
-                    <div class="speakers">Speaker: Engr. Borlongan | Collaboration: BU EE Dept & IIEE-UAE Chapter</div>
-                </div>
-                <img src="images/docu-session1.png" alt="Session 1 Documentation" class="card-image">
-                <div class="card-body">
-                    <h3>Introduction</h3>
-                    <p>This seminar, a collaboration between the Bicol University Electrical Engineering Department and the Institute of Integrated Electrical Engineers - UAE Chapter, was a deep dive into the practical applications of thermal imaging. As part of the 'Charting the Frontiers of Emerging Technologies in Electrical Engineering' series, it promised to be an insightful session, and it delivered.</p>
-
-                    <h3>Summary</h3>
-                    <p>Engr. Borlongan's presentation was a masterclass in clarity. He didn't just explain the 'what' of thermal imaging but the 'why' and 'how.' We learned to interpret thermal signatures, identify potential failure points in electrical systems, and understand the nuances of predictive maintenance. The case studies were particularly illuminating, showing how this technology saves companies millions in downtime and repairs.</p>
-
-                    <h3>Learnings</h3>
-                    <p>My key takeaway was the proactive power of thermal imaging. It's not just about fixing problems; it's about preventing them. This technology allows for a shift from reactive to predictive maintenance, a concept that is revolutionizing the industry. I am now inspired to explore this technology further and see how I can incorporate it into my future projects.</p>
-                </div>
-            </article>
-
-            <article class="session-card">
-                <div class="card-header">
-                    <span class="session-number">Session 02</span>
-                    <h2>Basic Solar Design and Installation</h2>
-                    <div class="speakers">Speaker: Engr. Constantine Reymundo</div>
-                </div>
-                <img src="images/docu-session2.jpeg" alt="Session 2 Documentation" class="card-image">
-                <div class="card-body">
-                    <h3>Introduction</h3>
-                    <p>Despite a rocky start with an internet outage, I was determined to catch as much of Engr. Constantine Reymundo's seminar on solar design as possible. The energy in the virtual room was palpable, and I was eager to learn from an expert in the field.</p>
-
-                    <h3>Summary</h3>
-                    <p>The webinar was a comprehensive overview of the solar landscape. We covered everything from the physics of photovoltaic cells to the economics of solar installations. The discussion on government incentives and the future of renewable energy in the Philippines was particularly insightful, highlighting the immense potential for growth in this sector.</p>
-
-                    <h3>Learnings</h3>
-                    <p>I now have a much clearer understanding of the complexities of solar design. It's a field that requires a blend of technical expertise, financial acumen, and a deep understanding of environmental factors. The seminar has given me the confidence to explore this field further and perhaps even consider a career in renewable energy.</p>
-                </div>
-            </article>
-
-            <article class="session-card">
-                <div class="card-header">
-                    <span class="session-number">Session 03</span>
-                    <h2>Technopreneurship: Turning Technology into Business</h2>
-                    <div class="speakers">Multiple Speakers | Event Management Experience</div>
-                </div>
-                <img src="images/p-3.jpg" alt="Session 3 Programme" class="card-image">
-                <div class="card-body">
-                    <h3>Introduction & Role</h3>
-                    <p>This webinar was a project that I was deeply invested in. While my initial role was on the technical team, a scheduling conflict led me to the documentation team. This unexpected change turned out to be a blessing in disguise, as it gave me a unique perspective on the event and allowed me to work closely with the content.</p>
-
-                    <h3>Summary of Experience</h3>
-                    <p>The last-minute change in the program was a test of our team's adaptability. I was proud of how we all pulled together to ensure a seamless experience for our attendees. Reading the certificate citations was a small but important role, and I was honored to be a part of recognizing the hard work of our speakers and participants.</p>
-
-                    <h3>Learnings</h3>
-                    <p>This experience was a crash course in event management. I learned the importance of clear communication, contingency planning, and the ability to think on your feet. But the biggest lesson was in the power of teamwork. When a group of dedicated individuals comes together with a shared vision, anything is possible.</p>
-                </div>
-            </article>
-
-            <article class="session-card">
-                <div class="card-header">
-                    <span class="session-number">Session 04</span>
-                    <h2>GMM Meeting & Technical Workshops</h2>
-                    <div class="speakers">Four Separate Professional Technical Workshops | Hosting Role</div>
-                </div>
-                <div class="card-body">
-                    <h3>Introduction & Role</h3>
-                    <p>I was not able to attend as I was the host during the GMM Meeting held in the Gymnasium with Four(4) separate professional technical workshops. However, I gained valuable insights into the topics covered.</p>
-
-                    <h3>Summary of Gained Knowledge</h3>
-                    <p>I learned about the latest advancements in solar technology, including various types of solar panels and their efficiency ratings. I also gained a deeper understanding of the fundamental principles of photovoltaic systems and their components.</p>
-
-                    <h3>Learnings & Hosting Experience</h3>
-                    <p>I learned about the standards and best practices in the electrical engineering field. The event showcased the dedication of the IIEE in organizing high-quality technical workshops. It was a fun and engaging day of hosting, working alongside my partner and the diligent working committee.</p>
-                </div>
-            </article>
-        </div>
-
-        <!-- ===== TECHNOPOTENTIAL HUB SECTION ===== -->
-        <div id="technopotential" class="major-section">
-            <div class="section-divider">
-                <h2 data-text="Technopotential Hub">Technopotential Hub</h2>
-            </div>
-
-            <!-- Report Card 1 -->
-            <div class="report-card-container">
-                <div class="report-card-collapsed" data-report="1">
-                    <h3>
-                        <span>Part 1: Ideas in Motion</span>
-                        <span class="expand-icon">▸</span>
-                    </h3>
-                </div>
-                <article class="report-card-expanded" id="report-1">
-                    <button class="close-report" data-close="1">×</button>
-                    <div class="card-header">
-                    <span class="session-number">Part 1</span>
-                    <h2>Ideas in Motion</h2>
-                    <div class="sub-header">Engineering Thinking Beyond the Schematic</div>
-                    <div class="speakers">Based on "The Pitcher's Primer" | Speakers: Ms. Chriz Luminario & Ms. Almira Shane A. Manlapaz</div>
-                </div>
-                <img src="images/TECHNO1-1.jpg" alt="The Pitcher's Primer" class="card-image">
-                <div class="card-body">
-                    <h3>Introduction</h3>
-                    <p>Our batch gathered at Bulwagang Bueño last November 6, 2025 for an event designed to stretch our understanding of how technical ideas travel into the real world. Organized by the groups of Ms. Llenaresas and Ms. Marmol, the session called "The Pitcher's Primer" shifted our attention from pure engineering work toward how concepts evolve into ventures. Two speakers led the discussion: Ms. Chriz Luminario and Ms. Almira Shane A. Manlapaz.</p>
-
-                    <h3>Summary</h3>
-                    <p>Ms. Luminario, founder of Lumiere Studio, began by tracing the evolution of modern marketing. Instead of print and television, most persuasion now happens through screens people carry everywhere. She explained how digital tools determine visibility and how brands use strategies involving algorithms, social media, personality and humor to stand out. For her, a product's character always begins with its intention and not merely its logo.</p>
-                    <p>Ms. Manlapaz from the DICT followed with a deeper look into support structures available to Filipino innovators. She introduced the Innovative Startup Act, a national law that backs early-stage ideas through funding and mentorship. By citing familiar companies such as GCash and Angkas, she illustrated how local startups grow when supported by clear programs. She also described the ideal team setup for early ventures: the Hustler who handles the business side, the Hacker who manages the technical core and the Hipster who shapes user experience.</p>
-
-                    <h3>Learnings and Reflection</h3>
-                    <p>This session revealed how even well-engineered solutions need visibility and communication to survive. Engineers often focus on precision and function, but technopreneurs must also learn how to attract attention and earn trust. Learning that the government has concrete support systems for innovation made the pathway from classroom concepts to viable startups feel less abstract and more attainable.</p>
-                </div>
-            </article>
-        </div>
-
-        <!-- Report Card 2 -->
-        <div class="report-card-container">
-            <div class="report-card-collapsed" data-report="2">
-                <h3>
-                    <span>Part 2: Blueprints for Breakthroughs</span>
-                    <span class="expand-icon">▸</span>
-                </h3>
-            </div>
-            <article class="report-card-expanded" id="report-2">
-                <button class="close-report" data-close="2">×</button>
-                <div class="card-header">
-                    <span class="session-number">Part 2</span>
-                    <h2>Blueprints for Breakthroughs</h2>
-                    <div class="sub-header">Making Technology Market-Ready</div>
-                    <div class="speakers">Based on "Technopreneur's Toolkit" | Speakers: Engr. Harvey S. Javier & Engr. Noli M. Esparas</div>
-                </div>
-                <img src="images/TECHNO1-2.jpg" alt="Technopreneur's Toolkit" class="card-image">
-                <div class="card-body">
-                    <h3>Introduction</h3>
-                    <p>The seminar series continued on November 8, 2025 with a session that bridged real-world technology development and national innovation programs. This time, the perspectives came from both business and the public sector. Engr. Harvey Javier represented the private industry, while Engr. Noli Esparas of the DOST represented national scientific initiatives.</p>
-
-                    <h3>Summary</h3>
-                    <p>Engr. Javier opened with a discussion titled "Innovating the Future," where he described how contemporary digital platforms combine various technologies. Using examples from SparkPoint and HSJ Technologies, he illustrated how blockchain improves transparency and how artificial intelligence enables automation and pattern recognition. His main point was clear: technology only lasts if people actually benefit from it.</p>
-                    <p>Engr. Esparas then widened the lens by explaining how the DOST functions as an engine that transforms scientific knowledge into solutions communities can use. He presented their programs in three groups: direct support for business development, assistance for innovation hubs and tech commercialization, and livelihood projects that help communities adapt scientific tools. He stressed that startups thrive when supported by a functioning ecosystem that includes policies, mentors, investors, talent and clear demand.</p>
-
-                    <h3>Learnings and Reflection</h3>
-                    <p>This session clarified that technopreneurship involves both exciting digital tools and the less glamorous but essential infrastructure behind them. Engr. Javier showcased how advanced our tools have become, but Engr. Esparas reminded us that technology must be grounded in institutions, people and societal needs. I found the view of AI as an enabler—not a replacement—particularly meaningful.</p>
-                </div>
-            </article>
-        </div>
-
-        <!-- Report Card 3 -->
-        <div class="report-card-container">
-            <div class="report-card-collapsed" data-report="3">
-                <h3>
-                    <span>Part 3: Lighting Possibilities</span>
-                    <span class="expand-icon">▸</span>
-                </h3>
-            </div>
-            <article class="report-card-expanded" id="report-3">
-                <button class="close-report" data-close="3">×</button>
-                <div class="card-header">
-                    <span class="session-number">Part 3</span>
-                    <h2>Lighting Possibilities</h2>
-                    <div class="sub-header">Solar Energy and the Entrepreneurial Mindset</div>
-                    <div class="speakers">Based on "The Solar Sparks" | Speaker: Mr. Sony Sabdao, RME</div>
-                </div>
-                <img src="images/TECHNO2-1.jpg" alt="The Solar Sparks" class="card-image">
-                <div class="card-body">
-                    <h3>Introduction</h3>
-                    <p>On November 22, our Technopreneurship class under Engr. Olesco held the third installment of our webinar series through Zoom. Our block invited Mr. Sony Sabdao, General Manager of S-S Enterprises, to share how solar technology offers practical solutions to everyday energy problems in the Philippines.</p>
-
-                    <h3>Summary</h3>
-                    <p>Mr. Sabdao began by connecting solar science with the engineering tasks performed in the field. He explained how the photovoltaic effect converts light into electricity and how system sizes change depending on the power needs of different clients. His comparison of grid-tie, hybrid and off-grid systems made it easier to understand which setup fits specific locations and lifestyles.</p>
-                    <p>After the technical overview, he walked us through the realities of building a solar business. Proper financial calculations, accurate site assessments and complete permits form the backbone of any successful installation. He emphasized that engineers must design systems that are not only functional but also financially viable and precise in execution.</p>
-
-                    <h3>Learnings and Reflection</h3>
-                    <p>The biggest shift in perspective for me was seeing solar not as a product but as a tailored service. Engineers now study the client's habits before choosing an arrangement. In the Philippine context, solar isn't just about lowering bills; it also protects households from frequent outages. It feels encouraging to know that our training can directly address real community concerns.</p>
-                </div>
-            </article>
-        </div>
-
-        <!-- Report Card 4 -->
-        <div class="report-card-container">
-            <div class="report-card-collapsed" data-report="4">
-                <h3>
-                    <span>Part 4: Engineering the Ledger</span>
-                    <span class="expand-icon">▸</span>
-                </h3>
-            </div>
-            <article class="report-card-expanded" id="report-4">
-                <button class="close-report" data-close="4">×</button>
-                <div class="card-header">
-                    <span class="session-number">Part 4</span>
-                    <h2>Engineering the Ledger</h2>
-                    <div class="sub-header">Why Numbers Define Innovation</div>
-                    <div class="speakers">Based on "Cashed In" | Speaker: Ms. Clarice Schofield</div>
-                </div>
-                <img src="images/TECHNO2-2.jpg" alt="Cashed In" class="card-image">
-                <div class="card-body">
-                    <h3>Introduction</h3>
-                    <p>Later that day, we attended the final webinar delivered by Ms. Clarice Schofield from Ernst and Young Global Consulting Services. Her talk, "Know Your Numbers," shifted our focus from engineering design to financial discipline.</p>
-
-                    <h3>Summary</h3>
-                    <p>Ms. Schofield began by stating that engineers contribute to decision-making in every organization. Because of that, we must understand accounting fundamentals. She simplified the core ideas. Assets refer to what the company owns. Liabilities refer to obligations. Equity represents the owner's interest. Revenue points to income earned from the business.</p>
-                    <p>She also introduced financial indicators that founders rely on. Runway measures how long funds can sustain operations. Burn Rate shows monthly spending. The Break even point marks the point where total income finally equals operating costs.</p>
-                    <p>She encouraged the use of AI tools for data cleanup and preliminary financial drafts, but she warned that these tools may produce errors, so every important figure must still be checked manually.</p>
-
-                    <h3>Learnings and Reflection</h3>
-                    <p>This session made me realize that financial literacy allows engineers to defend and communicate their ideas. A design becomes persuasive only when supported by strong numbers. Understanding how money flows inside a project gives engineers the confidence and credibility to lead larger initiatives.</p>
-                </div>
-            </article>
-        </div>
-
-        <!-- Report Card 5 -->
-        <div class="report-card-container">
-            <div class="report-card-collapsed" data-report="5">
-                <h3>
-                    <span>Part 5: Inside the Connected Home</span>
-                    <span class="expand-icon">▸</span>
-                </h3>
-            </div>
-            <article class="report-card-expanded" id="report-5">
-                <button class="close-report" data-close="5">×</button>
-                <div class="card-header">
-                    <span class="session-number">Part 5</span>
-                    <h2>Inside the Connected Home</h2>
-                    <div class="sub-header">Automation for the Modern Filipino</div>
-                    <div class="speakers">Based on "Smart Edge" | Speaker: Ms. Ayessa Nixzel Dumlao</div>
-                </div>
-                <img src="images/TECHNO3-1.jpg" alt="Smart Edge" class="card-image">
-                <div class="card-body">
-                    <h3>Introduction</h3>
-                    <p>In the afternoon, our class continued the sessions with a talk from Ms. Ayessa Nixzel Dumlao of Neovega SmartHome. Her discussion explored how automation quietly reshapes household living in the Philippines.</p>
+            <div class="content-layer">
+                <div class="main-box">
+                    <h1 id="mainTitle" class="typing-cursor"></h1>
                     
-                    <h3>Summary</h3>
-                    <p>Ms. Dumlao explained that smart homes function through connection rather than through individual devices. Lights, appliances, cameras and entertainment systems interact as one environment, controlled through a phone or voice input. She highlighted how convenience, security and energy efficiency emerge when devices work together instead of performing separately.</p>
-                    <p>To demonstrate this, she showcased products used by her company. The automated curtains adjust based on time, helping control indoor temperature. The switchable smart film changes from transparent to opaque instantly, offering privacy on command. Each example showed how small but persistent inconveniences can be solved through a mix of hardware and logical programming.</p>
+                    <div class="dept-title" id="deptTitle"></div>
 
-                    <h3>Learnings and Reflection</h3>
-                    <p>This talk broadened my view of the electrical engineering profession. Smart homes show that our work also shapes the comfort and rhythm of daily life. The field is not limited to large-scale grids and industrial plants; it also involves personal spaces where subtle design and user experience matter. It revealed opportunities to build systems that adapt to people instead of making people adapt to systems.</p>
+                    <div class="joke-container">
+                        <div class="joke-text" id="jokeText"></div>
+                        <button class="start-btn" id="startBtn">
+                            [ GO TO PORTFOLIO ]
+                        </button>
+                    </div>
+
                 </div>
-            </article>
-        </div>
 
-        <!-- Report Card 6 -->
-        <div class="report-card-container">
-            <div class="report-card-collapsed" data-report="6">
-                <h3>
-                    <span>Part 6: Seeing the User</span>
-                    <span class="expand-icon">▸</span>
-                </h3>
-            </div>
-            <article class="report-card-expanded" id="report-6">
-                <button class="close-report" data-close="6">×</button>
-                <div class="card-header">
-                    <span class="session-number">Part 6</span>
-                    <h2>Seeing the User</h2>
-                    <div class="sub-header">Building Innovations that People Actually Want</div>
-                    <div class="speakers">Based on "Charting Success" | Speaker: Ms. Marie Sachie Mitsui Turiano Academia</div>
+                <div class="ticker-wrap">
+                    <div class="ticker">
+                        SYSTEM READY /// MANUAL NAVIGATION ENGAGED /// WELCOME FACULTY AND STUDENTS /// ELECTRICAL ENGINEERING DEPARTMENT /// © 2024 JUJU
+                    </div>
                 </div>
-                <img src="images/TECHNO3-2.jpg" alt="Charting Success" class="card-image">
-                <div class="card-body">
-                    <h3>Introduction</h3>
-                    <p>To conclude the seminar series on the same afternoon, our block joined another group to host a final session with Ms. Sachie Turiano Academia, CEO of Fortem Auctrix. Her talk focused on the human side of innovation.</p>
-
-                    <h3>Summary</h3>
-                    <p>Ms. Academia opened by reframing technopreneurship as the creation of meaningful solutions rather than the mere invention of new tools. Many startups collapse, she explained, because they built something nobody needed.</p>
-                    <p>She introduced IMAP, a framework for uncovering user needs. It examines the problem, identifies users, studies the industry and locates gaps. She paired this with the ARC framework, which guides how ideas reach people—beginning with awareness, followed by emotional connection and ending with conversion or user adoption. She cited Tesla and Apple as examples of how technology and human behavior work hand in hand.</p>
-
-                    <h3>Learnings and Reflection</h3>
-                    <p>This last talk reshaped how I understand innovation. I used to think that completing the technical design marked the end of the work. Now I see that a product becomes meaningful only when it answers a real need. The frameworks she shared felt like analytical tools for understanding people. Just as we compute for load, voltage or flux, we must also compute for value and relevance. It became clear that engineering and entrepreneurship intersect at the point where technology becomes truly useful.</p>
-                </div>
-            </article>
-        </div>
-
-    </div>
-
-    <!-- ===== GROUP OUTPUT SECTION ===== -->
-    <div id="group-output" class="major-section">
-        <div class="section-divider">
-            <h2 data-text="Group Output">Group Output</h2>
-        </div>
-
-        <div class="contact-content" style="text-align: center; padding: 50px 40px;">
-            <p style="margin-bottom: 30px; font-size: 1.2rem; color: var(--text-main);">
-                Our collaborative narrative report documenting the complete Technopotential Hub journey—
-                from ideation workshops to final presentations. This comprehensive document captures 
-                the insights, learnings, and entrepreneurial frameworks explored throughout the seminar series.
-            </p>
-            <a href="pdfs/NARRATIVE REPORT.pdf" class="retro-btn" target="_blank" style="font-size: 1.1rem; padding: 15px 35px;">
-                <i data-feather="file-text" style="margin-right: 10px;"></i>
-                View Narrative Report
-            </a>
-        </div>
-    </div>
-
-<!-- ===== ABOUT ME SECTION ===== -->
-<div id="about-me" class="major-section">
-    <div class="section-divider">
-        <h2 data-text="About Me">About Me</h2>
-    </div>
-
-    <div class="about-me-container" style="max-width: 900px; margin: 40px auto 0;">
-        <div class="about-me-image" style="position: relative; margin-bottom: 40px;">
-            <img src="images/about-me.png" alt="Jureen's Journey" style="width: 100%; border-radius: 8px; border: 2px solid var(--accent-cyan); box-shadow: 0 0 20px var(--glow-cyan);">
-            <p style="text-align: center; margin-top: 15px; color: var(--text-muted); font-family: 'Share Tech Mono', monospace; font-size: 0.95rem;">
-                From Freshman Explorer to Student Leader: A Journey of Growth
-            </p>
-        </div>
-
-        <div class="about-me-text" style="background: var(--card-bg); padding: 45px; border: 1px solid var(--border-color); border-radius: 8px;">
-            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--accent-green); margin-bottom: 25px; font-size: 1.8rem; text-align: center;">
-                The Accidental Leader
-            </h3>
-            <p style="color: var(--text-main); line-height: 1.9; margin-bottom: 20px; font-size: 1.05rem;">
-                Picture this: a wide-eyed freshman stepping into Bicol University's College of Engineering, 
-                armed with nothing but a scientific calculator, a handful of pencils, and absolutely zero clue 
-                about what "student organizations" actually meant. That was me in 2022.
-            </p>
-            <p style="color: var(--text-main); line-height: 1.9; margin-bottom: 20px; font-size: 1.05rem;">
-                I thought college would be all lectures and lab reports. Instead, I found myself accidentally 
-                attending an IIEE-BUSC meeting, getting recruited into 
-                BUCENG-CSC because someone said there'd be free snacks, and somehow ending up in positions 
-                with intimidating titles like "Representative" and "Board of Director."
-            </p>
-            <p style="color: var(--text-main); line-height: 1.9; margin-bottom: 20px; font-size: 1.05rem;">
-                But here's the thing about stumbling into student organizations: <span style="color: var(--accent-cyan); font-weight: 600;">
-                you don't just find opportunities—you find people who shape who you become</span>. Kuya Mark Anthony Mantes 
-                showed me what true dedication looks like. Jan Carlo Bagasbas taught me that leadership could be both 
-                strategic and sincere. But it was <span style="color: var(--accent-green); font-weight: 600;">Kuya Joshua Lleno</span> 
-                who fundamentally changed my perspective—demonstrating that the best leaders don't just manage tasks, 
-                they inspire possibilities and create spaces where others can grow.
-            </p>
-            <p style="color: var(--text-main); line-height: 1.9; margin-bottom: 20px; font-size: 1.05rem;">
-                Through these mentors and countless late-night planning sessions, I discovered something unexpected: 
-                <span style="color: var(--accent-cyan); font-weight: 600;">leadership and academics aren't enemies—they're 
-                co-conspirators</span>. Those all-nighters planning Engineering Week taught me project management that no 
-                textbook could. Hosting events refined my communication in ways classrooms never did. Designing graphics 
-                sharpened my attention to detail more than any circuit diagram. The plot twist? My GWA wasn't suffering—it 
-                was thriving, fueled by the confidence and skills I gained from serving others.
-            </p>
-            <p style="color: var(--text-main); line-height: 1.9; font-size: 1.05rem;">
-                Now, having served as President of BUCENG-CSC, Technical Vice President of IIEE-BUSC, and 
-                currently as Vice President of BUCENG-CSC, I've discovered a truth that no textbook teaches: 
-                <span style="color: var(--accent-cyan); font-weight: 600;">the best engineers aren't just technically 
-                brilliant—they're bridge-builders, storytellers, and yes, occasionally accidental leaders who 
-                initially just wanted directions to the comfort room</span>. 
-                <span style="color: var(--accent-purple); font-style: italic;">And honestly? I wouldn't trade this journey for anything.</span>
-            </p>
-        </div>
-    </div>
-</div>
-
-    <!-- ===== ACCOMPLISHMENTS SECTION ===== -->
-    <div id="accomplishments" class="major-section">
-        <div class="section-divider">
-            <h2 data-text="Accomplishments">Accomplishments</h2>
-        </div>
-
-        <div class="accomplishments-grid">
-            <div class="accomplishments-col">
-                <h3>Organizations Handled</h3>
-                <ul>
-                    <li>President, BUCENG-BUSC</li>
-                    <li>Technical Vice President, IIEE-BUSC</li>
-                    <li>Vice President, BUCENG-CSC 2024-2025</li>
-                    <li>Majority Floor Leader, BU Legislative Council 2023-2024</li>
-                    <li>President, Masbate City Division Federated Supreme Student Government (2021-2022)</li>
-                    <li>Chairperson, Student Coordinating Council - Masbate National Comprehensive High School (2021-2022)</li>
-                    <li>Member, Local Youth Development Council (LYDC) Masbate City (2022)</li>
-                </ul>
             </div>
-            <div class="accomplishments-col">
-                <h3>Notable Involvements</h3>
-                <ul>
-                    <li>Gerry Roxas Leadership Awardee, 2022</li>
-                    <li>Philippine Startup Challenge Regional Champion, Bicol Region (2022)</li>
-                    <li>2nd Runner Up, Regional Science and Technology Fair (RSTF)</li>
-                    <li>Event Head, Lead Initiatives 2023</li>
-                    <li>Host, Nexus Futura: Engineering Week 2024</li>
-                    <li>Creative Director, EE JAM 2023 Event Head, EE Art Jam</li>
-                    <li>Host, TechHarbor 2024</li>
-                </ul>
-            </div>
+
         </div>
     </div>
 
-    <!-- ===== CONTACT SECTION ===== -->
-    <div id="contact" class="major-section">
-        <div class="section-divider">
-            <h2 data-text="Get In Touch">Get In Touch</h2>
-        </div>
-
-        <div class="contact-content">
-            <p style="margin-bottom: 30px; font-size: 1.1rem;">Feel free to reach out! I'm always open to discussing new projects, creative ideas, or opportunities to collaborate.</p>
-            <div class="contact-links">
-                <a href="mailto:jdes2022-6474-33556@bicol-u.edu.ph" class="contact-link-item">
-                    <i data-feather="mail"></i>
-                    <span>Email</span>
-                </a>
-                <a href="https://www.facebook.com/jureen.s" target="_blank" class="contact-link-item">
-                    <i data-feather="facebook"></i>
-                    <span>Facebook</span>
-                </a>
-                <a href="https://github.com/jureen-dominique-sese" target="_blank" class="contact-link-item">
-                    <i data-feather="github"></i>
-                    <span>GitHub</span>
-                </a>
-            </div>
-        </div>
+    <div id="loading">
+        <div style="font-family: 'Press Start 2P'; color: var(--neon-cyan);">ENTERING PORTFOLIO...</div>
+        <div class="load-bar"><div class="load-fill"></div></div>
     </div>
 
-    <!-- ===== ARCHIVE SECTION ===== -->
-    <div class="archive-section">
-        <h2>Archive & Related Documents</h2>
-        <div>
-            <a href="pdfs/IIEE-UAE_Webinar_Thermal.pdf" class="retro-btn" target="_blank">View Thermal Webinar Certificate</a>
-            <a href="https://github.com/jureen-dominique-sese/technopreneurship-output" class="retro-btn" target="_blank">View GitHub Repository</a>
-        </div>
-    </div>
+    <script>
+        const powerBtn = document.getElementById('powerBtn');
+        const powerOverlay = document.getElementById('power-overlay');
+        const crtScreen = document.getElementById('crtScreen');
+        const startBtn = document.getElementById('startBtn');
+        const clickSfx = document.getElementById('clickSfx');
+        const hoverSfx = document.getElementById('hoverSfx');
+        const bgMusic = document.getElementById('bgMusic');
+        const loading = document.getElementById('loading');
+        const starContainer = document.getElementById('starContainer');
+        const gridFloor = document.getElementById('gridFloor');
 
-</div>
+        // Volume controls
+        bgMusic.volume = 0.4;
+        clickSfx.volume = 0.5;
+        hoverSfx.volume = 0.2; // Keep hover sound subtle
 
-<footer>
-    <p>© 2025 Jureen Dominique E. Sese | Professional Portfolio | Bicol University College of Engineering</p>
-    <p style="margin-top: 10px; font-size: 0.75rem;">Electrical Engineering | Batch 2026</p>
-</footer>
-
-<script>
-    // Boot System & Background Music
-const bootOverlay = document.getElementById('bootOverlay');
-const bootButton = document.getElementById('bootButton');
-const loadingBar = document.getElementById('loadingBar');
-const loadingProgress = document.getElementById('loadingProgress');
-const bgMusic = document.getElementById('bgMusic');
-const bootParticles = document.getElementById('bootParticles');
-
-// Create floating particles
-function createBootParticles() {
-    for (let i = 0; i < 30; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'boot-particle';
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        particle.style.animationDelay = `${Math.random() * 3}s`;
-        particle.style.animationDuration = `${2 + Math.random() * 2}s`;
-        bootParticles.appendChild(particle);
-    }
-}
-
-createBootParticles();
-
-// Boot button click handler
-bootButton.addEventListener('click', async () => {
-    // Show loading bar
-    loadingBar.classList.add('active');
-    
-    // Animate loading progress
-    setTimeout(() => {
-        loadingProgress.style.width = '100%';
-    }, 100);
-    
-    // Try to play music (with error handling for autoplay restrictions)
-    try {
-        await bgMusic.play();
-        console.log('🎵 Background music started');
-    } catch (error) {
-        console.log('⚠️ Autoplay blocked. Music will play on next interaction.');
-        // Set up a one-time listener to play music on next user interaction
-        const playOnInteraction = () => {
-            bgMusic.play();
-            document.removeEventListener('click', playOnInteraction);
-        };
-        document.addEventListener('click', playOnInteraction);
-    }
-    
-    // Fade out boot screen after loading completes
-    setTimeout(() => {
-        bootOverlay.classList.add('fade-out');
-        
-        // Remove overlay from DOM after fade completes
-        setTimeout(() => {
-            bootOverlay.remove();
-        }, 500);
-    }, 1200);
-});
-
-// Optional: Add keyboard shortcut (press Enter to boot)
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && bootOverlay && !bootOverlay.classList.contains('fade-out')) {
-        bootButton.click();
-    }
-});
-
-// Boot button click handler
-bootButton.addEventListener('click', async () => {
-    // Show loading bar
-    loadingBar.classList.add('active');
-    
-    // Animate loading progress
-    setTimeout(() => {
-        loadingProgress.style.width = '100%';
-    }, 100);
-    
-    // Try to play music
-    try {
-        await bgMusic.play();
-        console.log('🎵 Background music started');
-    } catch (error) {
-        console.log('⚠️ Autoplay blocked. Music will play on next interaction.');
-        const playOnInteraction = () => {
-            bgMusic.play();
-            document.removeEventListener('click', playOnInteraction);
-        };
-        document.addEventListener('click', playOnInteraction);
-    }
-    
-    // Fade out boot screen after loading completes
-    setTimeout(() => {
-        bootOverlay.classList.add('fade-out');
-        
-        // Remove overlay and enable custom cursor
-        setTimeout(() => {
-            bootOverlay.remove();
-            // Enable custom cursor after boot
-            document.body.classList.add('custom-cursor-enabled');
-            cursor.classList.add('active');
-        }, 500);
-    }, 1200);
-});
-    feather.replace();
-
-    // Smooth scroll for navigation
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Active nav link on scroll + sticky nav reveal
-    const sections = document.querySelectorAll('.major-section');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    const nav = document.getElementById('mainNav');
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-        // Sticky nav slide down
-        const currentScroll = window.pageYOffset;
-        if (currentScroll > 200) {
-            nav.classList.add('nav-visible');
-        } else {
-            nav.classList.remove('nav-visible');
+        // --- HOVER SOUND EFFECT ---
+        function playHoverSound() {
+            hoverSfx.currentTime = 0;
+            hoverSfx.play().catch(e => {}); // Catch potential autoplay errors
         }
-        lastScroll = currentScroll;
+        powerBtn.addEventListener('mouseenter', playHoverSound);
+        startBtn.addEventListener('mouseenter', playHoverSound);
 
-        // Active section highlighting
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (pageYOffset >= sectionTop - 100) {
-                current = section.getAttribute('id');
-            }
+
+        // --- MOUSE TRACKING & PARALLAX ---
+        document.addEventListener('mousemove', (e) => {
+            // 1. Star origin tracking
+            starContainer.style.left = e.clientX + 'px';
+            starContainer.style.top = e.clientY + 'px';
+
+            // 2. Grid Parallax calculation
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            // Calculate distance from center (normalized roughly between -1 and 1)
+            const deltaX = (e.clientX - centerX) / centerX;
+            const deltaY = (e.clientY - centerY) / centerY;
+
+            // Set CSS variables for tilt. Invert Y for correct feel.
+            // Multiply by a small angle (e.g., 5deg) to control tilt amount.
+            gridFloor.style.setProperty('--tiltY', `${deltaX * 5}deg`);
+            gridFloor.style.setProperty('--tiltX', `${deltaY * -10}deg`);
         });
 
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
-                link.classList.add('active');
-            }
-        });
-    });
 
-    // Staggered card reveal on scroll
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
+        // --- TYPEWRITER FUNCTION ---
+        function typeWriter(elementId, text, speed = 50) {
+            const element = document.getElementById(elementId);
+            let i = 0;
+            element.innerHTML = ''; // Clear existing content
+            element.classList.add('typing-cursor'); // Add blinking cursor
+
+            function type() {
+                if (i < text.length) {
+                    // Handle HTML breaks specifically
+                    if (text.substring(i, i + 4) === '<br>') {
+                        element.innerHTML += '<br>';
+                        i += 4;
+                    } else {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                    }
+                    setTimeout(type, speed);
+                } else {
+                    // Remove cursor from non-h1 elements when done
+                    if(element.tagName !== 'H1') {
+                         element.classList.remove('typing-cursor');
+                    }
+                }
+            }
+            type();
+        }
+
+
+        // Generate Warp Stars
+        function createWarpStars() {
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('warp-star');
+                const angle = Math.random() * 360;
+                const delay = Math.random() * 4; 
+                const duration = 2 + Math.random() * 3;
+                star.style.setProperty('--angle', `${angle}deg`);
+                star.style.animationDelay = `${delay}s`;
+                star.style.animationDuration = `${duration}s`;
+                starContainer.appendChild(star);
+            }
+        }
+        createWarpStars();
+
+        // Turn On Sequence
+        powerBtn.addEventListener('click', () => {
+            bgMusic.play().catch(e => console.log(e));
+            powerOverlay.style.opacity = '0';
+            setTimeout(() => {
+                powerOverlay.style.display = 'none';
+                crtScreen.classList.add('turn-on');
+
+                // START TYPEWRITER EFFECTS AFTER SCREEN IS ON
                 setTimeout(() => {
-                    entry.target.classList.add('reveal');
-                }, index * 150); // Stagger by 150ms
-            }
-        });
-    }, { threshold: 0.1 });
+                    typeWriter('mainTitle', "JUJU'S<br>PORTFOLIO", 70);
+                }, 800);
 
-    document.querySelectorAll('.session-card').forEach(card => {
-        observer.observe(card);
-    });
+                setTimeout(() => {
+                    typeWriter('deptTitle', "BICOL UNIVERSITY<br>ELECTRICAL ENGINEERING DEPT.", 40);
+                }, 2500);
 
-    // EXPANDABLE REPORT CARDS WITH PIXEL SPARK ANIMATION
-    const collapsedCards = document.querySelectorAll('.report-card-collapsed');
-    const sparkOverlay = document.getElementById('sparkOverlay');
-    const sparkContainer = document.getElementById('sparkContainer');
+                setTimeout(() => {
+                    typeWriter('jokeText', "do you intend to stay here or visit the portfolio? if you do, click this button:", 30);
+                }, 5000);
 
-    function createPixelSparks() {
-        sparkContainer.innerHTML = '';
-        const sparkCount = 30;
-        
-        for (let i = 0; i < sparkCount; i++) {
-            const spark = document.createElement('div');
-            spark.className = 'pixel-spark';
-            
-            const angle = (Math.PI * 2 * i) / sparkCount;
-            const distance = 100 + Math.random() * 50;
-            const tx = Math.cos(angle) * distance;
-            const ty = Math.sin(angle) * distance;
-            
-            spark.style.setProperty('--tx', `${tx}px`);
-            spark.style.setProperty('--ty', `${ty}px`);
-            spark.style.left = '50%';
-            spark.style.top = '50%';
-            
-            // Random colors from theme
-            const colors = ['#58a6ff', '#3fb950', '#bc8cff', '#d29922'];
-            spark.style.background = colors[Math.floor(Math.random() * colors.length)];
-            spark.style.boxShadow = `0 0 10px ${spark.style.background}`;
-            
-            sparkContainer.appendChild(spark);
-        }
-    }
-
-    collapsedCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const reportId = this.getAttribute('data-report');
-            const expandedCard = document.getElementById(`report-${reportId}`);
-            
-            // Show spark overlay
-            sparkOverlay.classList.add('active');
-            createPixelSparks();
-            
-            // After spark animation, show card
-            setTimeout(() => {
-                sparkOverlay.classList.remove('active');
-                this.style.display = 'none';
-                expandedCard.classList.add('active');
-                expandedCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 900);
-        });
-    });
-
-    // Close report cards
-    const closeButtons = document.querySelectorAll('.close-report');
-    closeButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const reportId = this.getAttribute('data-close');
-            const expandedCard = document.getElementById(`report-${reportId}`);
-            const collapsedCard = document.querySelector(`[data-report="${reportId}"]`);
-            
-            expandedCard.classList.remove('active');
-            setTimeout(() => {
-                collapsedCard.style.display = 'block';
-                collapsedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 300);
-        });
-    });
-
-    // Typing animation for intro (one-time on load)
-// Typing animation for intro (one-time on load)
-// Replace the spaceship generation code in your <script> section with this enhanced version:
-
-// Generate twinkling stars
-function createStars() {
-    const container = document.getElementById('starsContainer');
-    const starCount = 50;
-    
-    for (let i = 0; i < starCount; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.animationDuration = `${2 + Math.random() * 3}s`;
-        star.style.animationDelay = `${Math.random() * 3}s`;
-        container.appendChild(star);
-    }
-}
-
-// Generate retro elements (spaceships, pac-man, etc)
-function createRetroElements() {
-    const container = document.getElementById('retroElements');
-    
-    const elements = [
-        { emoji: '🚀', class: 'retro-element', count: 3 },
-        { emoji: '🛸', class: 'retro-element', count: 2 },
-        { emoji: '✈️', class: 'retro-element', count: 2 },
-        { emoji: '🟡', class: 'pacman', count: 2 }, // Pac-Man
-        { emoji: '👾', class: 'ghost', count: 3 }, // Space Invader
-        { emoji: '🎮', class: 'retro-element', count: 1 },
-        { emoji: '🕹️', class: 'retro-element', count: 1 },
-        { emoji: '⭐', class: 'retro-element', count: 2 },
-        { emoji: '💫', class: 'retro-element', count: 2 },
-        { emoji: '🌟', class: 'retro-element', count: 1 },
-    ];
-    
-    elements.forEach(item => {
-        for (let i = 0; i < item.count; i++) {
-            const element = document.createElement('div');
-            element.className = item.class;
-            element.textContent = item.emoji;
-            
-            const startY = Math.random() * 250;
-            const endY = startY + (Math.random() * 80 - 40);
-            const duration = 10 + Math.random() * 15; // 10-25 seconds
-            const delay = Math.random() * 8;
-            const rotation = Math.random() * 360;
-            
-            element.style.setProperty('--start-y', `${startY}px`);
-            element.style.setProperty('--end-y', `${endY}px`);
-            element.style.setProperty('--rotation', `${rotation}deg`);
-            element.style.animationDuration = `${duration}s`;
-            element.style.animationDelay = `${delay}s`;
-            element.style.top = `${startY}px`;
-            
-            container.appendChild(element);
-        }
-    });
-}
-
-// Initialize all animations on load
-window.addEventListener('load', () => {
-    createStars();
-    createRetroElements();
-    
-    // Typing animation (keep your existing code)
-    const typingElement = document.querySelector('.typing-text');
-    const text = typingElement.textContent;
-    typingElement.textContent = '';
-    typingElement.style.display = 'inline';
-    typingElement.style.whiteSpace = 'normal';
-    
-    let i = 0;
-    function typeWriter() {
-        if (i < text.length) {
-            typingElement.textContent += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, 30);
-        } else {
-            setTimeout(() => {
-                typingElement.style.borderRight = 'none';
             }, 500);
+        });
+
+        // Enter Site Sequence
+        function enterSite() {
+            clickSfx.currentTime = 0;
+            clickSfx.play();
+            loading.style.display = 'flex';
+            setTimeout(() => {
+                window.location.href = 'content.html';
+            }, 2000);
         }
-    }
-    typeWriter();
-});
 
-// Custom Cursor Trail
-let cursorTrails = [];
-const cursor = document.getElementById('customCursor');
+        startBtn.addEventListener('click', enterSite);
 
-document.addEventListener('mousemove', (e) => {
-    // Move custom cursor
-    if (cursor) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    }
-    
-    // Create trail (throttle for performance)
-    if (Math.random() > 0.7) {
-        const trail = document.createElement('div');
-        trail.className = 'cursor-trail';
-        trail.style.left = e.clientX + 'px';
-        trail.style.top = e.clientY + 'px';
-        
-        // Random color from theme
-        const colors = ['var(--accent-cyan)', 'var(--accent-purple)', 'var(--accent-green)'];
-        trail.style.background = colors[Math.floor(Math.random() * colors.length)];
-        trail.style.boxShadow = `0 0 10px ${trail.style.background}`;
-        
-        document.body.appendChild(trail);
-        
-        setTimeout(() => trail.remove(), 500);
-    }
-});
-
-document.addEventListener('mousedown', () => {
-    if (cursor) cursor.classList.add('clicking');
-});
-
-document.addEventListener('mouseup', () => {
-    if (cursor) cursor.classList.remove('clicking');
-});
-
-// Parallax Background Effect
-const parallaxLayers = document.querySelectorAll('.parallax-layer');
-let mouseX = 0;
-let mouseY = 0;
-
-document.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX / window.innerWidth) * 100;
-    mouseY = (e.clientY / window.innerHeight) * 100;
-    
-    parallaxLayers.forEach(layer => {
-        const speed = layer.getAttribute('data-speed') || 0.5;
-        const x = (window.innerWidth - e.clientX * speed) / 100;
-        const y = (window.innerHeight - e.clientY * speed) / 100;
-        
-        layer.style.transform = `translate(${x}px, ${y}px)`;
-        layer.style.setProperty('--mouse-x', `${mouseX}%`);
-        layer.style.setProperty('--mouse-y', `${mouseY}%`);
-    });
-});
-
-// Achievement System
-const achievements = [
-    { id: 'scroll_explorer', icon: '🗺️', title: 'Explorer', desc: 'Scrolled through the portfolio', trigger: 'scroll', value: 500 },
-    { id: 'profdev_reader', icon: '📚', title: 'ProfDev Scholar', desc: 'Viewed ProfDev sessions', trigger: 'section', section: 'profdev' },
-    { id: 'techno_enthusiast', icon: '💡', title: 'Technopreneur', desc: 'Explored Technopotential Hub', trigger: 'section', section: 'technopotential' },
-    { id: 'accomplishment_viewer', icon: '🏆', title: 'Achievement Hunter', desc: 'Checked out accomplishments', trigger: 'section', section: 'accomplishments' },
-    { id: 'contact_curious', icon: '📧', title: 'Networker', desc: 'Visited contact section', trigger: 'section', section: 'contact' }
-];
-
-let unlockedAchievements = new Set();
-
-function showAchievement(achievement) {
-    if (unlockedAchievements.has(achievement.id)) return;
-    
-    unlockedAchievements.add(achievement.id);
-    
-    const popup = document.createElement('div');
-    popup.className = 'achievement-popup';
-    popup.innerHTML = `
-        <div class="achievement-header">
-            <div class="achievement-icon">${achievement.icon}</div>
-            <div class="achievement-text">
-                <h4>Achievement Unlocked!</h4>
-                <p>${achievement.title}: ${achievement.desc}</p>
-            </div>
-        </div>
-        <div class="achievement-progress">
-            <div class="achievement-progress-bar"></div>
-        </div>
-    `;
-    
-    document.body.appendChild(popup);
-    
-    // Play sound effect (optional - only if you want it)
-    // const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGmi87eadTgwNUKXh8bllHgU2jdXwyoMsBAEAAAAAAAAA');
-    // audio.volume = 0.3;
-    // audio.play().catch(() => {});
-    
-    setTimeout(() => {
-        popup.classList.add('hide');
-        setTimeout(() => popup.remove(), 500);
-    }, 4000);
-}
-
-// Scroll-based achievement
-let maxScroll = 0;
-window.addEventListener('scroll', () => {
-    maxScroll = Math.max(maxScroll, window.pageYOffset);
-    
-    achievements.forEach(ach => {
-        if (ach.trigger === 'scroll' && maxScroll > ach.value) {
-            showAchievement(ach);
-        }
-    });
-});
-
-// Section-based achievements
-const achievementObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const sectionId = entry.target.getAttribute('id');
-            const achievement = achievements.find(a => a.trigger === 'section' && a.section === sectionId);
-            if (achievement) {
-                setTimeout(() => showAchievement(achievement), 500);
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                if (powerOverlay.style.opacity !== '0') powerBtn.click();
+                else enterSite();
             }
-        }
-    });
-}, { threshold: 0.3 });
-
-sections.forEach(section => achievementObserver.observe(section));
-
-// Unlock accomplishments list items with stagger
-const accomplishmentObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const items = entry.target.querySelectorAll('li');
-            items.forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add('unlocked');
-                }, index * 100);
-            });
-            accomplishmentObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.2 });
-
-document.querySelectorAll('.accomplishments-col').forEach(col => {
-    accomplishmentObserver.observe(col);
-});
-
-// Parallax on scroll
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    parallaxLayers.forEach(layer => {
-        const speed = layer.getAttribute('data-speed') || 0.5;
-        layer.style.transform += ` translateY(${scrolled * speed * 0.1}px)`;
-    });
-});
-</script>
+        });
+    </script>
 </body>
 </html>
